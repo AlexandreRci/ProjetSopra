@@ -2,17 +2,47 @@ package sopra.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "planet_seed")
 public class PlanetSeed {
 
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
 	private int population;
 	private int arme;
+	@Column(name = "minerai_restant")
 	private int mineraiRestant;
+	@ManyToOne
+	@JoinColumn(name="joueur_id",nullable = false)
 	private Joueur joueur;
+	@ManyToOne
+	@JoinColumn(name="planete_id",nullable = false)
 	private Planete planete;
+	@OneToMany
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Batiment.class)
+	@JoinTable(name = "batiment_sur_planete",
+	joinColumns = @JoinColumn(name = "planet_seed_id"),
+	inverseJoinColumns = @JoinColumn(name = "batiment_id"))
 	private List<Batiment> batiments;
 	
 	
+	public PlanetSeed() {
+	}
+
 	public PlanetSeed(Integer id, int population, int arme, int mineraiRestant, Planete planete) {
 		this.id = id;
 		this.population = population;

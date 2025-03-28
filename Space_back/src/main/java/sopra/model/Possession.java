@@ -1,12 +1,30 @@
 package sopra.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "possession")
 public class Possession {
 
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
 	private int quantite;
+	@Enumerated(EnumType.STRING)
+	@Column(name="ressource",columnDefinition = "ENUM('Arme','Nourriture','Energie','Argent')", nullable = false)
 	private Ressource ressource;
 	
 	
+	public Possession() {
+	}
+
 	public Possession(Integer id, int quantite, Ressource ressource) {
 		this.id = id;
 		this.quantite = quantite;

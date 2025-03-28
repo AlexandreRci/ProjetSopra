@@ -3,15 +3,46 @@ package sopra.model;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="joueur")
 public class Joueur {
 	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable = false)
 	private int position;
+	@OneToMany
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Possession.class)
+	@JoinTable(name = "joueur_possession",
+	joinColumns = @JoinColumn(name = "joueur_id"),
+	inverseJoinColumns = @JoinColumn(name = "possession_id"))
 	private Possession[] possessions = new Possession[4];
+	@ManyToOne
+	@JoinColumn(name="partie_id",nullable = false)
 	private Partie partie;
+	@ManyToOne
+	@JoinColumn(name="espece_id",nullable = false)
 	private Espece espece;
+	@OneToMany(mappedBy = "joueur")
 	private List<PlanetSeed> planetSeeds;
 	
+
+	public Joueur() {
+	}
 
 	public Joueur(Integer id, int position, Possession[] possessions, Partie partie, Espece espece) {
 		this.id = id;
