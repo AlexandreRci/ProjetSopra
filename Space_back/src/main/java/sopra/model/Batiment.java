@@ -30,15 +30,19 @@ public class Batiment {
 	public Batiment() {
 	}
 
-	public Batiment(Integer id, String nom, Taille taille) {
+
+	public Batiment(Integer id, String nom, Taille taille, Ressource ressource) {
 		this.id = id;
 		this.nom = nom;
 		this.taille = taille;
+		this.ressource = ressource;
 	}
 	
-	public Batiment(String nom, Taille taille) {
+	
+	public Batiment(String nom, Taille taille, Ressource ressource) {
 		this.nom = nom;
 		this.taille = taille;
+		this.ressource = ressource;
 	}
 
 
