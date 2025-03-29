@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 
 import sopra.context.Singleton;
+import sopra.model.Batiment;
 import sopra.model.Biome;
 import sopra.model.Espece;
 import sopra.model.Joueur;
@@ -18,6 +19,7 @@ import sopra.model.Planete;
 import sopra.model.Possession;
 import sopra.model.Ressource;
 import sopra.model.Statut;
+import sopra.model.Taille;
 import sopra.model.Utilisateur;
 
 public class TestJPA {
@@ -84,10 +86,10 @@ public class TestJPA {
 		List<PlanetSeed> listPlaneteSeed4= new ArrayList();
 		
 		
-		Collections.addAll(listPlaneteSeed1, planeteSeed1, planeteSeed2,planeteSeed3,planeteSeed4);
-		Collections.addAll(listPlaneteSeed2, planeteSeed4, planeteSeed3,planeteSeed2,planeteSeed1);
-		Collections.addAll(listPlaneteSeed3,planeteSeed1, planeteSeed1, planeteSeed3, planeteSeed4);
-		Collections.addAll(listPlaneteSeed4,planeteSeed4, planeteSeed4, planeteSeed4, planeteSeed4);
+		Collections.addAll(listPlaneteSeed1, planeteSeed1);
+		Collections.addAll(listPlaneteSeed2, planeteSeed2);
+		Collections.addAll(listPlaneteSeed3,planeteSeed3);
+		Collections.addAll(listPlaneteSeed4,planeteSeed4);
 
 		Partie partie1 = new Partie(1,5,2,listPlaneteSeed1, Statut.Debut);
 		Partie partie2 = new Partie(2,7,4,listPlaneteSeed2, Statut.EnCours);
@@ -104,10 +106,17 @@ public class TestJPA {
 		Joueur joueur2 = new Joueur(1,possessionRessource2,partie1,espece2);
 		Joueur joueur3 = new Joueur(1,possessionRessource3,partie2,espece3);
 		Joueur joueur4 = new Joueur(1,possessionRessource4,partie3,espece4);
-		/*Joueur joueur2 = new Joueur();
-		Joueur joueur3 = new Joueur();
-		Joueur joueur4 = new Joueur();
-		*/	
+		
+		planeteSeed1.setJoueur(joueur1);
+		planeteSeed2.setJoueur(joueur2);
+		planeteSeed3.setJoueur(joueur3);
+		planeteSeed4.setJoueur(joueur4);
+		
+		Batiment batiment1 = new Batiment("Caserne",Taille.Petit,Ressource.Arme);
+		Batiment batiment2 = new Batiment("Ferme",Taille.Moyen,Ressource.Nourriture);
+		Batiment batiment3 = new Batiment("Centrale",Taille.Grand,Ressource.Energie);
+		Batiment batiment4 = new Batiment("Caserne",Taille.Grand,Ressource.Arme);
+		
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		
 		em.getTransaction().begin();
@@ -133,32 +142,42 @@ public class TestJPA {
 		em.persist(partie3);
 		em.persist(partie4);		
 		
-		em.persist(planeteSeed1);
-		em.persist(planeteSeed2);
-		em.persist(planeteSeed3);
-		em.persist(planeteSeed4);
-		
 		em.persist(joueur1);
 		em.persist(joueur2);
 		em.persist(joueur3);
 		em.persist(joueur4);
-
-		/*
-
-
-
-
-
-
-	
 		
+		em.persist(planeteSeed1);
+		em.persist(planeteSeed2);
+		em.persist(planeteSeed3);
+		em.persist(planeteSeed4);
 
-		*/
+		em.persist(possessionArme1);
+		em.persist(possessionArme2);
+		em.persist(possessionArme3);
+		em.persist(possessionArme4);
+		
+		em.persist(possessionNourriture1);
+		em.persist(possessionNourriture2);
+		em.persist(possessionNourriture3);
+		em.persist(possessionNourriture4);
 
+		em.persist(possessionEnergie1);
+		em.persist(possessionEnergie2);
+		em.persist(possessionEnergie3);
+		em.persist(possessionEnergie4);
 
-
+		em.persist(possessionArgent1);
+		em.persist(possessionArgent2);
+		em.persist(possessionArgent3);
+		em.persist(possessionArgent4);		
 		
 		
+		em.persist(batiment1);
+		em.persist(batiment2);
+		em.persist(batiment3);
+		em.persist(batiment4);
+				
 		em.getTransaction().commit();
 		
 		Singleton.getInstance().closeEmf();	

@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -30,7 +31,7 @@ public class Planete {
 	@JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
 	@Column(name="biome",nullable = false)
 	@Enumerated(EnumType.STRING)
-	
+	@OrderColumn(name = "ordre")
 	private Biome[] biomes = new Biome[3];
 	
 	
