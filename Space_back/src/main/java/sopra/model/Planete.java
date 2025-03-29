@@ -30,6 +30,7 @@ public class Planete {
 	@JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
 	@Column(name="biome",nullable = false)
 	@Enumerated(EnumType.STRING)
+	
 	private Biome[] biomes = new Biome[3];
 	
 	

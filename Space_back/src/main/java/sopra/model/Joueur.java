@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,7 @@ public class Joueur {
 	@JoinTable(name = "joueur_possession",
 	joinColumns = @JoinColumn(name = "joueur_id"),
 	inverseJoinColumns = @JoinColumn(name = "possession_id"))
+	@OrderColumn(name = "ordre")
 	private Possession[] possessions = new Possession[4];
 	@ManyToOne
 	@JoinColumn(name="partie_id",nullable = false)
