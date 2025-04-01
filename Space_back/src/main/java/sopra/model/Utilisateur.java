@@ -1,8 +1,19 @@
 package sopra.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="utilisateur")
 public class Utilisateur extends Compte {
 
+	@Column(nullable = false)
 	protected String name;
+
+	
+	public Utilisateur() {
+	}
 
 	public Utilisateur(Integer id, String login, String password, String name) {
 		super(id, login, password);

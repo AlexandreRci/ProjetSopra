@@ -2,17 +2,49 @@ package sopra.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="partie")
 public class Partie {
 	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name = "current_position")
 	private int currentPosition;
+	@Column(name = "nb_tour")
 	private int nbTour;
+	@Column(name = "nb_joueur")
 	private int nbJoueur;
+	@OneToMany(mappedBy = "partie")
 	private List<Joueur> joueurs;
+	@OneToMany
+	@JoinTable(name = "planete_seed_par_partie",
+	joinColumns = @JoinColumn(name = "partie_id"),
+	inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
 	private List<PlanetSeed> planetSeeds;
+	@Enumerated(EnumType.STRING)
+	@Column(name="statut",columnDefinition = "ENUM('Debut','EnCours','Fini')", nullable = false)
 	private Statut statut;
 	
 	
+	
+	public Partie() {
+	}
+
 	public Partie(Integer id, int currentPosition, int nbTour, int nbJoueur, List<PlanetSeed> planetSeeds,
 			Statut statut) {
 		this.id = id;

@@ -1,16 +1,43 @@
 package sopra.model;
 
-import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="planete")
 public class Planete {
 
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable = false)
 	private String nom;
+	@Column(nullable = false)
 	private int minerai;
-	private Biome[] biomes = new Biome[3];
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Biome.class)
+	@JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
+	@Column(name="biome",nullable = false)
+	@Enumerated(EnumType.STRING)
+	private List<Biome> biomes;
 	
 	
-	public Planete(Integer id, String nom, int minerai, Biome[] biomes) {
+	public Planete() {
+	}
+
+
+	public Planete(Integer id, String nom, int minerai, List<Biome> biomes) {
 		this.id = id;
 		this.nom = nom;
 		this.minerai = minerai;
@@ -18,7 +45,7 @@ public class Planete {
 	}
 	
 	
-	public Planete(String nom, int minerai, Biome[] biomes) {
+	public Planete(String nom, int minerai, List<Biome> biomes) {
 		this.nom = nom;
 		this.minerai = minerai;
 		this.biomes = biomes;
@@ -55,19 +82,19 @@ public class Planete {
 	}
 
 
-	public Biome[] getBiomes() {
+	public List<Biome> getBiomes() {
 		return biomes;
 	}
 
 
-	public void setBiomes(Biome[] biomes) {
+	public void setBiomes(List<Biome> biomes) {
 		this.biomes = biomes;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Planete [id=" + id + ", nom=" + nom + ", minerai=" + minerai + ", biomes=" + Arrays.toString(biomes)
+		return "Planete [id=" + id + ", nom=" + nom + ", minerai=" + minerai + ", biomes=" 
 				+ "]";
 	}
 	

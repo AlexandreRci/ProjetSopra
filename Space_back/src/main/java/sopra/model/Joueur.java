@@ -3,17 +3,49 @@ package sopra.model;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="joueur")
 public class Joueur {
 	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable = false)
 	private int position;
-	private Possession[] possessions = new Possession[4];
+	@OneToMany
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Possession.class)
+	@JoinTable(name = "joueur_possession",
+	joinColumns = @JoinColumn(name = "joueur_id"),
+	inverseJoinColumns = @JoinColumn(name = "possession_id"))
+	private List<Possession> possessions;
+	@ManyToOne
+	@JoinColumn(name="partie_id",nullable = false)
 	private Partie partie;
+	@ManyToOne
+	@JoinColumn(name="espece_id",nullable = false)
 	private Espece espece;
+	@OneToMany(mappedBy = "joueur")
 	private List<PlanetSeed> planetSeeds;
 	
 
-	public Joueur(Integer id, int position, Possession[] possessions, Partie partie, Espece espece) {
+	public Joueur() {
+	}
+
+	public Joueur(Integer id, int position, List<Possession> possessions, Partie partie, Espece espece) {
 		this.id = id;
 		this.position = position;
 		this.possessions = possessions;
@@ -21,7 +53,7 @@ public class Joueur {
 		this.espece = espece;
 	}
 	
-	public Joueur(int position, Possession[] possessions, Partie partie, Espece espece) {
+	public Joueur(int position, List<Possession> possessions, Partie partie, Espece espece) {
 		this.position = position;
 		this.possessions = possessions;
 		this.partie = partie;
@@ -50,12 +82,12 @@ public class Joueur {
 
 
 
-	public Possession[] getPossessions() {
+	public List<Possession> getPossessions() {
 		return possessions;
 	}
 
 
-	public void setPossessions(Possession[] possessions) {
+	public void setPossessions(List<Possession> possessions) {
 		this.possessions = possessions;
 	}
 
@@ -91,7 +123,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", position=" + position + ", possessions=" + Arrays.toString(possessions)
+		return "Joueur [id=" + id + ", position=" + position + ", possessions="
 				+ ", partie=" + partie + ", espece=" + espece + ", planetSeeds=" + planetSeeds + "]";
 	}
 	
