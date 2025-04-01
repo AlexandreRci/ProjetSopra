@@ -31,8 +31,7 @@ public class Joueur {
 	@JoinTable(name = "joueur_possession",
 	joinColumns = @JoinColumn(name = "joueur_id"),
 	inverseJoinColumns = @JoinColumn(name = "possession_id"))
-	@OrderColumn(name = "ordre")
-	private Possession[] possessions = new Possession[4];
+	private List<Possession> possessions;
 	@ManyToOne
 	@JoinColumn(name="partie_id",nullable = false)
 	private Partie partie;
@@ -46,7 +45,7 @@ public class Joueur {
 	public Joueur() {
 	}
 
-	public Joueur(Integer id, int position, Possession[] possessions, Partie partie, Espece espece) {
+	public Joueur(Integer id, int position, List<Possession> possessions, Partie partie, Espece espece) {
 		this.id = id;
 		this.position = position;
 		this.possessions = possessions;
@@ -54,7 +53,7 @@ public class Joueur {
 		this.espece = espece;
 	}
 	
-	public Joueur(int position, Possession[] possessions, Partie partie, Espece espece) {
+	public Joueur(int position, List<Possession> possessions, Partie partie, Espece espece) {
 		this.position = position;
 		this.possessions = possessions;
 		this.partie = partie;
@@ -83,12 +82,12 @@ public class Joueur {
 
 
 
-	public Possession[] getPossessions() {
+	public List<Possession> getPossessions() {
 		return possessions;
 	}
 
 
-	public void setPossessions(Possession[] possessions) {
+	public void setPossessions(List<Possession> possessions) {
 		this.possessions = possessions;
 	}
 
@@ -124,7 +123,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", position=" + position + ", possessions=" + Arrays.toString(possessions)
+		return "Joueur [id=" + id + ", position=" + position + ", possessions="
 				+ ", partie=" + partie + ", espece=" + espece + ", planetSeeds=" + planetSeeds + "]";
 	}
 	

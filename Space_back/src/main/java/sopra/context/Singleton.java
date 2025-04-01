@@ -12,7 +12,7 @@ public class Singleton {
 
     private Singleton() {
     }
-
+    
     public static Singleton getInstance() {
         if (instance == null) {
             instance = new Singleton();
@@ -29,5 +29,9 @@ public class Singleton {
      */
     public void closeEmf() {
         this.emf.close();
+    }
+    
+    public CompteService getCompteSrv() {
+        return compteSrv;
     }
 }

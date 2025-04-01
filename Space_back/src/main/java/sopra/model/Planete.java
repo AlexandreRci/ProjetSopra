@@ -1,6 +1,6 @@
 package sopra.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -31,15 +30,14 @@ public class Planete {
 	@JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
 	@Column(name="biome",nullable = false)
 	@Enumerated(EnumType.STRING)
-	@OrderColumn(name = "ordre")
-	private Biome[] biomes = new Biome[3];
+	private List<Biome> biomes;
 	
 	
 	public Planete() {
 	}
 
 
-	public Planete(Integer id, String nom, int minerai, Biome[] biomes) {
+	public Planete(Integer id, String nom, int minerai, List<Biome> biomes) {
 		this.id = id;
 		this.nom = nom;
 		this.minerai = minerai;
@@ -47,7 +45,7 @@ public class Planete {
 	}
 	
 	
-	public Planete(String nom, int minerai, Biome[] biomes) {
+	public Planete(String nom, int minerai, List<Biome> biomes) {
 		this.nom = nom;
 		this.minerai = minerai;
 		this.biomes = biomes;
@@ -84,19 +82,19 @@ public class Planete {
 	}
 
 
-	public Biome[] getBiomes() {
+	public List<Biome> getBiomes() {
 		return biomes;
 	}
 
 
-	public void setBiomes(Biome[] biomes) {
+	public void setBiomes(List<Biome> biomes) {
 		this.biomes = biomes;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Planete [id=" + id + ", nom=" + nom + ", minerai=" + minerai + ", biomes=" + Arrays.toString(biomes)
+		return "Planete [id=" + id + ", nom=" + nom + ", minerai=" + minerai + ", biomes=" 
 				+ "]";
 	}
 	

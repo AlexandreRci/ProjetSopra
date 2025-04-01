@@ -59,21 +59,52 @@ public class TestJPA {
 		Possession possessionArgent3 = new Possession(345, Ressource.Argent);
 		Possession possessionArgent4 = new Possession(484, Ressource.Argent);		
 		
+		/*
 		Possession [] possessionRessource1 = {possessionArme1,possessionNourriture1,possessionEnergie1,possessionArgent1};
 		Possession [] possessionRessource2 = {possessionArme2,possessionNourriture2,possessionEnergie2,possessionArgent2};
 		Possession [] possessionRessource3 = {possessionArme3,possessionNourriture3,possessionEnergie3,possessionArgent3};
 		Possession [] possessionRessource4 = {possessionArme4,possessionNourriture4,possessionEnergie4,possessionArgent4};
+		*/
 		
-		Biome[] listeBiomes1 = {Biome.Plaine,Biome.Foret,Biome.Ocean};
-		Biome[] listeBiomes2 = {Biome.Plaine,Biome.Foret,Biome.Desertique};
-		Biome[] listeBiomes3 = {Biome.Plaine,Biome.Ocean,Biome.Desertique};
-		Biome[] listeBiomes4 = {Biome.Foret,Biome.Ocean,Biome.Desertique};
+		List<Possession> possessionRessource1 = new ArrayList<>();
+		List<Possession> possessionRessource2 = new ArrayList<>();
+		List<Possession> possessionRessource3 = new ArrayList<>();
+		List<Possession> possessionRessource4 = new ArrayList<>();
+		
+		Collections.addAll(possessionRessource1, possessionArme1,possessionNourriture1,possessionEnergie1,possessionArgent1);
+		Collections.addAll(possessionRessource2, possessionArme2,possessionNourriture2,possessionEnergie2,possessionArgent2);
+		Collections.addAll(possessionRessource3, possessionArme3,possessionNourriture3,possessionEnergie3,possessionArgent3);
+		Collections.addAll(possessionRessource4, possessionArme4,possessionNourriture4,possessionEnergie4,possessionArgent4);
 		
 		
-		Planete planete1 = new Planete("Planete A",125,listeBiomes1);
-		Planete planete2 = new Planete("Planete B",247,listeBiomes2);
-		Planete planete3 = new Planete("Planete C",371,listeBiomes3);
-		Planete planete4 = new Planete("Planete D",404,listeBiomes4);
+		
+		
+		
+		List<Biome> listeBiome1 = new ArrayList<>(); 
+		List<Biome> listeBiome2 = new ArrayList<>(); 
+		List<Biome> listeBiome3 = new ArrayList<>(); 
+		List<Biome> listeBiome4 = new ArrayList<>(); 
+		
+		Collections.addAll(listeBiome1, Biome.Plaine,Biome.Foret,Biome.Desertique);
+		Collections.addAll(listeBiome2, Biome.Plaine,Biome.Foret,Biome.Desertique);
+		Collections.addAll(listeBiome3, Biome.Plaine,Biome.Foret,Biome.Desertique);
+		Collections.addAll(listeBiome4, Biome.Plaine,Biome.Foret,Biome.Desertique);
+		
+		
+		
+		/*
+		1 = {Biome.Plaine,Biome.Foret,Biome.Ocean};
+		Collections.addAllBiome[] listeBiomes2 = {Biome.Plaine,Biome.Foret,Biome.Desertique};
+		Collections.addAllBiome[] listeBiomes3 = {Biome.Plaine,Biome.Ocean,Biome.Desertique};
+		Collections.addAllBiome[] listeBiomes4 = {Biome.Foret,Biome.Ocean,Biome.Desertique};
+		*/
+		
+		
+		
+		Planete planete1 = new Planete("Planete A",125,listeBiome1);
+		Planete planete2 = new Planete("Planete B",247,listeBiome2);
+		Planete planete3 = new Planete("Planete C",371,listeBiome3);
+		Planete planete4 = new Planete("Planete D",404,listeBiome4);
 		
 		PlanetSeed planeteSeed1= new PlanetSeed(100,12,10,planete1);
 		PlanetSeed planeteSeed2= new PlanetSeed(206,22,24,planete2);
