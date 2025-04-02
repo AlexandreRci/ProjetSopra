@@ -2,5 +2,5 @@ package sopra.model;
 
 public enum Statut {
 
-	Debut, EnCours, Fini;
+    Debut, EnCours, Fini
 }

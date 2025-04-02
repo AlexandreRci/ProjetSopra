@@ -20,70 +20,65 @@ import javax.persistence.Table;
 @Table(name = "espece")
 public class Espece {
 
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Integer id;
-	@Column(nullable = false)
-	private String nom;
-	@ElementCollection(fetch = FetchType.EAGER)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(nullable = false)
+    private String nom;
+    @ElementCollection(fetch = FetchType.EAGER)
     @MapKeyEnumerated(EnumType.STRING)
     @CollectionTable(name = "espece_biome", joinColumns = @JoinColumn(name = "espece_id"))
     @Column(name = "biome_value", nullable = false)
-	private Map<Biome,Double> biomes = new HashMap<Biome,Double>();
-	
-	
-	public Espece() {
-	}
-
-	public Espece(Integer id, String nom, Map<Biome, Double> biomes) {
-		this.id = id;
-		this.nom = nom;
-		this.biomes = biomes;
-	}
-	
-	public Espece(String nom, Map<Biome, Double> biomes) {
-		this.nom = nom;
-		this.biomes = biomes;
-	}
+    private Map<Biome, Double> biomes = new HashMap<>();
 
 
-	public Integer getId() {
-		return id;
-	}
+    public Espece() {
+    }
+
+    public Espece(Integer id, String nom, Map<Biome, Double> biomes) {
+        this.id = id;
+        this.nom = nom;
+        this.biomes = biomes;
+    }
+
+    public Espece(String nom, Map<Biome, Double> biomes) {
+        this.nom = nom;
+        this.biomes = biomes;
+    }
 
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
 
-	public String getNom() {
-		return nom;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public String getNom() {
+        return nom;
+    }
 
 
-	public Map<Biome, Double> getBiomes() {
-		return biomes;
-	}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
 
-	public void setBiomes(Map<Biome, Double> biomes) {
-		this.biomes = biomes;
-	}
+    public Map<Biome, Double> getBiomes() {
+        return biomes;
+    }
 
-	@Override
-	public String toString() {
-		return "Espece [id=" + id + ", nom=" + nom + ", biomes=" + biomes + "]";
-	}
 
-	
+    public void setBiomes(Map<Biome, Double> biomes) {
+        this.biomes = biomes;
+    }
 
-	
-	
-	
+    @Override
+    public String toString() {
+        return "Espece [id=" + id + ", nom=" + nom + ", biomes=" + biomes + "]";
+    }
+
 }
