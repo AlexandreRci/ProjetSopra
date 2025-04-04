@@ -19,120 +19,121 @@ import javax.persistence.Table;
 @Table(name = "planet_seed")
 public class PlanetSeed {
 
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Integer id;
-	private int population;
-	private int arme;
-	@Column(name = "minerai_restant")
-	private int mineraiRestant;
-	@ManyToOne
-	@JoinColumn(name="joueur_id",nullable = false)
-	private Joueur joueur;
-	@ManyToOne
-	@JoinColumn(name="planete_id",nullable = false)
-	private Planete planete;
-	@OneToMany
-	@ElementCollection(fetch = FetchType.EAGER, targetClass = Batiment.class)
-	@JoinTable(name = "batiment_sur_planete",
-	joinColumns = @JoinColumn(name = "planet_seed_id"),
-	inverseJoinColumns = @JoinColumn(name = "batiment_id"))
-	private List<Batiment> batiments;
-	
-	
-	public PlanetSeed() {
-	}
-
-	public PlanetSeed(Integer id, int population, int arme, int mineraiRestant, Planete planete) {
-		this.id = id;
-		this.population = population;
-		this.arme = arme;
-		this.mineraiRestant = mineraiRestant;
-		this.planete = planete;
-	}
-	
-	public PlanetSeed(int population, int arme, int mineraiRestant, Planete planete) {
-		this.population = population;
-		this.arme = arme;
-		this.mineraiRestant = mineraiRestant;
-		this.planete = planete;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private int population;
+    private int arme;
+    @Column(name = "minerai_restant")
+    private int mineraiRestant;
+    @ManyToOne
+    @JoinColumn(name = "joueur_id", nullable = false)
+    private Joueur joueur;
+    @ManyToOne
+    @JoinColumn(name = "planete_id", nullable = false)
+    private Planete planete;
+    @OneToMany
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = Batiment.class)
+    @JoinTable(name = "batiment_sur_planete",
+            joinColumns = @JoinColumn(name = "planet_seed_id"),
+            inverseJoinColumns = @JoinColumn(name = "batiment_id"))
+    private List<Batiment> batiments;
 
 
+    public PlanetSeed() {
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public PlanetSeed(Integer id, int population, int arme, int mineraiRestant, Joueur joueur, Planete planete) {
+        this.id = id;
+        this.population = population;
+        this.arme = arme;
+        this.mineraiRestant = mineraiRestant;
+        this.joueur = joueur;
+        this.planete = planete;
+    }
 
+    public PlanetSeed(int population, int arme, int mineraiRestant, Joueur joueur, Planete planete) {
+        this.population = population;
+        this.arme = arme;
+        this.mineraiRestant = mineraiRestant;
+        this.joueur = joueur;
+        this.planete = planete;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	public int getPopulation() {
-		return population;
-	}
-
-
-	public void setPopulation(int population) {
-		this.population = population;
-	}
-
-
-	public int getArme() {
-		return arme;
-	}
-
-
-	public void setArme(int arme) {
-		this.arme = arme;
-	}
+    public Integer getId() {
+        return id;
+    }
 
 
-	public int getMineraiRestant() {
-		return mineraiRestant;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-	public void setMineraiRestant(int mineraiRestant) {
-		this.mineraiRestant = mineraiRestant;
-	}
+    public int getPopulation() {
+        return population;
+    }
 
 
-	public Joueur getJoueur() {
-		return joueur;
-	}
+    public void setPopulation(int population) {
+        this.population = population;
+    }
 
 
-	public void setJoueur(Joueur joueur) {
-		this.joueur = joueur;
-	}
+    public int getArme() {
+        return arme;
+    }
 
 
-	public Planete getPlanete() {
-		return planete;
-	}
+    public void setArme(int arme) {
+        this.arme = arme;
+    }
 
 
-	public void setPlanete(Planete planete) {
-		this.planete = planete;
-	}
+    public int getMineraiRestant() {
+        return mineraiRestant;
+    }
 
 
-	public List<Batiment> getBatiments() {
-		return batiments;
-	}
+    public void setMineraiRestant(int mineraiRestant) {
+        this.mineraiRestant = mineraiRestant;
+    }
 
 
-	public void setBatiments(List<Batiment> batiments) {
-		this.batiments = batiments;
-	}
+    public Joueur getJoueur() {
+        return joueur;
+    }
 
-	@Override
-	public String toString() {
-		return "PlanetSeed [id=" + id + ", population=" + population + ", arme=" + arme + ", mineraiRestant="
-				+ mineraiRestant + ", joueur=" + joueur + ", planete=" + planete + ", batiments=" + batiments + "]";
-	}
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
+
+
+    public Planete getPlanete() {
+        return planete;
+    }
+
+
+    public void setPlanete(Planete planete) {
+        this.planete = planete;
+    }
+
+
+    public List<Batiment> getBatiments() {
+        return batiments;
+    }
+
+
+    public void setBatiments(List<Batiment> batiments) {
+        this.batiments = batiments;
+    }
+
+    @Override
+    public String toString() {
+        return "PlanetSeed [id=" + id + ", population=" + population + ", arme=" + arme + ", mineraiRestant="
+                + mineraiRestant + ", joueur=" + joueur.getId() + ", planete=" + planete.getNom() +
+                "]";
+    }
 
 }

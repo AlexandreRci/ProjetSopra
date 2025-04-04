@@ -3,11 +3,9 @@ package sopra.model;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,132 +15,124 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="partie")
+@Table(name = "partie")
 public class Partie {
-	
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Integer id;
-	@Column(name = "current_position")
-	private int currentPosition;
-	@Column(name = "nb_tour")
-	private int nbTour;
-	@Column(name = "nb_joueur")
-	private int nbJoueur;
-	@OneToMany(mappedBy = "partie")
-	private List<Joueur> joueurs;
-	@OneToMany
-	@JoinTable(name = "planete_seed_par_partie",
-	joinColumns = @JoinColumn(name = "partie_id"),
-	inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
-	private List<PlanetSeed> planetSeeds;
-	@Enumerated(EnumType.STRING)
-	@Column(name="statut",columnDefinition = "ENUM('Debut','EnCours','Fini')", nullable = false)
-	private Statut statut;
-	
-	
-	
-	public Partie() {
-	}
 
-	public Partie(Integer id, int currentPosition, int nbTour, int nbJoueur, List<PlanetSeed> planetSeeds,
-			Statut statut) {
-		this.id = id;
-		this.currentPosition = currentPosition;
-		this.nbTour = nbTour;
-		this.nbJoueur = nbJoueur;
-		this.planetSeeds = planetSeeds;
-		this.statut = statut;
-	}
-	
-	public Partie( int currentPosition, int nbTour, int nbJoueur, List<PlanetSeed> planetSeeds,
-			Statut statut) {
-		this.currentPosition = currentPosition;
-		this.nbTour = nbTour;
-		this.nbJoueur = nbJoueur;
-		this.planetSeeds = planetSeeds;
-		this.statut = statut;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "current_position")
+    private int currentPosition;
+    @Column(name = "nb_tour")
+    private int nbTour;
+    @Column(name = "nb_joueur")
+    private int nbJoueur;
+    @OneToMany(mappedBy = "partie")
+    private List<Joueur> joueurs;
+    @OneToMany
+    @JoinTable(name = "planete_seed_par_partie",
+            joinColumns = @JoinColumn(name = "partie_id"),
+            inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
+    private List<PlanetSeed> planetSeeds;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statut", columnDefinition = "ENUM('Debut','EnCours','Fini')", nullable = false)
+    private Statut statut;
 
 
+    public Partie() {
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Partie(Integer id, int currentPosition, int nbTour, int nbJoueur,
+                  Statut statut) {
+        this.id = id;
+        this.currentPosition = currentPosition;
+        this.nbTour = nbTour;
+        this.nbJoueur = nbJoueur;
+        this.statut = statut;
+    }
 
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	public int getCurrentPosition() {
-		return currentPosition;
-	}
-
-
-	public void setCurrentPosition(int currentPosition) {
-		this.currentPosition = currentPosition;
-	}
-
-
-	public int getNbTour() {
-		return nbTour;
-	}
+    public Partie(int currentPosition, int nbTour, int nbJoueur, Statut statut) {
+        this.currentPosition = currentPosition;
+        this.nbTour = nbTour;
+        this.nbJoueur = nbJoueur;
+        this.statut = statut;
+    }
 
 
-	public void setNbTour(int nbTour) {
-		this.nbTour = nbTour;
-	}
+    public Integer getId() {
+        return id;
+    }
 
 
-	public int getNbJoueur() {
-		return nbJoueur;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-	public void setNbJoueur(int nbJoueur) {
-		this.nbJoueur = nbJoueur;
-	}
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
 
 
-	public List<Joueur> getJoueurs() {
-		return joueurs;
-	}
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
+    }
 
 
-	public void setJoueurs(List<Joueur> joueurs) {
-		this.joueurs = joueurs;
-	}
+    public int getNbTour() {
+        return nbTour;
+    }
 
 
-	public List<PlanetSeed> getPlanetSeeds() {
-		return planetSeeds;
-	}
+    public void setNbTour(int nbTour) {
+        this.nbTour = nbTour;
+    }
 
 
-	public void setPlanetSeeds(List<PlanetSeed> planetSeeds) {
-		this.planetSeeds = planetSeeds;
-	}
+    public int getNbJoueur() {
+        return nbJoueur;
+    }
 
 
-	public Statut getStatut() {
-		return statut;
-	}
+    public void setNbJoueur(int nbJoueur) {
+        this.nbJoueur = nbJoueur;
+    }
 
 
-	public void setStatut(Statut statut) {
-		this.statut = statut;
-	}
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
 
-	@Override
-	public String toString() {
-		return "Partie [id=" + id + ", currentPosition=" + currentPosition + ", nbTour=" + nbTour + ", nbJoueur="
-				+ nbJoueur + ", joueurs=" + joueurs + ", planetSeeds=" + planetSeeds + ", statut=" + statut + "]";
-	}
 
-	
-	
-	
+    public void setJoueurs(List<Joueur> joueurs) {
+        this.joueurs = joueurs;
+    }
+
+
+    public List<PlanetSeed> getPlanetSeeds() {
+        return planetSeeds;
+    }
+
+
+    public void setPlanetSeeds(List<PlanetSeed> planetSeeds) {
+        this.planetSeeds = planetSeeds;
+    }
+
+
+    public Statut getStatut() {
+        return statut;
+    }
+
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
+    }
+
+    @Override
+    public String toString() {
+        return "Partie [id=" + id + ", currentPosition=" + currentPosition + ", nbTour=" + nbTour + ", nbJoueur="
+                + nbJoueur + ", statut=" + statut + "]";
+    }
+
 
 }

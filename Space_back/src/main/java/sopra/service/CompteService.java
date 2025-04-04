@@ -6,8 +6,8 @@ import sopra.model.Compte;
 
 import java.util.List;
 
-public class CompteService {
-    IDAOCompte daoCompte = new DAOCompte();
+public class CompteService implements IService<Compte,Integer>{
+    final IDAOCompte daoCompte = new DAOCompte();
 
     public Compte getById(Integer id) throws Exception {
         if (id == null) {
