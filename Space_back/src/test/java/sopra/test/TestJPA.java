@@ -285,11 +285,15 @@ public class TestJPA {
         planeteSeed3.setBatiments(batimentList3);
         planeteSeed4.setBatiments(batimentList4);
 
+        planeteSeed1 = planetSeedService.update(planeteSeed1);
+        planeteSeed2 = planetSeedService.update(planeteSeed2);
+        planeteSeed3 = planetSeedService.update(planeteSeed3);
+        planeteSeed4 = planetSeedService.update(planeteSeed4);
+
         System.out.println(planeteSeed1.getBatiments());
         System.out.println(planeteSeed2.getBatiments());
         System.out.println(planeteSeed3.getBatiments());
         System.out.println(planeteSeed4.getBatiments());
-
 
 
     }
