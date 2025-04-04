@@ -20,6 +20,8 @@ public class TestJPA {
     static PlaneteService planeteService = Singleton.getInstance().getPlaneteSrv();
     static PlanetSeedService planetSeedService = Singleton.getInstance().getPlanetSeedSrv();
     static PossessionService possessionService = Singleton.getInstance().getPossessionSrv();
+    static BatimentService batimentService = Singleton.getInstance().getBatimentSrv();
+
 
     public static void main(String[] args) {
         Utilisateur utilisateur1 = new Utilisateur("login_judy", "password_judy", "Judy");
@@ -258,71 +260,36 @@ public class TestJPA {
         Batiment batiment3 = new Batiment("Centrale", Taille.Grand, Ressource.Energie);
         Batiment batiment4 = new Batiment("Caserne", Taille.Grand, Ressource.Arme);
 
+        batiment1 = batimentService.create(batiment1);
+        batiment2 = batimentService.create(batiment2);
+        batiment3 = batimentService.create(batiment3);
+        batiment4 = batimentService.create(batiment4);
 
-//		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-//
-//		em.getTransaction().begin();
-//
-//		em.persist(utilisateur1);
-//		em.persist(utilisateur2);
-//		em.persist(utilisateur3);
-//		em.persist(utilisateur4);
-//
-//		em.persist(espece1);
-//		em.persist(espece2);
-//		em.persist(espece3);
-//		em.persist(espece4);
-//
-//		em.persist(planete1);
-//		em.persist(planete2);
-//		em.persist(planete3);
-//		em.persist(planete4);
-//
-//
-//		em.persist(partie1);
-//		em.persist(partie2);
-//		em.persist(partie3);
-//		em.persist(partie4);
-//
-//		em.persist(joueur1);
-//		em.persist(joueur2);
-//		em.persist(joueur3);
-//		em.persist(joueur4);
-//
-//		em.persist(planeteSeed1);
-//		em.persist(planeteSeed2);
-//		em.persist(planeteSeed3);
-//		em.persist(planeteSeed4);
-//
-//		em.persist(possessionArme1);
-//		em.persist(possessionArme2);
-//		em.persist(possessionArme3);
-//		em.persist(possessionArme4);
-//
-//		em.persist(possessionNourriture1);
-//		em.persist(possessionNourriture2);
-//		em.persist(possessionNourriture3);
-//		em.persist(possessionNourriture4);
-//
-//		em.persist(possessionEnergie1);
-//		em.persist(possessionEnergie2);
-//		em.persist(possessionEnergie3);
-//		em.persist(possessionEnergie4);
-//
-//		em.persist(possessionArgent1);
-//		em.persist(possessionArgent2);
-//		em.persist(possessionArgent3);
-//		em.persist(possessionArgent4);
-//
-//
-//		em.persist(batiment1);
-//		em.persist(batiment2);
-//		em.persist(batiment3);
-//		em.persist(batiment4);
-//
-//		em.getTransaction().commit();
-//
-//		Singleton.getInstance().closeEmf();
+        System.out.println(batiment1);
+        System.out.println(batiment2);
+        System.out.println(batiment3);
+        System.out.println(batiment4);
+
+        List<Batiment> batimentList1 = new ArrayList<>();
+        List<Batiment> batimentList2 = new ArrayList<>();
+        List<Batiment> batimentList3 = new ArrayList<>();
+        List<Batiment> batimentList4 = new ArrayList<>();
+
+        batimentList1.add(batiment1);
+        batimentList2.add(batiment2);
+        batimentList3.add(batiment3);
+        batimentList4.add(batiment4);
+
+        planeteSeed1.setBatiments(batimentList1);
+        planeteSeed2.setBatiments(batimentList2);
+        planeteSeed3.setBatiments(batimentList3);
+        planeteSeed4.setBatiments(batimentList4);
+
+        System.out.println(planeteSeed1.getBatiments());
+        System.out.println(planeteSeed2.getBatiments());
+        System.out.println(planeteSeed3.getBatiments());
+        System.out.println(planeteSeed4.getBatiments());
+
 
 
     }

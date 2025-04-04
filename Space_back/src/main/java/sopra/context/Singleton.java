@@ -7,14 +7,17 @@ import javax.persistence.Persistence;
 
 public class Singleton {
     private static Singleton instance = null;
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
+
     private final CompteService compteSrv = new CompteService();
     private final JoueurService joueurSrv = new JoueurService();
     private final PartieService partieSrv = new PartieService();
     private final EspeceService especeSrv = new EspeceService();
     private final PlaneteService planeteSrv = new PlaneteService();
     private final PlanetSeedService planetSeedSrv = new PlanetSeedService();
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
     private final PossessionService possessionSrv = new PossessionService();
+    private final BatimentService batimentSrv = new BatimentService();
+
 
     private Singleton() {
     }
@@ -63,5 +66,9 @@ public class Singleton {
 
     public PossessionService getPossessionSrv() {
         return possessionSrv;
+    }
+
+    public BatimentService getBatimentSrv() {
+        return batimentSrv;
     }
 }
