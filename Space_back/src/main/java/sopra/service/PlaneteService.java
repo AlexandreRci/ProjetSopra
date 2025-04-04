@@ -5,8 +5,8 @@ import sopra.model.Planete;
 
 import java.util.List;
 
-public class PlaneteService {
-    DAOPlanete daoPlanete = new DAOPlanete();
+public class PlaneteService implements IService<Planete,Integer>{
+    final DAOPlanete daoPlanete = new DAOPlanete();
 
     public Planete getById(Integer id) throws Exception {
         if (id == null) {

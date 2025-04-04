@@ -5,8 +5,8 @@ import sopra.model.Partie;
 
 import java.util.List;
 
-public class PartieService {
-    DAOPartie daoPartie = new DAOPartie();
+public class PartieService implements IService<Partie, Integer>{
+    final DAOPartie daoPartie = new DAOPartie();
 
     public Partie getById(Integer id) throws Exception {
         if (id == null) {

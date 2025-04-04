@@ -5,8 +5,8 @@ import sopra.model.Espece;
 
 import java.util.List;
 
-public class EspeceService {
-    DAOEspece daoEspece = new DAOEspece();
+public class EspeceService implements IService<Espece, Integer> {
+    final DAOEspece daoEspece = new DAOEspece();
 
     public Espece getById(Integer id) throws Exception {
         if (id == null) {

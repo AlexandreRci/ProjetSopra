@@ -5,8 +5,8 @@ import sopra.model.Possession;
 
 import java.util.List;
 
-public class PossessionService {
-    DAOPossession daoPossession = new DAOPossession();
+public class PossessionService implements IService<Possession, Integer>{
+    final DAOPossession daoPossession = new DAOPossession();
 
     public Possession getById(Integer id) throws Exception {
         if (id == null) {

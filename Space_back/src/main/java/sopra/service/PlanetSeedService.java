@@ -5,8 +5,8 @@ import sopra.model.PlanetSeed;
 
 import java.util.List;
 
-public class PlanetSeedService {
-    DAOPlanetSeed daoPlanetSeed = new DAOPlanetSeed();
+public class PlanetSeedService implements IService<PlanetSeed,Integer>{
+    final DAOPlanetSeed daoPlanetSeed = new DAOPlanetSeed();
 
     public PlanetSeed getById(Integer id) throws Exception {
         if (id == null) {

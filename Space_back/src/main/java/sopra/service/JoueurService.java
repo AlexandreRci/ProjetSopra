@@ -5,8 +5,8 @@ import sopra.model.Joueur;
 
 import java.util.List;
 
-public class JoueurService {
-    DAOJoueur daoJoueur = new DAOJoueur();
+public class JoueurService implements IService<Joueur, Integer>{
+    final DAOJoueur daoJoueur = new DAOJoueur();
 
     public Joueur getById(Integer id) throws Exception {
         if (id == null) {
