@@ -1,29 +1,31 @@
 package sopra.test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-import sopra.context.Singleton;
+import org.springframework.beans.factory.annotation.Autowired;
 import sopra.model.*;
 import sopra.service.*;
 
+import java.util.*;
+
 public class TestJPA {
+    @Autowired
+    CompteService compteService;
+    @Autowired
+    PartieService partieService;
+    @Autowired
+    JoueurService joueurService;
+    @Autowired
+    EspeceService especeService;
+    @Autowired
+    PlaneteService planeteService;
+    @Autowired
+    PlanetSeedService planetSeedService;
+    @Autowired
+    PossessionService possessionService;
+    @Autowired
+    BatimentService batimentService;
 
-    static CompteService compteService = Singleton.getInstance().getCompteSrv();
-    static PartieService partieService = Singleton.getInstance().getPartieSrv();
-    static JoueurService joueurService = Singleton.getInstance().getJoueurSrv();
-    static EspeceService especeService = Singleton.getInstance().getEspeceSrv();
-    static PlaneteService planeteService = Singleton.getInstance().getPlaneteSrv();
-    static PlanetSeedService planetSeedService = Singleton.getInstance().getPlanetSeedSrv();
-    static PossessionService possessionService = Singleton.getInstance().getPossessionSrv();
-    static BatimentService batimentService = Singleton.getInstance().getBatimentSrv();
 
-
-    public static void main(String[] args) {
+    public void run(String[]... args) {
         Utilisateur utilisateur1 = new Utilisateur("login_judy", "password_judy", "Judy");
         Utilisateur utilisateur2 = new Utilisateur("login_AlexL", "password_AlexL", "AlexL");
         Utilisateur utilisateur3 = new Utilisateur("login_AlexR", "password_AlexR", "AlexR");
