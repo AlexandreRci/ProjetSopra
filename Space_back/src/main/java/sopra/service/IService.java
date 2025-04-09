@@ -11,7 +11,7 @@ public interface IService<T, K> {
 
     T update(T object);
 
-    boolean deleteById(K id);
+    void deleteById(K id);
 
-    boolean delete(T object) throws Exception;
+    void delete(T object);
 }

@@ -1,23 +1,26 @@
 package sopra.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sopra.dao.IDAOCompte;
-import sopra.dao.jpa.DAOCompte;
 import sopra.model.Compte;
 
 import java.util.List;
 
-public class CompteService implements IService<Compte,Integer>{
-    final IDAOCompte daoCompte = new DAOCompte();
+@Service
+public class CompteService implements IService<Compte, Integer> {
+    @Autowired
+    IDAOCompte daoCompte;
 
     public Compte getById(Integer id) throws Exception {
         if (id == null) {
             throw new Exception("Impossible de chercher un compte sans id ?!");
         }
-        return daoCompte.findById(id);
+        return daoCompte.findById(id).orElse(null);
     }
 
-    public Compte getByLoginAndPassword(String login, String password) {
-        return daoCompte.findByLoginAndPassword(login, password);
+    public Compte getByUsernameAndPassword(String username, String password) {
+        return daoCompte.findByUsernameAndPassword(username, password);
     }
 
     public List<Compte> getAll() {
@@ -25,25 +28,18 @@ public class CompteService implements IService<Compte,Integer>{
     }
 
     public Compte create(Compte compte) {
-        compte = daoCompte.save(compte);
-        return compte;
+        return daoCompte.save(compte);
     }
 
     public Compte update(Compte compte) {
-        compte = daoCompte.save(compte);
-        return compte;
+        return daoCompte.save(compte);
     }
 
-    public boolean deleteById(Integer id) {
-        daoCompte.delete(id);
-        return true;
+    public void deleteById(Integer id) {
+        daoCompte.deleteById(id);
     }
 
-    public boolean delete(Compte compte) throws Exception {
-        if (compte.getId() == null) {
-            throw new Exception("Impossible de supprimer un compte qui n'a pas d'id");
-        }
-        deleteById(compte.getId());
-        return true;
+    public void delete(Compte compte) {
+        daoCompte.delete(compte);
     }
 }

@@ -1,18 +1,22 @@
 package sopra.service;
 
-import sopra.dao.jpa.DAOBatiment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import sopra.dao.IDAOBatiment;
 import sopra.model.Batiment;
 
 import java.util.List;
 
-public class BatimentService implements IService<Batiment,Integer>{
-    final DAOBatiment daoBatiment = new DAOBatiment();
+@Service
+public class BatimentService implements IService<Batiment, Integer> {
+    @Autowired
+    IDAOBatiment daoBatiment;
 
     public Batiment getById(Integer id) throws Exception {
         if (id == null) {
             throw new Exception("Impossible de chercher une batiment sans id ?!");
         }
-        return daoBatiment.findById(id);
+        return daoBatiment.findById(id).orElse(null);
     }
 
     public List<Batiment> getAll() {
@@ -20,25 +24,18 @@ public class BatimentService implements IService<Batiment,Integer>{
     }
 
     public Batiment create(Batiment batiment) {
-        batiment = daoBatiment.save(batiment);
-        return batiment;
+        return daoBatiment.save(batiment);
     }
 
     public Batiment update(Batiment batiment) {
-        batiment = daoBatiment.save(batiment);
-        return batiment;
+        return daoBatiment.save(batiment);
     }
 
-    public boolean deleteById(Integer id) {
-        daoBatiment.delete(id);
-        return true;
+    public void deleteById(Integer id) {
+        daoBatiment.deleteById(id);
     }
 
-    public boolean delete(Batiment batiment) throws Exception {
-        if (batiment.getId() == null) {
-            throw new Exception("Impossible de supprimer une batiment qui n'a pas d'id");
-        }
-        deleteById(batiment.getId());
-        return true;
+    public void delete(Batiment batiment){
+        daoBatiment.delete(batiment);
     }
 }

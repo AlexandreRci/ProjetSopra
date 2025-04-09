@@ -1,18 +1,22 @@
 package sopra.service;
 
-import sopra.dao.jpa.DAOPartie;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import sopra.dao.IDAOPartie;
 import sopra.model.Partie;
 
 import java.util.List;
 
-public class PartieService implements IService<Partie, Integer>{
-    final DAOPartie daoPartie = new DAOPartie();
+@Service
+public class PartieService implements IService<Partie, Integer> {
+    @Autowired
+    IDAOPartie daoPartie;
 
     public Partie getById(Integer id) throws Exception {
         if (id == null) {
             throw new Exception("Impossible de chercher une partie sans id ?!");
         }
-        return daoPartie.findById(id);
+        return daoPartie.findById(id).orElse(null);
     }
 
     public List<Partie> getAll() {
@@ -20,25 +24,18 @@ public class PartieService implements IService<Partie, Integer>{
     }
 
     public Partie create(Partie partie) {
-        partie = daoPartie.save(partie);
-        return partie;
+        return daoPartie.save(partie);
     }
 
     public Partie update(Partie partie) {
-        partie = daoPartie.save(partie);
-        return partie;
+        return daoPartie.save(partie);
     }
 
-    public boolean deleteById(Integer id) {
-        daoPartie.delete(id);
-        return true;
+    public void deleteById(Integer id) {
+        daoPartie.deleteById(id);
     }
 
-    public boolean delete(Partie partie) throws Exception {
-        if (partie.getId() == null) {
-            throw new Exception("Impossible de supprimer une partie qui n'a pas d'id");
-        }
-        deleteById(partie.getId());
-        return true;
+    public void delete(Partie partie){
+        daoPartie.delete(partie);
     }
 }

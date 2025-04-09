@@ -19,7 +19,7 @@ public abstract class Compte {
     @Column(name = "id_compte")
     protected Integer id;
     @Column(nullable = false)
-    protected String login;
+    protected String username;
     @Column(nullable = false)
     protected String password;
 
@@ -27,14 +27,14 @@ public abstract class Compte {
     public Compte() {
     }
 
-    public Compte(Integer id, String login, String password) {
+    public Compte(Integer id, String username, String password) {
         this.id = id;
-        this.login = login;
+        this.username = username;
         this.password = password;
     }
 
-    public Compte(String login, String password) {
-        this.login = login;
+    public Compte(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -49,13 +49,13 @@ public abstract class Compte {
     }
 
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 

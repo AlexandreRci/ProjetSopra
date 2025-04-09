@@ -15,14 +15,14 @@ public class Utilisateur extends Compte {
     public Utilisateur() {
     }
 
-    public Utilisateur(Integer id, String login, String password, String name) {
-        super(id, login, password);
+    public Utilisateur(Integer id, String username, String password, String name) {
+        super(id, username, password);
         this.name = name;
 
     }
 
-    public Utilisateur(String login, String password, String name) {
-        super(login, password);
+    public Utilisateur(String username, String password, String name) {
+        super(username, password);
         this.name = name;
 
     }
@@ -37,7 +37,7 @@ public class Utilisateur extends Compte {
 
     @Override
     public String toString() {
-        return "Utilisateur [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + "]";
+        return "Utilisateur [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + "]";
     }
 
 

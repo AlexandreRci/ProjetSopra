@@ -2,7 +2,7 @@ package sopra.test;
 
 import java.util.Scanner;
 
-import sopra.context.Singleton;
+/*import sopra.context.Singleton;
 import sopra.model.Compte;
 import sopra.service.CompteService;
 
@@ -48,4 +48,4 @@ public class TestRequetes {
 		
 	}
 
-}
+}*/
