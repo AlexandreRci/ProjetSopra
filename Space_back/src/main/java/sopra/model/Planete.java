@@ -16,93 +16,88 @@ import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="planete")
+@Table(name = "planete")
 public class Planete {
 
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Integer id;
-	@Column(nullable = false)
-	private String nom;
-	@Column(nullable = false)
-	private int minerai;
-	@ElementCollection(fetch = FetchType.EAGER, targetClass = Biome.class)
-	@JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
-	@Column(name="biome",nullable = false)
-	@Enumerated(EnumType.STRING)
-	private List<Biome> biomes;
-	
-	
-	public Planete() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(nullable = false)
+    private String nom;
+    @Column(nullable = false)
+    private int minerai;
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = Biome.class)
+    @JoinTable(name = "biomes_sur_planete", joinColumns = @JoinColumn(name = "planete"))
+    @Column(name = "biome", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private List<Biome> biomes;
 
 
-	public Planete(Integer id, String nom, int minerai, List<Biome> biomes) {
-		this.id = id;
-		this.nom = nom;
-		this.minerai = minerai;
-		this.biomes = biomes;
-	}
-	
-	
-	public Planete(String nom, int minerai, List<Biome> biomes) {
-		this.nom = nom;
-		this.minerai = minerai;
-		this.biomes = biomes;
-	}
+    public Planete() {
+    }
 
 
-	public Integer getId() {
-		return id;
-	}
+    public Planete(Integer id, String nom, int minerai, List<Biome> biomes) {
+        this.id = id;
+        this.nom = nom;
+        this.minerai = minerai;
+        this.biomes = biomes;
+    }
 
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Planete(String nom, int minerai, List<Biome> biomes) {
+        this.nom = nom;
+        this.minerai = minerai;
+        this.biomes = biomes;
+    }
 
 
-	public String getNom() {
-		return nom;
-	}
+    public Integer getId() {
+        return id;
+    }
 
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-	public int getMinerai() {
-		return minerai;
-	}
+    public String getNom() {
+        return nom;
+    }
 
 
-	public void setMinerai(int minerai) {
-		this.minerai = minerai;
-	}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
 
-	public List<Biome> getBiomes() {
-		return biomes;
-	}
+    public int getMinerai() {
+        return minerai;
+    }
 
 
-	public void setBiomes(List<Biome> biomes) {
-		this.biomes = biomes;
-	}
+    public void setMinerai(int minerai) {
+        this.minerai = minerai;
+    }
 
 
-	@Override
-	public String toString() {
-		return "Planete [id=" + id + ", nom=" + nom + ", minerai=" + minerai + ", biomes=" 
-				+ "]";
-	}
-	
-	
-	
-	
-	
+    public List<Biome> getBiomes() {
+        return biomes;
+    }
 
-	
 
+    public void setBiomes(List<Biome> biomes) {
+        this.biomes = biomes;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Planete{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", minerai=" + minerai +
+                '}';
+    }
 }
