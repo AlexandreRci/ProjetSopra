@@ -33,7 +33,6 @@ public class PlanetSeed {
     @JoinColumn(name = "planete_id", nullable = false)
     private Planete planete;
     @OneToMany
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = Batiment.class)
     @JoinTable(name = "batiment_sur_planete",
             joinColumns = @JoinColumn(name = "planet_seed_id"),
             inverseJoinColumns = @JoinColumn(name = "batiment_id"))

@@ -24,8 +24,7 @@ public class Joueur {
     private Integer id;
     @Column(nullable = false)
     private int position;
-    @OneToMany
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = Possession.class)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "joueur_possession",
             joinColumns = @JoinColumn(name = "joueur_id"),
             inverseJoinColumns = @JoinColumn(name = "possession_id"))
