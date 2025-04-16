@@ -1,18 +1,22 @@
 package sopra.service;
 
-import sopra.dao.jpa.DAOPossession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import sopra.dao.IDAOPossession;
 import sopra.model.Possession;
 
 import java.util.List;
 
-public class PossessionService implements IService<Possession, Integer>{
-    final DAOPossession daoPossession = new DAOPossession();
+@Service
+public class PossessionService implements IService<Possession, Integer> {
+    @Autowired
+    IDAOPossession daoPossession;
 
     public Possession getById(Integer id) throws Exception {
         if (id == null) {
             throw new Exception("Impossible de chercher une possession sans id ?!");
         }
-        return daoPossession.findById(id);
+        return daoPossession.findById(id).orElse(null);
     }
 
     public List<Possession> getAll() {
@@ -20,25 +24,18 @@ public class PossessionService implements IService<Possession, Integer>{
     }
 
     public Possession create(Possession possession) {
-        possession = daoPossession.save(possession);
-        return possession;
+        return daoPossession.save(possession);
     }
 
     public Possession update(Possession possession) {
-        possession = daoPossession.save(possession);
-        return possession;
+        return daoPossession.save(possession);
     }
 
-    public boolean deleteById(Integer id) {
-        daoPossession.delete(id);
-        return true;
+    public void deleteById(Integer id) {
+        daoPossession.deleteById(id);
     }
 
-    public boolean delete(Possession possession) throws Exception {
-        if (possession.getId() == null) {
-            throw new Exception("Impossible de supprimer une possession qui n'a pas d'id");
-        }
-        deleteById(possession.getId());
-        return true;
+    public void delete(Possession possession){
+        daoPossession.delete(possession);
     }
 }

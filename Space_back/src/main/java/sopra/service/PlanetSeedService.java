@@ -1,18 +1,22 @@
 package sopra.service;
 
-import sopra.dao.jpa.DAOPlanetSeed;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import sopra.dao.IDAOPlanetSeed;
 import sopra.model.PlanetSeed;
 
 import java.util.List;
 
-public class PlanetSeedService implements IService<PlanetSeed,Integer>{
-    final DAOPlanetSeed daoPlanetSeed = new DAOPlanetSeed();
+@Service
+public class PlanetSeedService implements IService<PlanetSeed, Integer> {
+    @Autowired
+    IDAOPlanetSeed daoPlanetSeed;
 
     public PlanetSeed getById(Integer id) throws Exception {
         if (id == null) {
             throw new Exception("Impossible de chercher une planetSeed sans id ?!");
         }
-        return daoPlanetSeed.findById(id);
+        return daoPlanetSeed.findById(id).orElse(null);
     }
 
     public List<PlanetSeed> getAll() {
@@ -20,25 +24,18 @@ public class PlanetSeedService implements IService<PlanetSeed,Integer>{
     }
 
     public PlanetSeed create(PlanetSeed planeteSeed) {
-        planeteSeed = daoPlanetSeed.save(planeteSeed);
-        return planeteSeed;
+        return daoPlanetSeed.save(planeteSeed);
     }
 
     public PlanetSeed update(PlanetSeed planeteSeed) {
-        planeteSeed = daoPlanetSeed.save(planeteSeed);
-        return planeteSeed;
+        return daoPlanetSeed.save(planeteSeed);
     }
 
-    public boolean deleteById(Integer id) {
-        daoPlanetSeed.delete(id);
-        return true;
+    public void deleteById(Integer id) {
+        daoPlanetSeed.deleteById(id);
     }
 
-    public boolean delete(PlanetSeed planeteSeed) throws Exception {
-        if (planeteSeed.getId() == null) {
-            throw new Exception("Impossible de supprimer une planetSeed qui n'a pas d'id");
-        }
-        deleteById(planeteSeed.getId());
-        return true;
+    public void delete(PlanetSeed planeteSeed) {
+        daoPlanetSeed.delete(planeteSeed);
     }
 }
