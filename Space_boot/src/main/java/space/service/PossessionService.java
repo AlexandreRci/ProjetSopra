@@ -39,4 +39,8 @@ public class PossessionService implements IService<Possession, Integer> {
     public void delete(Possession possession){
         daoPossession.delete(possession);
     }
+
+    public boolean existsById(Integer id) {
+        return daoPossession.existsById(id);
+    }
 }
