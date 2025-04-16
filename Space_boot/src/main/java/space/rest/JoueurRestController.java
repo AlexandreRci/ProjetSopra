@@ -32,8 +32,9 @@ public class JoueurRestController {
 	@GetMapping("")
 	public List<JoueurResponse> getAll() {
 		List<Joueur> joueur = this.joueurService.getAll();
-		//return joueur.stream().map(JoueurResponse::convert).toList();
-		return;
+		//JoueurResponse joueurResponse
+		return joueur.stream().map(JoueurResponse::convert).toList();
+		
 	}
 
 	@GetMapping("/{id}")

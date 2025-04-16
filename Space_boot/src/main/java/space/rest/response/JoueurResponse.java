@@ -14,135 +14,86 @@ public class JoueurResponse {
 
     private Integer id;
     private int position;
-    private List<Possession> possessions;
-    private Partie partie;
-    private Espece espece;
-    private List<PlanetSeed> planetSeeds;
+	private List<Integer> idPossessions;
+	private Integer idPartie;
+	private Integer idEspece;
+	private List<Integer> idPlanetSeeds;
+
 	
     
-	public JoueurResponse() {
-		super();
-	}
-    
-
-    
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
-
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
-
-
-
 	public int getPosition() {
 		return position;
 	}
-
-
-
-
-
 
 	public void setPosition(int position) {
 		this.position = position;
 	}
 
-
-
-
-
-
-	public List<Possession> getPossessions() {
-		return possessions;
+	public List<Integer> getIdPossessions() {
+		return idPossessions;
 	}
 
-
-
-
-
-
-	public void setPossessions(List<Possession> possessions) {
-		this.possessions = possessions;
+	public void setIdPossessions(List<Integer> idPossessions) {
+		this.idPossessions = idPossessions;
 	}
 
-
-
-
-
-
-	public Partie getPartie() {
-		return partie;
+	public Integer getIdPartie() {
+		return idPartie;
 	}
 
-
-
-
-
-
-	public void setPartie(Partie partie) {
-		this.partie = partie;
+	public void setIdPartie(Integer idPartie) {
+		this.idPartie = idPartie;
 	}
 
-
-
-
-
-
-	public Espece getEspece() {
-		return espece;
+	public Integer getIdEspece() {
+		return idEspece;
 	}
 
-
-
-
-
-
-	public void setEspece(Espece espece) {
-		this.espece = espece;
+	public void setIdEspece(Integer idEspece) {
+		this.idEspece = idEspece;
 	}
 
-
-
-
-
-
-	public List<PlanetSeed> getPlanetSeeds() {
-		return planetSeeds;
+	public List<Integer> getIdPlanetSeeds() {
+		return idPlanetSeeds;
 	}
 
-
-
-
-
-
-	public void setPlanetSeeds(List<PlanetSeed> planetSeeds) {
-		this.planetSeeds = planetSeeds;
+	public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
+		this.idPlanetSeeds = idPlanetSeeds;
 	}
-
-
-
-
-
-
 	public static JoueurResponse convert(Joueur joueur) {
 		JoueurResponse joueurResponse = new JoueurResponse();
-		BeanUtils.copyProperties(joueur, joueurResponse); //copie des info d'espece vers especeResponse
+		BeanUtils.copyProperties(joueur, joueurResponse);
+
+		if (joueur.getPartie() != null) {
+		Integer idPartie = joueur.getPartie().getId();
+		joueurResponse.setIdPartie(idPartie);
+		}
+
+		if (joueur.getEspece() != null) {
+		Integer idEspece = joueur.getEspece().getId();
+		joueurResponse.setIdEspece(idEspece);
+		}
+
+		if (!joueur.getPossessions().isEmpty()) {
+		joueurResponse.setIdPossessions(joueur.getPossessions().stream().map(Possession::getId).toList());
+
+		}
 		
-		return joueurResponse; 
-	}
+		if (!joueur.getPlanetSeeds().isEmpty()) {
+		joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
+
+		}
+
+		return joueurResponse;
+		}
     
     
     
