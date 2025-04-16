@@ -39,4 +39,8 @@ public class EspeceService implements IService<Espece, Integer> {
     public void delete(Espece espece){
         daoEspece.delete(espece);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoEspece.existsById(id);
+    }
 }
