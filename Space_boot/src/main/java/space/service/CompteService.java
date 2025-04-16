@@ -43,4 +43,8 @@ public class CompteService implements IService<Compte, Integer> {
     public void delete(Compte compte) {
         daoCompte.delete(compte);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoCompte.existsById(id);
+    }
 }
