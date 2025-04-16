@@ -40,4 +40,8 @@ public class JoueurService implements IService<Joueur, Integer> {
     public void delete(Joueur joueur){
         daoJoueur.delete(joueur);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoJoueur.existsById(id);
+    }
 }

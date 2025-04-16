@@ -39,4 +39,8 @@ public class PlaneteService implements IService<Planete, Integer> {
     public void delete(Planete planete){
         daoPlanete.delete(planete);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoPlanete.existsById(id);
+    }
 }

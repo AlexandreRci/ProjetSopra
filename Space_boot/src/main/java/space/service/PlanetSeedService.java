@@ -39,4 +39,8 @@ public class PlanetSeedService implements IService<PlanetSeed, Integer> {
     public void delete(PlanetSeed planeteSeed) {
         daoPlanetSeed.delete(planeteSeed);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoPlanetSeed.existsById(id);
+    }
 }

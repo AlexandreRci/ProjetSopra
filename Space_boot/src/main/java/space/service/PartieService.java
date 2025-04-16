@@ -39,4 +39,8 @@ public class PartieService implements IService<Partie, Integer> {
     public void delete(Partie partie){
         daoPartie.delete(partie);
     }
+
+    public boolean existsById(Integer id) {
+        return daoPartie.existsById(id);
+    }
 }
