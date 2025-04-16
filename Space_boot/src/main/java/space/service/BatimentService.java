@@ -39,4 +39,8 @@ public class BatimentService implements IService<Batiment, Integer> {
     public void delete(Batiment batiment){
         daoBatiment.delete(batiment);
     }
+    
+    public boolean existsById(Integer id) {
+    	return daoBatiment.existsById(id);
+    }
 }
