@@ -16,7 +16,7 @@ public class PlanetSeed {
     @Column(name = "minerai_restant")
     private int mineraiRestant;
     @ManyToOne
-    @JoinColumn(name = "joueur_id", nullable = false)
+    @JoinColumn(name = "joueur_id", nullable = true)
     private Joueur joueur;
     @ManyToOne
     @JoinColumn(name = "planete_id", nullable = false)
