@@ -1,6 +1,5 @@
 package space.rest;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class PartieRestController {
     public PartieResponse create(@RequestBody PartieRequest partieRequest) {
         Partie partie = PartieRequest.convert(partieRequest);
         partie = partieService.create(partie);
-        for (Joueur joueur: partie.getJoueurs()){
+        for (Joueur joueur : partie.getJoueurs()) {
             try {
                 joueur = joueurService.getById(joueur.getId());
                 joueur.setPartie(partie);
