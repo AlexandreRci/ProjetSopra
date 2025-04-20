@@ -14,19 +14,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import space.model.Possession;
+import space.model.Batiment;
 import space.model.Ressource;
-import space.rest.request.PossessionRequest;
-import space.service.PossessionService;
+import space.model.Taille;
+import space.rest.request.BatimentRequest;
+import space.service.BatimentService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
-class PossessionRestControllerTest {
+class BatimentRestControllerTest {
 
     @Autowired
-    PossessionService possessionService;
+    BatimentService batimentService;
     @Autowired
     private WebApplicationContext applicationContext;
     private MockMvc mockMvc;
@@ -42,101 +43,108 @@ class PossessionRestControllerTest {
 
     @Test
     void getAll() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
-        Possession possession2 = new Possession(404, Ressource.Nourriture);
-        possessionService.create(possession1);
-        possessionService.create(possession2);
+        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment2 = new Batiment("Ferme", Taille.Moyen, Ressource.Nourriture);
+        batimentService.create(batiment1);
+        batimentService.create(batiment2);
 
         // ACT et ASSERT
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/possession").contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/batiment").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].quantite").value(202))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].quantite").value(404));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].nom").value("Caserne"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].nom").value("Ferme"));
 
     }
 
     @Test
     void getById() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
-        int id = possessionService.create(possession1).getId();
+        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        int id = batimentService.create(batiment1).getId();
 
         // ACT et ASSERT
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/possession/" + id).contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/batiment/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(202))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Caserne"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Petit.toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()));
     }
 
     @Test
     void create() throws Exception {
-        PossessionRequest possessionRequest = new PossessionRequest();
-        possessionRequest.setQuantite(202);
-        possessionRequest.setRessource(Ressource.Arme);
+        BatimentRequest batimentRequest = new BatimentRequest();
+        batimentRequest.setNom("Caserne");
+        batimentRequest.setTaille(Taille.Moyen);
+        batimentRequest.setRessource(Ressource.Arme);
 
-        // Convert the PossessionRequest object to a JSON string
-        String jsonRequest = objectMapper.writeValueAsString(possessionRequest);
+        // Convert the BatimentRequest object to a JSON string
+        String jsonRequest = objectMapper.writeValueAsString(batimentRequest);
 
 
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/possession")
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/batiment")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(202))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Caserne"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Moyen.toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()))
                 .andReturn();
 
         JsonNode jsonNode = objectMapper.readTree(result.getResponse().getContentAsString());
         int id = jsonNode.get("id").asInt();
-        assertTrue(possessionService.existsById(id));
-        Possession possession = possessionService.getById(id);
-        assertEquals(202, possession.getQuantite());
-        assertEquals(Ressource.Arme, possession.getRessource());
+        assertTrue(batimentService.existsById(id));
+        Batiment batiment = batimentService.getById(id);
+        assertEquals("Caserne", batiment.getNom());
+        assertEquals(Taille.Moyen, batiment.getTaille());
+        assertEquals(Ressource.Arme, batiment.getRessource());
 
     }
 
     @Test
     void update() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
-        int id = possessionService.create(possession1).getId();
+        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        int id = batimentService.create(batiment1).getId();
 
-        PossessionRequest possessionRequest = new PossessionRequest();
-        possessionRequest.setId(id);
-        possessionRequest.setQuantite(404);
-        possessionRequest.setRessource(Ressource.Nourriture);
+        BatimentRequest batimentRequest = new BatimentRequest();
+        batimentRequest.setId(id);
+        batimentRequest.setNom("Ferme");
+        batimentRequest.setTaille(Taille.Moyen);
+        batimentRequest.setRessource(Ressource.Nourriture);
 
-        // Convert the PossessionRequest object to a JSON string
-        String jsonRequest = objectMapper.writeValueAsString(possessionRequest);
+        // Convert the BatimentRequest object to a JSON string
+        String jsonRequest = objectMapper.writeValueAsString(batimentRequest);
 
 
-        this.mockMvc.perform(MockMvcRequestBuilders.put("/possession/" + id)
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/batiment/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(id))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(404))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Ferme"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Moyen.toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Nourriture.toString()));
 
-        Possession possession = possessionService.getById(id);
-        assertEquals(404, possession.getQuantite());
-        assertEquals(Ressource.Nourriture, possession.getRessource());
+        Batiment batiment = batimentService.getById(id);
+        assertEquals("Ferme", batiment.getNom());
+        assertEquals(Taille.Moyen, batiment.getTaille());
+        assertEquals(Ressource.Nourriture, batiment.getRessource());
     }
 
     @Test
     void delete() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
-        int id = possessionService.create(possession1).getId();
+        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        int id = batimentService.create(batiment1).getId();
 
-        this.mockMvc.perform(MockMvcRequestBuilders.delete("/possession/" + id)
+        this.mockMvc.perform(MockMvcRequestBuilders.delete("/batiment/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-        assertFalse(possessionService.existsById(id));
+        assertFalse(batimentService.existsById(id));
     }
 }
