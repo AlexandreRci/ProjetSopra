@@ -1,12 +1,11 @@
 package space.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import space.dao.IDAOJoueur;
 import space.model.Joueur;
+
+import java.util.List;
 
 @Service
 public class JoueurService implements IService<Joueur, Integer> {
@@ -37,11 +36,11 @@ public class JoueurService implements IService<Joueur, Integer> {
         daoJoueur.deleteById(id);
     }
 
-    public void delete(Joueur joueur){
+    public void delete(Joueur joueur) {
         daoJoueur.delete(joueur);
     }
-    
+
     public boolean existsById(Integer id) {
-    	return daoJoueur.existsById(id);
+        return daoJoueur.existsById(id);
     }
 }

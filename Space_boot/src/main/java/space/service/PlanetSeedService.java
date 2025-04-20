@@ -1,12 +1,11 @@
 package space.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import space.dao.IDAOPlanetSeed;
 import space.model.PlanetSeed;
+
+import java.util.List;
 
 @Service
 public class PlanetSeedService implements IService<PlanetSeed, Integer> {
@@ -39,8 +38,8 @@ public class PlanetSeedService implements IService<PlanetSeed, Integer> {
     public void delete(PlanetSeed planeteSeed) {
         daoPlanetSeed.delete(planeteSeed);
     }
-    
+
     public boolean existsById(Integer id) {
-    	return daoPlanetSeed.existsById(id);
+        return daoPlanetSeed.existsById(id);
     }
 }

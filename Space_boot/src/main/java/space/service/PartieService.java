@@ -1,12 +1,11 @@
 package space.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import space.dao.IDAOPartie;
 import space.model.Partie;
+
+import java.util.List;
 
 @Service
 public class PartieService implements IService<Partie, Integer> {
@@ -36,7 +35,7 @@ public class PartieService implements IService<Partie, Integer> {
         daoPartie.deleteById(id);
     }
 
-    public void delete(Partie partie){
+    public void delete(Partie partie) {
         daoPartie.delete(partie);
     }
 

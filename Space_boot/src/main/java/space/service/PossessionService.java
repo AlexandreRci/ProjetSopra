@@ -1,12 +1,11 @@
 package space.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import space.dao.IDAOPossession;
 import space.model.Possession;
+
+import java.util.List;
 
 @Service
 public class PossessionService implements IService<Possession, Integer> {
@@ -36,7 +35,7 @@ public class PossessionService implements IService<Possession, Integer> {
         daoPossession.deleteById(id);
     }
 
-    public void delete(Possession possession){
+    public void delete(Possession possession) {
         daoPossession.delete(possession);
     }
 
