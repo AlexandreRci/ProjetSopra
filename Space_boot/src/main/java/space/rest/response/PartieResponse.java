@@ -1,7 +1,10 @@
 package space.rest.response;
 
 import org.springframework.beans.BeanUtils;
-import space.model.*;
+import space.model.Joueur;
+import space.model.Partie;
+import space.model.PlanetSeed;
+import space.model.Statut;
 
 import java.util.List;
 
@@ -15,6 +18,14 @@ public class PartieResponse {
     private Statut statut;
 
     public PartieResponse() {
+    }
+
+    public static PartieResponse convert(Partie partie) {
+        PartieResponse partieResponse = new PartieResponse();
+        partieResponse.setJoueurs(partie.getJoueurs().stream().map(Joueur::getId).toList());
+        partieResponse.setPlanetSeeds(partie.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
+        BeanUtils.copyProperties(partie, partieResponse);
+        return partieResponse;
     }
 
     public Integer getId() {
@@ -71,14 +82,5 @@ public class PartieResponse {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
-    }
-
-
-    public static PartieResponse convert(Partie partie) {
-        PartieResponse partieResponse = new PartieResponse();
-        partieResponse.setJoueurs(partie.getJoueurs().stream().map(Joueur::getId).toList());
-        partieResponse.setPlanetSeeds(partie.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
-        BeanUtils.copyProperties(partie, partieResponse);
-        return partieResponse;
     }
 }

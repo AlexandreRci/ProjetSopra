@@ -1,100 +1,95 @@
 package space.rest.response;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
-
-import space.model.Espece;
 import space.model.Joueur;
-import space.model.Partie;
 import space.model.PlanetSeed;
 import space.model.Possession;
+
+import java.util.List;
 
 public class JoueurResponse {
 
     private Integer id;
     private int position;
-	private List<Integer> idPossessions;
-	private Integer idPartie;
-	private Integer idEspece;
-	private List<Integer> idPlanetSeeds;
+    private List<Integer> idPossessions;
+    private Integer idPartie;
+    private Integer idEspece;
+    private List<Integer> idPlanetSeeds;
 
-	
-    
-	public Integer getId() {
-		return id;
-	}
+    public static JoueurResponse convert(Joueur joueur) {
+        JoueurResponse joueurResponse = new JoueurResponse();
+        BeanUtils.copyProperties(joueur, joueurResponse);
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+        if (joueur.getPartie() != null) {
+            Integer idPartie = joueur.getPartie().getId();
+            joueurResponse.setIdPartie(idPartie);
+        }
 
-	public int getPosition() {
-		return position;
-	}
+        if (joueur.getEspece() != null) {
+            Integer idEspece = joueur.getEspece().getId();
+            joueurResponse.setIdEspece(idEspece);
+        }
 
-	public void setPosition(int position) {
-		this.position = position;
-	}
+        if (!joueur.getPossessions().isEmpty()) {
+            joueurResponse.setIdPossessions(joueur.getPossessions().stream().map(Possession::getId).toList());
 
-	public List<Integer> getIdPossessions() {
-		return idPossessions;
-	}
+        }
 
-	public void setIdPossessions(List<Integer> idPossessions) {
-		this.idPossessions = idPossessions;
-	}
+        if (!joueur.getPlanetSeeds().isEmpty()) {
+            joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
 
-	public Integer getIdPartie() {
-		return idPartie;
-	}
+        }
 
-	public void setIdPartie(Integer idPartie) {
-		this.idPartie = idPartie;
-	}
+        return joueurResponse;
+    }
 
-	public Integer getIdEspece() {
-		return idEspece;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setIdEspece(Integer idEspece) {
-		this.idEspece = idEspece;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public List<Integer> getIdPlanetSeeds() {
-		return idPlanetSeeds;
-	}
+    public int getPosition() {
+        return position;
+    }
 
-	public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
-		this.idPlanetSeeds = idPlanetSeeds;
-	}
-	public static JoueurResponse convert(Joueur joueur) {
-		JoueurResponse joueurResponse = new JoueurResponse();
-		BeanUtils.copyProperties(joueur, joueurResponse);
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
-		if (joueur.getPartie() != null) {
-		Integer idPartie = joueur.getPartie().getId();
-		joueurResponse.setIdPartie(idPartie);
-		}
+    public List<Integer> getIdPossessions() {
+        return idPossessions;
+    }
 
-		if (joueur.getEspece() != null) {
-		Integer idEspece = joueur.getEspece().getId();
-		joueurResponse.setIdEspece(idEspece);
-		}
+    public void setIdPossessions(List<Integer> idPossessions) {
+        this.idPossessions = idPossessions;
+    }
 
-		if (!joueur.getPossessions().isEmpty()) {
-		joueurResponse.setIdPossessions(joueur.getPossessions().stream().map(Possession::getId).toList());
+    public Integer getIdPartie() {
+        return idPartie;
+    }
 
-		}
-		
-		if (!joueur.getPlanetSeeds().isEmpty()) {
-		joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
+    public void setIdPartie(Integer idPartie) {
+        this.idPartie = idPartie;
+    }
 
-		}
+    public Integer getIdEspece() {
+        return idEspece;
+    }
 
-		return joueurResponse;
-		}
-    
-    
-    
+    public void setIdEspece(Integer idEspece) {
+        this.idEspece = idEspece;
+    }
+
+    public List<Integer> getIdPlanetSeeds() {
+        return idPlanetSeeds;
+    }
+
+    public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
+        this.idPlanetSeeds = idPlanetSeeds;
+    }
+
+
 }
