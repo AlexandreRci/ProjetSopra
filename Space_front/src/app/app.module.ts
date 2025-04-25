@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { EcranAccueilComponent } from './ecran-accueil/ecran-accueil.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
@@ -18,9 +20,11 @@ import { SeConnecterComponent } from './se-connecter/se-connecter.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [provideHttpClient(withFetch()) ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

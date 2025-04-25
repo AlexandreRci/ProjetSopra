@@ -15,13 +15,23 @@
           <button class="top-button"> <img src="../assets/images/settings.png" alt="parametres"></button> <!-- Paramètres -->
         </div>
         <div class="content">
+            
             <button class="button" id="creation-du-compte">Création du compte</button>
-            <input type="text" class="input-field" placeholder="Pseudo">
-            <input type="password" class="input-field" placeholder="Mot de passe">
-            <input type="password" class="input-field" placeholder="Mot de passe">
-            <a href="ecranAcceuil.html"><button class="button">Retour</button></a>
+
+            <form (ngSubmit)="addCompte()" [formGroup]="compteForm">
+                <input type="text" class="input-field" placeholder="Name" formControlName="name">
+                <input type="text" class="input-field" placeholder="Identifiant" formControlUsername="username">
+
+                <input type="password" class="input-field" placeholder="Mot de passe" formControlPassword="password">
+                <input type="password" class="input-field" placeholder="Mot de passe">
+            
+                <input class="button" type="submit"  [disabled]="compteForm.invalid" value="Valider"/>
+            <!-- <input type="submit"  class="button" id="creation-du-compte" value="Valider"></input> -->
+        </form>
+            <a href="ecranAcceuil.html" [routerLink]="['/ecranAcceuil']" routerLinkActive="active"><button class="button">Retour</button></a>
 
         </div>
+        
     </div>
 </body>
 </html>
