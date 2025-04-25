@@ -1,0 +1,78 @@
+  body, html {    /*Applique toutes ces modifications entre les balises body et html*/
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+
+        background-image: url('../assets/images/planets-solar-system.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'élément */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        background-position: center; /* Centre l'image dans l'élément */
+    }
+
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+    .button, .input-field {
+        display: block;
+        margin: 10px auto;
+        padding: 15px;
+
+        border: 2px solid transparent;
+        border-radius: 5px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s;
+
+        color: white;
+        font-size: 18px;
+        font-family:'Orbitron';
+
+        cursor: pointer;
+    }
+
+    .input-field::placeholder{
+      text-align: center; /*centrer les placeholders*/
+    }
+
+    .input-field:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+        border-color: orange;
+    }
+
+    .top-buttons {
+        position: absolute;
+        display: flex;
+        top: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    .top-button {
+      display: flex;
+      align-items: center;  /*Mets les icones au centre du bouton*/
+      justify-content: center;
+
+      width: 40px;
+      height: 40px;
+
+      border-radius: 100%;  /*Rend les boutons circulaire*/
+      border: 2px solid transparent;
+
+      cursor: pointer;
+
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: background-color 0.3s;
+    }
+    .top-button:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-color: orange;
+    }
+    @media (min-width: 600px) {
+        .content {
+            width: 50%;
+        }
+    }
