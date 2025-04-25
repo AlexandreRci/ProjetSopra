@@ -2,7 +2,8 @@ package space.rest.request;
 
 
 import org.springframework.beans.BeanUtils;
-import space.model.*;
+import space.model.Possession;
+import space.model.Ressource;
 
 public class PossessionRequest {
     private Integer id;
@@ -10,6 +11,12 @@ public class PossessionRequest {
     private Ressource ressource;
 
     public PossessionRequest() {
+    }
+
+    public static Possession convert(PossessionRequest possessionRequest) {
+        Possession possession = new Possession();
+        BeanUtils.copyProperties(possessionRequest, possession);
+        return possession;
     }
 
     public Integer getId() {
@@ -34,12 +41,6 @@ public class PossessionRequest {
 
     public void setRessource(Ressource ressource) {
         this.ressource = ressource;
-    }
-
-    public static Possession convert(PossessionRequest possessionRequest) {
-        Possession possession = new Possession();
-        BeanUtils.copyProperties(possessionRequest, possession);
-        return possession;
     }
 
 }

@@ -1,17 +1,13 @@
 package space.rest.response;
 
-import java.util.ArrayList;
+import org.springframework.beans.BeanUtils;
+import space.model.Batiment;
+import space.model.PlanetSeed;
+
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
-
-import space.model.Batiment;
-import space.model.Joueur;
-import space.model.PlanetSeed;
-import space.model.Planete;
-
 public class PlanetSeedResponse {
-	private Integer id;
+    private Integer id;
     private int population;
     private int arme;
     private int mineraiRestant;
@@ -19,101 +15,86 @@ public class PlanetSeedResponse {
     private Integer idPlanete;
     private List<Integer> idBatiments;
 
-    
-	public PlanetSeedResponse() {
-		super();
-	}
 
+    public PlanetSeedResponse() {
+        super();
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public static PlanetSeedResponse convert(PlanetSeed planetSeed) {
+        PlanetSeedResponse planetSeedResponse = new PlanetSeedResponse();
+        BeanUtils.copyProperties(planetSeed, planetSeedResponse);
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+        if (planetSeed.getJoueur() != null) {
+            Integer idJoueur = planetSeed.getJoueur().getId();
+            planetSeedResponse.setIdJoueur(idJoueur);
+        }
 
+        if (planetSeed.getPlanete() != null) {
+            Integer idPlanete = planetSeed.getPlanete().getId();
+            planetSeedResponse.setIdPlanete(idPlanete);
+        }
 
-	public int getPopulation() {
-		return population;
-	}
+        if (!planetSeed.getBatiments().isEmpty()) {
+            planetSeedResponse.setIdBatiments(planetSeed.getBatiments().stream().map(Batiment::getId).toList());
 
+        }
 
-	public void setPopulation(int population) {
-		this.population = population;
-	}
+        return planetSeedResponse;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 
-	public int getArme() {
-		return arme;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public int getPopulation() {
+        return population;
+    }
 
-	public void setArme(int arme) {
-		this.arme = arme;
-	}
+    public void setPopulation(int population) {
+        this.population = population;
+    }
 
+    public int getArme() {
+        return arme;
+    }
 
-	public int getMineraiRestant() {
-		return mineraiRestant;
-	}
+    public void setArme(int arme) {
+        this.arme = arme;
+    }
 
+    public int getMineraiRestant() {
+        return mineraiRestant;
+    }
 
-	public void setMineraiRestant(int mineraiRestant) {
-		this.mineraiRestant = mineraiRestant;
-	}
+    public void setMineraiRestant(int mineraiRestant) {
+        this.mineraiRestant = mineraiRestant;
+    }
 
+    public Integer getIdJoueur() {
+        return idJoueur;
+    }
 
-	public Integer getIdJoueur() {
-		return idJoueur;
-	}
+    public void setIdJoueur(Integer idJoueur) {
+        this.idJoueur = idJoueur;
+    }
 
+    public Integer getIdPlanete() {
+        return idPlanete;
+    }
 
-	public void setIdJoueur(Integer idJoueur) {
-		this.idJoueur = idJoueur;
-	}
+    public void setIdPlanete(Integer idPlanete) {
+        this.idPlanete = idPlanete;
+    }
 
+    public List<Integer> getIdBatiments() {
+        return idBatiments;
+    }
 
-	public Integer getIdPlanete() {
-		return idPlanete;
-	}
-
-
-	public void setIdPlanete(Integer idPlanete) {
-		this.idPlanete = idPlanete;
-	}
-
-	
-
-	public List<Integer> getIdBatiments() {
-		return idBatiments;
-	}
-
-
-	public void setIdBatiments(List<Integer> idBatiments) {
-		this.idBatiments = idBatiments;
-	}
-
-
-	public static PlanetSeedResponse convert(PlanetSeed planetSeed) {
-		PlanetSeedResponse planetSeedResponse = new PlanetSeedResponse();
-		BeanUtils.copyProperties(planetSeed, planetSeedResponse);
-		
-		if (planetSeed.getJoueur() != null) {
-			Integer idJoueur = planetSeed.getJoueur().getId();
-			planetSeedResponse.setIdJoueur(idJoueur);
-		}
-		
-		if (planetSeed.getPlanete() != null) {
-			Integer idPlanete = planetSeed.getPlanete().getId();
-			planetSeedResponse.setIdPlanete(idPlanete);
-		}
-		
-		if (!planetSeed.getBatiments().isEmpty()) {
-			planetSeedResponse.setIdBatiments(planetSeed.getBatiments().stream().map(Batiment::getId).toList());
-			
-		}
-		
-		return planetSeedResponse; 
-	}
+    public void setIdBatiments(List<Integer> idBatiments) {
+        this.idBatiments = idBatiments;
+    }
 }

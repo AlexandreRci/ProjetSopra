@@ -1,12 +1,11 @@
 package space.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import space.dao.IDAOBatiment;
 import space.model.Batiment;
+
+import java.util.List;
 
 @Service
 public class BatimentService implements IService<Batiment, Integer> {
@@ -36,11 +35,11 @@ public class BatimentService implements IService<Batiment, Integer> {
         daoBatiment.deleteById(id);
     }
 
-    public void delete(Batiment batiment){
+    public void delete(Batiment batiment) {
         daoBatiment.delete(batiment);
     }
-    
+
     public boolean existsById(Integer id) {
-    	return daoBatiment.existsById(id);
+        return daoBatiment.existsById(id);
     }
 }

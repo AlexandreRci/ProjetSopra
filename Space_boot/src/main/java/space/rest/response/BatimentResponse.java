@@ -1,62 +1,59 @@
 package space.rest.response;
 
 import org.springframework.beans.BeanUtils;
-
 import space.model.Batiment;
+import space.model.Ressource;
+import space.model.Taille;
+
 public class BatimentResponse {
 
-	private Integer id;
-	private String nom;	
-	private String taille;
-	private String ressource;
-	
-	
-	public BatimentResponse() {
-		super();
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public String getNom() {
-		return nom;
-	}
+    private Integer id;
+    private String nom;
+    private Taille taille;
+    private Ressource ressource;
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
 
-	public String getTaille() {
-		return taille;
-	}
+    public BatimentResponse() {
+        super();
+    }
 
-	public void setTaille(String taille) {
-		this.taille = taille;
-	}
+    public static BatimentResponse convert(Batiment batiment) {
+        BatimentResponse batimentResponse = new BatimentResponse();
 
-	public String getRessource() {
-		return ressource;
-	}
+        BeanUtils.copyProperties(batiment, batimentResponse);
 
-	public void setRessource(String ressource) {
-		this.ressource = ressource;
-	}
-	
-	public static BatimentResponse convert(Batiment batiment) {
-		BatimentResponse batimentResponse = new BatimentResponse();
-		
-		BeanUtils.copyProperties(batiment, batimentResponse);
-		
-		batimentResponse.setTaille(batiment.getTaille().toString());
-		batimentResponse.setRessource(batiment.getRessource().toString());
-		
-		
-		return batimentResponse;
-	}
-	
+        return batimentResponse;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Taille getTaille() {
+        return taille;
+    }
+
+    public void setTaille(Taille taille) {
+        this.taille = taille;
+    }
+
+    public Ressource getRessource() {
+        return ressource;
+    }
+
+    public void setRessource(Ressource ressource) {
+        this.ressource = ressource;
+    }
 }

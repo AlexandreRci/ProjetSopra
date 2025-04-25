@@ -12,6 +12,12 @@ public class PossessionResponse {
     public PossessionResponse() {
     }
 
+    public static PossessionResponse convert(Possession possession) {
+        PossessionResponse possessionResponse = new PossessionResponse();
+        BeanUtils.copyProperties(possession, possessionResponse);
+        return possessionResponse;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -34,11 +40,5 @@ public class PossessionResponse {
 
     public void setRessource(Ressource ressource) {
         this.ressource = ressource;
-    }
-
-    public static PossessionResponse convert(Possession possession) {
-        PossessionResponse possessionResponse = new PossessionResponse();
-        BeanUtils.copyProperties(possession, possessionResponse);
-        return possessionResponse;
     }
 }

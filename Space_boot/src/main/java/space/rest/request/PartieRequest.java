@@ -1,9 +1,11 @@
 package space.rest.request;
 
 
-import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
-import space.model.*;
+import space.model.Joueur;
+import space.model.Partie;
+import space.model.PlanetSeed;
+import space.model.Statut;
 
 import java.util.List;
 
@@ -17,6 +19,22 @@ public class PartieRequest {
     private Statut statut;
 
     public PartieRequest() {
+    }
+
+    public static Partie convert(PartieRequest partieRequest) {
+        Partie partie = new Partie();
+        partie.setJoueurs(partieRequest.getJoueurs().stream().map(id -> {
+            Joueur joueur = new Joueur();
+            joueur.setId(id);
+            return joueur;
+        }).toList());
+        partie.setPlanetSeeds(partieRequest.getPlanetSeeds().stream().map(id -> {
+            PlanetSeed planetSeed = new PlanetSeed();
+            planetSeed.setId(id);
+            return planetSeed;
+        }).toList());
+        BeanUtils.copyProperties(partieRequest, partie);
+        return partie;
     }
 
     public Integer getId() {
@@ -73,21 +91,5 @@ public class PartieRequest {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
-    }
-
-    public static Partie convert(PartieRequest partieRequest) {
-        Partie partie = new Partie();
-        partie.setJoueurs(partieRequest.getJoueurs().stream().map(id->{
-            Joueur joueur = new Joueur();
-            joueur.setId(id);
-            return joueur;
-        }).toList());
-        partie.setPlanetSeeds(partieRequest.getPlanetSeeds().stream().map(id->{
-            PlanetSeed planetSeed = new PlanetSeed();
-            planetSeed.setId(id);
-            return planetSeed;
-        }).toList());
-        BeanUtils.copyProperties(partieRequest, partie);
-        return partie;
     }
 }

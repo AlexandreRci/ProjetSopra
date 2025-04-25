@@ -1,17 +1,8 @@
 package space.model;
 
-import java.util.List;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "planet_seed")
@@ -25,7 +16,7 @@ public class PlanetSeed {
     @Column(name = "minerai_restant")
     private int mineraiRestant;
     @ManyToOne
-    @JoinColumn(name = "joueur_id", nullable = false)
+    @JoinColumn(name = "joueur_id", nullable = true)
     private Joueur joueur;
     @ManyToOne
     @JoinColumn(name = "planete_id", nullable = false)
