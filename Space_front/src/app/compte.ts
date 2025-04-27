@@ -1,43 +1,43 @@
 export class Compte {
-    constructor(private _id: number, private _name: string, private _username: string, private _password: string, private _compteType: string) { }
+    constructor(private id: number|null, private name: string, private username: string, private password: string, private compteType: string) { }
 
-    public get id(): number {
-        return this._id;
+    public getId(): number|null {
+        return this.id;
     }
 
-    public set id(value: number) {
-        this._id = value;
+    public setId(value: number) {
+        this.id = value;
     }
 
-    public get name(): string {
-        return this._name;
+    public getName(): string {
+        return this.name;
     }
 
-    public set name(name: string) {
-        this._name = name;
+    public setName(name: string) {
+        this.name = name;
     }
 
-    public get username(): string {
-        return this._username;
+    public getUsername(): string {
+        return this.username;
     }
 
-    public set username(username: string) {
-        this._username = username;
+    public setUsername(username: string) {
+        this.username = username;
     }
 
-    public get password(): string {
-        return this._password;
+    public getPassword(): string {
+        return this.password;
     }
 
-    public set password(password: string) {
-        this._password = password;
+    public setPassword(password: string) {
+        this.password = password;
     }
 
-    public get compteType(): string {
-        return this._compteType;
+    public getCompteType(): string {
+        return this.compteType;
     }
 
-    public set compteType(compteType: string) {
-        this._compteType = compteType;
+    public setCompteType(compteType: string) {
+        this.compteType = compteType;
     }
 }
