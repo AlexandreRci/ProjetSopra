@@ -71,4 +71,15 @@ public class CompteRequest {
     public enum CompteType {
         ADMIN, UTILISATEUR
     }
+
+    @Override
+    public String toString() {
+        return "CompteRequest{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", compteType=" + compteType +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
