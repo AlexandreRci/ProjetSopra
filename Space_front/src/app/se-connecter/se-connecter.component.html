@@ -12,11 +12,7 @@
 
 <body>
     <div class="background">
-        <div class="top-buttons">
-            <button class="top-button"> <img src="../assets/images/volume.png" alt="musique"></button> <!-- Son -->
-            <button class="top-button"> <img src="../assets/images/settings.png" alt="parametres"></button>
-            <!-- Paramètres -->
-        </div>
+        <app-top-buttons></app-top-buttons>
         <div class="content">
             <h2 id="FormName">Se connecter</h2>
             <form (ngSubmit)="authenticate()" [formGroup]="authForm" id="inscription">
