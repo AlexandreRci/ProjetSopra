@@ -9,6 +9,7 @@ import { EcranAccueilComponent } from './ecran-accueil/ecran-accueil.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
+import { TopButtonsComponent } from './top-buttons/top-buttons.component';
 import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     CreationCompteComponent,
     MenuPartieComponent,
     SeConnecterComponent,
+    TopButtonsComponent
     EcranJeuComponent
   ],
   imports: [
