@@ -5,11 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import space.config.jwt.JwtHeaderAuthorizationFilter;
 
 import java.util.List;
 
@@ -18,13 +22,15 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(
+            HttpSecurity http, JwtHeaderAuthorizationFilter jwtFilter) throws Exception {
         // Méthode d'authentification par HTTP Basic
         http.httpBasic(Customizer.withDefaults());
 
         // Autorisations sur URLs
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/**").permitAll();
+            auth.requestMatchers("/connexion").permitAll();
         });
 
         http.csrf(c -> c.ignoringRequestMatchers("/**"));
@@ -48,6 +54,8 @@ public class SecurityConfig {
 
             c.configurationSource(source);
         });
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -55,5 +63,10 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

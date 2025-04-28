@@ -1,6 +1,7 @@
 package space.rest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import space.model.Compte;
@@ -15,17 +16,17 @@ import java.util.List;
 public class CompteRestController {
 
     private final CompteService compteService;
+    private PasswordEncoder passwordEncoder;
 
-    public CompteRestController(CompteService compteService) {
-        super();
+    public CompteRestController(CompteService compteService, PasswordEncoder passwordEncoder) {
         this.compteService = compteService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("")
     public List<CompteResponse> getAll() {
         List<Compte> comptes = this.compteService.getAll();
 
-//		return comptes.stream().map(u -> CompteResponse.convert(u)).toList();
         return comptes.stream().map(CompteResponse::convert).toList();
     }
 
@@ -43,8 +44,9 @@ public class CompteRestController {
 
     @PostMapping("")
     public Compte create(@RequestBody CompteRequest compteRequest) {
+        System.out.println(compteRequest);
         Compte compte = CompteRequest.convert(compteRequest);
-
+        compte.setPassword(this.passwordEncoder.encode(compte.getPassword()));
         return compteService.create(compte);
     }
 

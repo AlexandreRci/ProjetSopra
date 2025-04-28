@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 import space.model.Compte;
 
+import java.util.Optional;
+
 public interface IDAOCompte extends JpaRepository<Compte, Integer> {
     /**
      * Should be modified to hash password and use the hash to compare in the bdd.
@@ -16,4 +18,6 @@ public interface IDAOCompte extends JpaRepository<Compte, Integer> {
      */
     @Query("SELECT c from Compte c where c.username=:username and c.password=:password")
     Compte findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    Optional<Compte> findByUsername(String username);
 }
