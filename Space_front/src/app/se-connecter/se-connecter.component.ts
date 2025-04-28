@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CompteRequest } from '../compte-request';
+import { CompteResponse } from '../compte-response';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -13,8 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './se-connecter.component.css'
 })
 
-// /!\ /!\ 
-// Remplacer TOUS les "login" en "username" peu importe la casse 
 
 export class SeConnecterComponent implements OnInit {
   public authForm!: FormGroup;
@@ -35,32 +34,20 @@ export class SeConnecterComponent implements OnInit {
   }
 
 
-  public authenticate() {
-    this.service.authenticate(new CompteRequest(this.authForm.value.username, this.authForm.value.password));
-    if (this.service.token === "")
-    {
-      this.isError = true;
-    }else{
-      this.router.navigate(['/menuPartie']);
-    }
-
-
-  // public authenticate() {
-  //   this.service.authenticate(new CompteRequest(this.authForm.value.username, this.authForm.value.password))
-  //     .subscribe({
-  //       next: () => {
-  //         this.router.navigate(['/menuPartie']);
-  //       },
-  //       error: (err) => {
-  //         console.error('Identifiants invalides', err);
-  //         Afficher un message d'erreur à l'utilisateur
-  //       }
-  //     });
-
-
-
-
-    // FIXME : Si l'auth échoue, on est quand même redirigé
-    //this.router.navigate([ '/home' ]);
+  public authenticate(): void {
+    this.service.authenticate(new CompteRequest(this.authForm.value.username, this.authForm.value.password))
+      .subscribe({
+        next: (response: CompteResponse) => {
+          if (response.token) {
+            console.log('Connexion réussie');
+            this.router.navigate(['/menuPartie']);
+          } else {
+            this.isError = true;
+          }
+        },
+        error: () => {
+          this.isError = true;
+        }
+      });
   }
 }

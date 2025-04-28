@@ -1,32 +1,31 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 import { CompteRequest } from './compte-request';
 import { CompteResponse } from './compte-response';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService  {
+export class AuthService {
   public token: string = "";
   private API_URL: string = `http://localhost:8080/connexion`;
-  
+
   constructor(private http: HttpClient) {
-    this.token = localStorage.getItem('token') as string;
+    this.token = localStorage.getItem('token') ?? '';
   }
 
-
-  
-
-  public authenticate(authRequest: CompteRequest) {
-    this.http.post<CompteResponse>(this.API_URL, {
+  public authenticate(authRequest: CompteRequest): Observable<CompteResponse> {
+    return this.http.post<CompteResponse>(this.API_URL, {
       username: authRequest.username,
       password: authRequest.password
-    }).subscribe(resp => {
-      this.token = resp.getToken();
-      localStorage.setItem('token', this.token)
-    });
+    }).pipe(
+      tap((resp: CompteResponse) => {
+        if (resp.token) { 
+          this.token = resp.token;
+          localStorage.setItem('token', this.token);
+        }
+      })
+    );
   }
-
-
-
 }
