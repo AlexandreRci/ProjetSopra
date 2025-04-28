@@ -39,6 +39,7 @@ export class SeConnecterComponent implements OnInit {
       .subscribe({
         next: (response: CompteResponse) => {
           if (response.token) {
+            localStorage.setItem('username', this.authForm.value.username);
             console.log('Connexion réussie');
             this.router.navigate(['/menuPartie']);
           } else {
