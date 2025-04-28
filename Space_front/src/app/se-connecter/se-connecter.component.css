@@ -33,26 +33,12 @@ grid-row-gap: 0px;*/
   /* C'est lui le plus important*/
 }
 
-.top-buttons {
+app-top-buttons {
+  display: grid;
   grid-auto-flow: column;
-  grid-column: 11 /13;
+  grid-column: 12 /13;
   grid-row: 1 /2;
-  display: flex;
-  /* Use Flexbox to center content inside the button */
   align-items: center;
-  /* Vertically center content */
-  justify-content: center;
-}
-
-.top-button {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: background-color 0.3s;
-  border-radius: 50%;
-  margin-top: 20px;
-  border: 2px solid transparent;
-  cursor: pointer;
 }
 
 .button {
@@ -67,6 +53,9 @@ grid-row-gap: 0px;*/
   font-size: 18px;
   font-family: 'Orbitron';
   cursor: pointer;
+
+  width: 400px;
+  height: 50px;
   /*Change ke curseur en "index qui montre que c'est clicable"*/
 }
 
@@ -77,6 +66,11 @@ grid-row-gap: 0px;*/
   /* Make it slightly transparent */
   cursor: not-allowed;
   /* Change cursor to indicate it's not clickable */
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: orange;
 }
 
 .input-field {
@@ -95,21 +89,13 @@ grid-row-gap: 0px;*/
 
   text-align: center;
 
-}
-
-.button {
-  width: 400px;
-  height: 50px;
-}
-
-.input-field {
   width: 400px;
   height: 50px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.button:hover {
+.input-field:hover {
   background-color: rgba(0, 0, 0, 0.7);
   border-color: orange;
 }
@@ -156,22 +142,4 @@ grid-row-gap: 0px;*/
 
 #submit_button {
   margin-top: 20px;
-}
-
-
-.top-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-color: orange;
-}
-
-.input-field:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-color: orange;
-}
-
-.top-button img {
-  width: 35px;
-  height: 35px;
-  align-items: center;
-  justify-items: center;
 }
