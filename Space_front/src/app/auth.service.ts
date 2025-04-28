@@ -8,7 +8,7 @@ import { CompteResponse } from './compte-response';
 })
 export class AuthService  {
   public token: string = "";
-  private API_URL: string = `http://localhost:8080/api/connexion`;
+  private API_URL: string = `http://localhost:8080/connexion`;
   
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token') as string;

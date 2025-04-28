@@ -13,7 +13,7 @@ export class CompteRequest {
 
     public get password(): string
     {
-        return this.password;
+        return this._password;
     }
 
     public set password(password: string)

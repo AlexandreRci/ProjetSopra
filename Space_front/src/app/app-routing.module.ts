@@ -6,7 +6,7 @@ import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 
 const routes: Routes = [
-  { path: 'ecranAcceuil', component: EcranAccueilComponent },
+  { path: 'ecranAccueil', component: EcranAccueilComponent },
   { path: 'seConnecter', component: SeConnecterComponent },
   { path: 'creationCompte', component: CreationCompteComponent },
   { path: 'menuPartie', component: MenuPartieComponent },

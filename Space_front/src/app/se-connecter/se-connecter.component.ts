@@ -26,7 +26,7 @@ export class SeConnecterComponent implements OnInit {
 
   ngOnInit(): void {
     this.usernameCtrl = this.formBuilder.control('', Validators.required);
-    this.passwordCtrl = this.formBuilder.control('', [ Validators.required ]);
+    this.passwordCtrl = this.formBuilder.control('', Validators.required);
 
     this.authForm = this.formBuilder.group({
       username: this.usernameCtrl,
