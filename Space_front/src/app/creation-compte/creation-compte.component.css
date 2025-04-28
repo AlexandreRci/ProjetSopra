@@ -100,6 +100,13 @@ body, html {    /*Applique toutes ces modifications entre les balises body et ht
   color: white;
 }
 
+.success {
+  color: lightgreen;
+  font-family: 'Orbitron';
+  margin-top: 20px;
+}
+
+
 #FormName{
   grid-column: 3/10;
   grid-row:  2;
