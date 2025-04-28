@@ -25,18 +25,13 @@ export class SeConnecterComponent implements OnInit {
   constructor(private service: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    // this.usernameCtrl = this.formBuilder.control('Entrer votre username', Validators.required);
-    // this.passwordCtrl = this.formBuilder.control('', [ Validators.required, Validators.minLength(8) ]);
+    this.usernameCtrl = this.formBuilder.control('', Validators.required);
+    this.passwordCtrl = this.formBuilder.control('', [ Validators.required ]);
 
     this.authForm = this.formBuilder.group({
-      username: this.formBuilder.control('Entrer votre username', Validators.required),
-      password: this.formBuilder.control('', [ Validators.required, Validators.minLength(8) ])
+      username: this.usernameCtrl,
+      password: this.passwordCtrl
     });
-
-    // this.authForm = this.formBuilder.group({
-    //   username: this.usernameCtrl,
-    //   password: this.passwordCtrl
-    // });
   }
 
 
@@ -48,7 +43,7 @@ export class SeConnecterComponent implements OnInit {
     }else{
       this.router.navigate(['/menuPartie']);
     }
-    
+
 
   // public authenticate() {
   //   this.service.authenticate(new CompteRequest(this.authForm.value.username, this.authForm.value.password))

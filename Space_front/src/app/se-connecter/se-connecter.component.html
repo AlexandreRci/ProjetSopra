@@ -17,8 +17,8 @@
         <form (ngSubmit)="authenticate()" [formGroup]="authForm">
         <div class="content">
             <button class="button" id="se-connecter">Se connecter</button>
-            <input type="text" class="input-field" placeholder="Pseudo">
-            <input type="password" class="input-field" placeholder="Mot de passe">
+            <input type="text" class="input-field" placeholder="Pseudo" formControlName="username">
+            <input type="password" class="input-field" placeholder="Mot de passe" formControlName="password">
             <div *ngIf="authForm.get('password')?.hasError('required')">
                 Le mot de passe est obligatoire
             </div>
@@ -27,10 +27,10 @@
             <div *ngIf="isError">
                 Identifiant ou mdp invalides
             </div>
-            <a href="ecranAcceuil.html" [routerLink]="['/ecranAcceuil']" routerLinkActive="active"><button class="button" id="retour">Retour</button></a>
-
         </div>
     </form>
+    <a href="ecranAcceuil.html" [routerLink]="['/ecranAcceuil']" routerLinkActive="active"><button class="button" id="retour">Retour</button></a>
+
     </div>
 </body>
 </html>

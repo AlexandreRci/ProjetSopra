@@ -22,7 +22,7 @@ export class AuthService  {
       username: authRequest.username,
       password: authRequest.password
     }).subscribe(resp => {
-      this.token = resp.token;
+      this.token = resp.getToken();
       localStorage.setItem('token', this.token)
     });
   }

@@ -1,19 +1,19 @@
 export class CompteResponse {
-    constructor(private _success: boolean, private _token: string) { }
+    constructor(private success: boolean, private token: string) { }
 
-    public get success(): boolean {
-        return this._success;
+    public getSuccess(): boolean {
+        return this.success;
     }
 
-    public set success(value: boolean) {
-        this._success = value;
+    public setSuccess(value: boolean) {
+        this.success = value;
     }
 
-    public get token(): string {
-        return this._token;
+    public getToken(): string {
+        return this.token;
     }
 
-    public set token(value: string) {
-        this._token = value;
+    public setToken(value: string) {
+        this.token = value;
     }
 }
