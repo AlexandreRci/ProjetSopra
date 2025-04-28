@@ -3,6 +3,7 @@ import { CompteService } from '../compte.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Compte } from '../compte';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-creation-compte',
@@ -18,6 +19,7 @@ export class CreationCompteComponent implements OnInit {
   public password2!: FormControl;
 
   public compteCree: boolean = false;
+  public usernameExiste: boolean = false;
 
   constructor(private service: CompteService, private formBuilder: FormBuilder, private router: Router) {}
 
@@ -44,20 +46,24 @@ export class CreationCompteComponent implements OnInit {
       this.compteForm.value.username,
       this.compteForm.value.password1,
       "UTILISATEUR"
-    )).subscribe(
-      (response) => {
+    )).subscribe({
+      next: (response) => {
         console.log("Réponse du serveur", response);
         this.compteForm.reset();
+        this.usernameExiste = false;
         this.compteCree = true;
 
         setTimeout(() => {
           this.router.navigate(['/seConnecter']);
-        }, 2000); // 2 secondes avant dêtre rediriger 
+        }, 4000);
       },
-      (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erreur lors de la création du compte', error);
+        if (error.status === 409) {
+          this.usernameExiste = true;
+        }
       }
-    );
+    });
   }
 }
 
