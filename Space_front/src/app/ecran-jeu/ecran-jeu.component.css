@@ -1,0 +1,146 @@
+body, html {    /*Applique toutes ces modifications entre les balises body et html*/
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('../../assets/images/milky-way-full-stars-space.jpg');
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'élément */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; /* Centre l'image dans l'élément */
+}
+
+/***************/
+/* Généralité */
+/***************/
+.background{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+/*  grid-column-gap: 0px;
+  grid-row-gap: 0px;*/
+  height: 100vh;
+}
+
+.box {
+  border: 2px solid white; /*Modification du bord des boutons*/
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5); /*Ajoute des effets de transparence trop cool*/
+  transition: background-color 0.3s;
+
+  color: white;
+  font-size: 18px;
+  font-family:'Orbitron';
+}
+
+
+
+/***************/
+/* L'image de la planète */
+/***************/
+.planet-display{
+    display: grid;
+    grid-column: 5 / 11;
+    grid-row: 2/ 6;
+}
+
+.planet-display .box{
+  /* Mettre en commentaire les 4 lignes ci-dessous pour faire apparaître la box et mieux voir la position de l'image sur la grid*/
+  /* border: none;
+  border-radius: none;
+  background-color: none;
+  background-color: rgba(0, 0, 0, 0); */
+
+}
+
+
+.planet-display img{
+  width: 700px;
+  height: 700px;
+  align-items: center;
+  justify-items: center;
+}
+
+
+/***************/
+/* Tous ce qui concerne le temps restant */
+/***************/
+.time-left{
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.time-left .box{
+  display: grid;
+  grid-auto-flow: column;
+}
+
+/***************/
+/* Tous ce qui concerne le nombre de tours de jeu */
+/***************/
+
+.turn-number{
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+.turn-number .box{
+  display: grid;
+  grid-auto-flow: column;
+}
+/***************/
+/* Tous ce qui concerne les ressources de jeu */
+/***************/
+.ressources{
+    display: grid;
+    grid-column: 9 / 13;
+    grid-row: 1 / 2;
+}
+
+.ressources .box{
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.ressource-icon img{
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+/***************/
+/* Tous ce qui concerne les info sur les planètes */
+/***************/
+.planet-info{
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 4 / 9;
+
+    cursor: pointer;
+}
+
+/***************/
+/* Tous ce qui concerne le menu principal */
+/***************/
+.main-menu{
+    display: grid;
+    grid-column: 3 / 8;
+    grid-row: 10/13;
+
+    cursor: pointer;
+}
+
+
+/***************/
+/* Tous ce qui concerne le menu secondaire */
+/***************/
+.secondary-menu{
+    display: grid;
+    grid-column: 9 / 12;
+    grid-row: 10/13;
+
+    cursor: pointer;
+}
