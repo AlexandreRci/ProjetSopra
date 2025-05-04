@@ -13,10 +13,11 @@
 <body>
     <div class="background">
 
+      <div class="time-turn">
         <div class="time-left">
           <div class="box">
             <div class="timer-text">
-              Temps restant:
+              Temps restant :
             </div>
             <div class="timer">
               01:12
@@ -27,13 +28,18 @@
         <div class="turn-number">
           <div class="box">
             <div class="turn-text">
-              Tours n°:
+              Tours n° 
             </div>
             <div class="turn">
               12
             </div>
           </div>
         </div>
+
+
+      </div>
+
+
 
         <div class="ressources">
           <div class="box">
@@ -64,28 +70,90 @@
           </div>
         </div>
 
+        <!-- <div class="planet-info">
+          <div class="box">
+            <div class="planet-info-text">
+              Info planetes
+            </div>
+            <div class="planet-info-list-planets">
+              <div class="planet-info-list-planet">
+                <div class="planet-info-list-planet-img">
+                  <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+                </div>
+                <div class="planet-info-list-planet-name">
+                  Planete A
+                </div>
+              </div>
+              <div class="planet-info-list-planet">
+                <div class="planet-info-list-planet-img">
+                  <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+                </div>
+                <div class="planet-info-list-planet-name">
+                  Planete A
+                </div>
+              </div>
+              <div class="planet-info-list-planet">
+                <div class="planet-info-list-planet-img">
+                  <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+                </div>
+                <div class="planet-info-list-planet-name">
+                  Planete A
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
         <div class="planet-info">
           <div class="box">
-            Info planetes
+            <div class="planet-info-text">
+              Info planetes
+            </div>
+            <div class="planet-info-list-planets">
+              <div *ngFor="let planet of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]; let i = index"
+                   [ngClass]="{'expanded': expandedPlanetIndex === i}"
+                   class="planet-info-list-planet"
+                   (click)="togglePlanetInfo(i)">
+                <div class="planet-info-list-planet-img">
+                  <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+                </div>
+                <div class="planet-info-list-planet-name">
+                  Planete {{ i + 1 }}
+                </div>
+                <div class="planet-info-details">
+                  <p>Minerai disponible : 75</p>
+                  <p>Population: 124</p>
+                  <p>Milice: 33</p>
+                  <p>Espèce: Espèce A</p>
+                  <p>Biomes: Désertique, Plaine, Forêt</p>
+                  <button>[ATTAQUER]</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
 
         <div class="planet-display">
            <div class="box">
              <!--La div "box" est utile pour aider à voir l'emplacement de la planete sur la grid -->
-            <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+            <img [ngClass]="{'animated': isAnimated}" src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
           </div>
         </div>
 
         <div class="main-menu">
           <div class="box">
-            Menu principal
+            <div class="main-menu-text">
+              Menu principal
+            </div>
           </div>
         </div>
 
         <div class="secondary-menu">
           <div class="box">
-            Menu secondaire
+            <div class="secondary-menu-text">
+              Menu secondaire
+            </div>
           </div>
         </div>
 
