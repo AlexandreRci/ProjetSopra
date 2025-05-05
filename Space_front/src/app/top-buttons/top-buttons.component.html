@@ -4,21 +4,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="background">
-    <!-- <div class="top-buttons">
-        <button class="top-button"> <img src="../assets/images/volume.png" alt="musique"></button>
-        <button class="top-button" (click)="toggleMenu()"> <img src="../assets/images/settings.png"
-                alt="parametres"></button>
-
-    </div>
-    <div class="side-menu" [ngClass]="{'open': isOpen}">
-        <button (click)="closeMenu()" class="close-button">Close</button>
-        <nav>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-      </div> -->
+  <div class="top-buttons">
+    <button class="top-button"> <img src="../assets/images/volume.png" alt="musique"></button>
+    <button class="top-button" (click)="toggleMenu()"> <img src="../assets/images/settings.png"
+        alt="parametres"></button>
+  </div>
+  <div *ngIf="isOpen" class="side-menu" [ngClass]="{'open': isOpen}">
+    <ul>
+      <li><a href="#">Crédits</a></li>
+      <li><a [routerLink]="['/ecranAccueil']" onclick="removeToken()"><b>Se déconnecter</b></a></li>
+    </ul>
+  </div>
 </div>

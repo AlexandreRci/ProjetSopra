@@ -7,17 +7,22 @@ import { Component } from '@angular/core';
   styleUrl: './top-buttons.component.css'
 })
 export class TopButtonsComponent {
-  // isOpen: boolean = false;
+  isOpen: boolean = false;
 
   // openMenu() {
   //   this.isOpen = true;
   // }
 
-  // closeMenu() {
-  //   this.isOpen = false;
-  // }
+  closeMenu() {
+    this.isOpen = false;
+  }
 
-  // toggleMenu() {
-  //   this.isOpen = !this.isOpen;
-  // }
+  toggleMenu() {
+    this.isOpen = !this.isOpen;
+  }
+
+  removeToken() {
+    localStorage.removeItem('token');
+  }
+
 }

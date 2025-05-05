@@ -19,7 +19,7 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     CreationCompteComponent,
     MenuPartieComponent,
     SeConnecterComponent,
-    TopButtonsComponent
+    TopButtonsComponent,
     EcranJeuComponent
   ],
   imports: [
