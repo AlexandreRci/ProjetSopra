@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- <link rel="stylesheet" href="../CSS/seConnecter.css"> -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter</title>
+
+</head>
+
+<body>
+    <div class="background">
+        <app-top-buttons></app-top-buttons>
+        <div class="content">
+            <h2 id="FormName">Se connecter</h2>
+            <form (ngSubmit)="authenticate()" [formGroup]="authForm" id="inscription">
+                <div class="content">
+                    <input type="text" class="input-field" placeholder="Pseudo" formControlName="username">
+                    <div *ngIf="authForm.get('username')?.hasError('required')" class="error">
+                        L'identifiant est obligatoire
+                    </div>
+                    <input type="password" class="input-field" placeholder="Mot de passe" formControlName="password">
+                    <div *ngIf="authForm.get('password')?.hasError('required')" class="error">
+                        Le mot de passe est obligatoire
+                    </div>
+
+                    <input id="submit_button" class="button" type="submit" value="Valider" [disabled]="authForm.invalid" />
+                    <div *ngIf="isError" class="error">
+                        Identifiant ou mdp invalides
+                    </div>
+                </div>
+            </form>
+            <a id="retour" [routerLink]="['/ecranAccueil']" routerLinkActive="active"><button
+                class="button">Retour</button></a>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

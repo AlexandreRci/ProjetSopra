@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- <link rel="stylesheet" href="ecran-acceuil.component.css"> -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecran d'accueil</title>
+
+</head>
+<body>
+    <div class="background">
+        <app-top-buttons></app-top-buttons>
+        <div class="content">
+            <a [routerLink]="['/creationCompte']" routerLinkActive="active"><button class="button">Créer un compte</button></a>
+            <a [routerLink]="['/seConnecter']" routerLinkActive="active"><button class="button">Se connecter</button></a>
+        </div>
+    </div>
+</body>
+</html>

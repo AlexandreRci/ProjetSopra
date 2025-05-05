@@ -11,7 +11,7 @@ public abstract class Compte {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqC")
     @Column(name = "id_compte")
     protected Integer id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     protected String username;
     @Column(nullable = false)
     protected String password;

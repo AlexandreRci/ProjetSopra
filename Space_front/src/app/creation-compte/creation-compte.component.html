@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- <link rel="stylesheet" href="../CSS/creationCompte.css"> -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creation du compte</title>
+
+</head>
+
+<body>
+    <div class="background">
+        <app-top-buttons></app-top-buttons>
+        <div class="content">
+
+            <h2 id="FormName">Création du compte</h2>
+            <form (ngSubmit)="addCompte()" [formGroup]="compteForm" name="inscription" id="inscription">
+                <input type="text" class="input-field" placeholder="Nom" formControlName="name">
+                <div *ngIf="compteForm.get('name')?.hasError('required')" class="error">
+                    Le nom est obligatoire
+                </div>
+                <input type="text" class="input-field" placeholder="Identifiant" formControlName="username">
+                <div *ngIf="compteForm.get('username')?.hasError('required')" class="error">
+                    L'identifiant est obligatoire
+                </div>
+                <input type="password" class="input-field" placeholder="Mot de passe" formControlName="password1">
+                <div *ngIf="compteForm.get('password1')?.hasError('required')" class="error">
+                    Le mot de passe est obligatoire
+                </div>
+                <div *ngIf="compteForm.get('password1')?.hasError('minlength')" class="error">
+                    Le mot de passe doit faire au moins 8 caractères
+                </div>
+                <div *ngIf="compteForm.get('password1')?.hasError('maxlength')" class="error">
+                    Le mot de passe doit faire au maximum 20 caractères
+                </div>
+                <input type="password" class="input-field" placeholder="Mot de passe" formControlName="password2">
+                <div *ngIf="compteForm.get('password2')?.hasError('required')" class="error">
+                    Le mot de passe est obligatoire
+                </div>
+                <div *ngIf="compteForm.errors?.['passwordMismatch']" class="error">
+                    Les mots de passe ne correspondent pas
+                </div>
+                <input id="submit_button" class="button" type="submit" value="Valider"
+                    [disabled]="compteForm.invalid" />
+                <div *ngIf="compteCree" class="success">
+                    <strong>Le compte a bien été créé ! Redirection vers la page de connexion...</strong>
+                </div>
+
+            </form>
+
+
+            <a id="retour" [routerLink]="['/ecranAccueil']" routerLinkActive="active"><button
+                    class="button">Retour</button></a>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
