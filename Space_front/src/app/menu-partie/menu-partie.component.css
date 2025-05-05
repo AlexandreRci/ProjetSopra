@@ -100,3 +100,11 @@ height: 35px;
 align-items: center;
 justify-items: center;
 }
+
+app-top-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column: 12 /13;
+    grid-row: 1 /2;
+    align-items: center;
+  }
