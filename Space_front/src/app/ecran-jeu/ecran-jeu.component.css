@@ -319,3 +319,10 @@ padding-right: 10px; /*Pour rendre la ligne de scroll plus facile d'accès*/
 
   cursor: pointer;
 } 
+app-top-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column: 12 /13;
+  grid-row: 1 /2;
+  align-items: center;
+}
