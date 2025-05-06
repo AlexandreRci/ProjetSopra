@@ -18,7 +18,12 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     EcranAccueilComponent,
     CreationCompteComponent,
     MenuPartieComponent,
+<<<<<<< HEAD
     TopButtonsComponent
+=======
+    SeConnecterComponent,
+    TopButtonsComponent,
+>>>>>>> 8b8be74 ([+] Ajout boutons dans EcranJeu)
     EcranJeuComponent
     SeConnecterComponent,
   ],

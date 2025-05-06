@@ -73,10 +73,10 @@ body, html {    /*Applique toutes ces modifications entre les balises body et ht
 
 .planet-display .box{
   /* Mettre en commentaire les 4 lignes ci-dessous pour faire apparaître la box et mieux voir la position de l'image sur la grid*/
-  border: none;
+  /* border: none;
   border-radius: none;
   background-color: none;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0); */
 
 }
 
@@ -182,7 +182,7 @@ body, html {    /*Applique toutes ces modifications entre les balises body et ht
   display: grid;
   grid-column: 1 / 4;
   grid-row: 3 / 9;
-  cursor: pointer;
+  
 }
 
 .planet-info-text {
@@ -203,6 +203,8 @@ border: 2px solid white;
 border-radius: 15px;
 cursor: pointer;
 transition: background-color 0.3s;
+
+cursor: pointer;
 }
 
 .planet-info-list-planet-img img {
@@ -217,7 +219,8 @@ transition: max-height 0.3s ease-out; /*Petite animation pour replier les inform
 }
 
 .planet-info-list-planet.expanded .planet-info-details {
- max-height: 410px; /*Taille de la fenêtre déplié */
+ max-height: 450px; /*Taille de la fenêtre déplié */
+ font-size: 20px;
 transition: max-height 0.3s ease-in;
 }
 
@@ -234,8 +237,6 @@ padding-right: 10px; /*Pour rendre la ligne de scroll plus facile d'accès*/
     display: grid;
     grid-column: 2 / 8;
     grid-row: 10/13;
-
-    cursor: pointer;
 }
 
 .main-menu-text{
@@ -243,18 +244,78 @@ padding-right: 10px; /*Pour rendre la ligne de scroll plus facile d'accès*/
   justify-items: center;
 }
 
-/***************/
-/* Tous ce qui concerne le menu secondaire */
-/***************/
-.secondary-menu{
-    display: grid;
-    grid-column: 9 / 12;
-    grid-row: 10/13;
 
-    cursor: pointer;
+.main-menu-buttons{
+  display: grid;
+  grid-auto-flow: column;
 }
 
-.secondary-menu-text{
+.main-menu-build-list{
+  display: grid;
+  justify-items: center; 
+  grid-row-gap: 10px;
+}
+
+.main-menu-destroy-list{
+  display: grid;
+  justify-items: center;
+  grid-row-gap: 10px;
+}
+
+.main-menu-build-button {
+  display: grid;
+  justify-items: center;
+  border: 2px solid white;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+
+  cursor: pointer;
+} 
+
+.main-menu-destroy-button {
+  display: grid;
+  justify-items: center;
+
+  position: relative; /* ou absolute, fixed */
+  z-index: 2; /* z-index plus élevé pour apparaître devant divA */
+
+  border: 2px solid white;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+
+  cursor: pointer;
+} 
+
+/***************/
+/* Tous ce qui concerne le menu secondaire */
+/* Le menu est bidouillée, je pense qu'il y a moyen d'optimiser le code*/
+/***************/
+.secondary-menu {
+  display: grid;
+  
+  grid-column: 9 / 12;
+  grid-row: 10 / 13;
+}
+
+.secondary-menu .box {
   display: grid;
   justify-items: center;
 }
+
+.secondary-menu-boutons {
+  display: grid;
+  justify-content: center;
+  /* align-content: space-evenly; */
+  grid-row-gap: 25px;
+} 
+
+.secondary-menu-bouton {
+  display: grid;
+  justify-items: center;
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  cursor: pointer;
+} 
