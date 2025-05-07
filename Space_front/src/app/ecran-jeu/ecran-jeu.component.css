@@ -316,9 +316,9 @@ padding-right: 10px; /*Pour rendre la ligne de scroll plus facile d'accès*/
   border-radius: 15px;
   cursor: pointer;
   transition: background-color 0.3s;
-
   cursor: pointer;
 } 
+
 app-top-buttons {
   display: grid;
   grid-auto-flow: column;

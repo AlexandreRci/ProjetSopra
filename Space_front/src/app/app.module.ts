@@ -18,13 +18,9 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     EcranAccueilComponent,
     CreationCompteComponent,
     MenuPartieComponent,
-<<<<<<< HEAD
-    TopButtonsComponent
-=======
     SeConnecterComponent,
     TopButtonsComponent,
     EcranJeuComponent
-    SeConnecterComponent,
   ],
   imports: [
     BrowserModule,
