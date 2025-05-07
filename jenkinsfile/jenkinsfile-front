@@ -65,7 +65,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker push judypolka/ajc-test-judy:space_front'
+                    sh 'docker push judypolka/space_project:space_front'
                 }
             }
         }
