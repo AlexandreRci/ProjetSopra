@@ -25,6 +25,9 @@
                 <div *ngIf="compteForm.get('username')?.hasError('required')" class="error">
                     L'identifiant est obligatoire
                 </div>
+                <div *ngIf="usernameExiste" class="error">
+                    <strong>L'identifiant est déjà utilisé</strong>
+                  </div>
                 <input type="password" class="input-field" placeholder="Mot de passe" formControlName="password1">
                 <div *ngIf="compteForm.get('password1')?.hasError('required')" class="error">
                     Le mot de passe est obligatoire

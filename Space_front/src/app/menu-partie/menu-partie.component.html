@@ -11,9 +11,10 @@
 </head>
 <body>
     <div class="background">
+      <app-top-buttons></app-top-buttons>
 
       <div class="files">
-        <button class="button"> Nouvelle partie</button>
+        <a href="ecran-jeu.component.html" [routerLink]="['/ecranJeu']" routerLinkActive="active"><button class="button"> Nouvelle partie</button></a>
         <button class="button"> Nouvelle partie</button>
         <button class="button"> Nouvelle partie</button>
       </div>
@@ -29,10 +30,6 @@
       <a href="seConnecter.html"><button class="button">Se déconnecter</button></a>
       </div>
 
-      <div class="top-right-buttons">
-        <button class="button"><img src="../assets/images/volume.png" alt="musique"></button>
-        <button class="button"><img src="../assets/images/settings.png" alt="parametres"></button>
-      </div>
 
     </div>
 

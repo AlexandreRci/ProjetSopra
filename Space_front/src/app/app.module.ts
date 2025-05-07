@@ -10,6 +10,7 @@ import { CreationCompteComponent } from './creation-compte/creation-compte.compo
 import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { TopButtonsComponent } from './top-buttons/top-buttons.component';
+import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TopButtonsComponent } from './top-buttons/top-buttons.component';
     CreationCompteComponent,
     MenuPartieComponent,
     SeConnecterComponent,
-    TopButtonsComponent
+    TopButtonsComponent,
+    EcranJeuComponent
   ],
   imports: [
     BrowserModule,

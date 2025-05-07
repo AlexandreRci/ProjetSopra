@@ -1,40 +1,91 @@
 .top-buttons {
-    /*  grid-column-gap: 0px;
+  /*  grid-column-gap: 0px;
     grid-row-gap: 0px;*/
-    grid-auto-flow: column;
-    grid-column: 12 /13;
-    grid-row: 1 /2;
+  grid-auto-flow: column;
+  grid-column: 12 /13;
+  grid-row: 1 /2;
 
-    display: flex;
-    /* Use Flexbox to center content inside the button */
-    align-items: center;
-    /* Vertically center content */
-    justify-content:center;
+  display: flex;
+  /* Use Flexbox to center content inside the button */
+  align-items: center;
+  /* Vertically center content */
+  justify-content: center;
 }
 
 .top-button {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: background-color 0.3s;
-    border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s;
+  border-radius: 50%;
 
-    border: 2px solid transparent;
-    margin-right: 5px;
-    margin-left: 5px;
+  border: 2px solid transparent;
+  margin-right: 5px;
+  margin-left: 5px;
 
-    cursor: pointer;
+  cursor: pointer;
 
 }
 
 .top-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-color: orange;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: orange;
 }
 
 .top-button img {
-    width: 35px;
-    height: 35px;
-    align-items: center;
-    justify-items: center;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-items: center;
+}
+
+.side-menu {
+  position: fixed;
+  /* Fixed position to stay in view */
+  margin-top: 2%;
+  margin-right: 10%;
+  width: 200px;
+  /* Adjust width as needed */
+  transform: translateX(100%);
+  /* Initially moved out of view to the right */
+  transition: transform 0.3s ease;
+  /* Smooth transition */
+  z-index: 1000;
+  /* Ensure it appears above other content */
+  overflow-y: auto;
+  /* Allow scrolling if content overflows */
+  font-family: 'Orbitron';
+  background-color: rgba(0, 0, 0, 0.5);
+  /*Ajoute des effets de transparence trop cool*/
+  border: 2px solid white;
+  /*Modification du bord des boutons*/
+  color: white;
+  font-size: 16px;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+  /* Moves into view */
+}
+
+.side-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  padding: 10px;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
 }
