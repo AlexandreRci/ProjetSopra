@@ -1,0 +1,73 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Git checkout') {
+            steps {
+                git credentialsId: 'github',
+                    url: 'git@github.com:AlexandreRci/ProjetSopra.git',
+                    branch: 'main'
+                
+                // Permet de stocker les fichiers récupérés via git dans "source-code", qu'on pourra manipuler dans un autre environnement d'exécution
+                stash name: 'source-code', includes: '**/*'
+            }
+        }
+        
+        stage('In Docker Execution') {
+            agent {
+                docker {
+                    image 'node:lts-bullseye'
+                    args '--network devops'
+                }
+            }
+            
+            stages {
+                stage('Dependencies installation') {
+                    steps {
+                        // Permet de recopier le "source-code" récupéré via git dans l'autre environnement
+                        unstash 'source-code'
+
+                        dir('Space_front') {
+                            sh 'npm install'
+                        }
+                    }
+                }
+            
+                stage('Sonar Analysis') {
+                    steps {
+                        dir('Space_front') {
+                            withSonarQubeEnv('sonar') {
+                                sh './node_modules/.bin/sonar -Dsonar.projectKey=space_front'
+                            }
+                        }
+                    }
+                }
+            
+                stage('Angular Build') {
+                    steps {
+                        dir('Space_front') {
+                            sh './node_modules/.bin/ng build'
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Docker Build') {
+            steps {
+                dir('Space_front') {
+                    sh 'docker build -t judypolka/space_project:space_front .'
+                }
+            }
+        }
+        
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    sh 'docker push judypolka/ajc-test-judy:quest-angular-jenkins'
+                }
+            }
+        }
+    }
+}
