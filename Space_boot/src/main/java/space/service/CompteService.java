@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class CompteService implements IService<Compte, Integer>, UserDetailsService {
     private final IDAOCompte daoCompte;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public CompteService(IDAOCompte daoCompte, PasswordEncoder passwordEncoder) {
         this.daoCompte = daoCompte;

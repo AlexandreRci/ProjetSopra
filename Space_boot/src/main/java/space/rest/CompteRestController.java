@@ -1,31 +1,23 @@
 package space.rest;
 
-import java.util.List;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import space.model.Compte;
 import space.rest.request.CompteRequest;
 import space.rest.response.CompteResponse;
 import space.service.CompteService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/compte")
 public class CompteRestController {
 
     private final CompteService compteService;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public CompteRestController(CompteService compteService, PasswordEncoder passwordEncoder) {
         this.compteService = compteService;
@@ -55,7 +47,7 @@ public class CompteRestController {
     public Compte create(@RequestBody CompteRequest compteRequest) {
         Compte compte = CompteRequest.convert(compteRequest);
         compte.setPassword(this.passwordEncoder.encode(compte.getPassword()));
-        
+
         try {
             return compteService.create(compte);
         } catch (DataIntegrityViolationException e) {

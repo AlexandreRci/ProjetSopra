@@ -1,7 +1,6 @@
 package space.service;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOPlanetSeed;
 import space.model.Batiment;

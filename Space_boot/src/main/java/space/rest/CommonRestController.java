@@ -13,8 +13,9 @@ import space.rest.response.ConnexionResponse;
 @RestController
 public class CommonRestController {
     private final AuthenticationManager authenticationManager;
+
     public CommonRestController(AuthenticationManager authenticationManager) {
-        this.authenticationManager= authenticationManager;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/connexion")
