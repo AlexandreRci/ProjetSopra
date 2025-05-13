@@ -51,7 +51,7 @@ public class BatimentRestController {
 
     @PutMapping("/{id}")
     public Batiment update(@RequestBody BatimentRequest batimentRequest, @PathVariable Integer id) {
-        if (id != batimentRequest.getId() || !this.batimentService.existsById(id)) {
+        if (!id.equals(batimentRequest.getId()) || !this.batimentService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

@@ -1,6 +1,5 @@
 package space.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,21 +16,19 @@ import java.util.Optional;
 
 @Service
 public class CompteService implements IService<Compte, Integer>, UserDetailsService {
-    @Autowired
-    IDAOCompte daoCompte;
-
-    @Autowired
+    private final IDAOCompte daoCompte;
     private PasswordEncoder passwordEncoder;
+
+    public CompteService(IDAOCompte daoCompte, PasswordEncoder passwordEncoder) {
+        this.daoCompte = daoCompte;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Compte compte = this.daoCompte.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("L'utilisateur n'existe pas."));
 
         // Si l'utilisateur n'a pas été trouvé, l'exception sera jetée, et on s'arrêtera là
-
-        // Si mot de passe en clair en base, utiliser ça :
-        //User.UserBuilder userBuilder = User.withUsername(username).password(passwordEncoder.encode(compte.getPassword()));
-
         // Si mot de passe hashés en base, utiliser ça :
         User.UserBuilder userBuilder = User.withUsername(username).password(compte.getPassword());
 
@@ -39,6 +36,7 @@ public class CompteService implements IService<Compte, Integer>, UserDetailsServ
             case Admin admin -> userBuilder.roles("ADMIN");
             case Utilisateur utilisateur -> userBuilder.roles("UTILISATEUR");
             default -> {
+                throw new UsernameNotFoundException("L'utilisateur n'existe pas.");
             }
         }
 

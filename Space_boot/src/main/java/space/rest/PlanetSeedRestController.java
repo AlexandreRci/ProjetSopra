@@ -24,8 +24,6 @@ public class PlanetSeedRestController {
     @GetMapping("")
     public List<PlanetSeedResponse> getAll() {
         List<PlanetSeed> planetSeeds = this.planetSeedService.getAll();
-
-//		return planetSeeds.stream().map(u -> PlanetSeedResponse.convert(u)).toList();
         return planetSeeds.stream().map(PlanetSeedResponse::convert).toList();
     }
 
@@ -49,7 +47,7 @@ public class PlanetSeedRestController {
 
     @PutMapping("/{id}")
     public PlanetSeedResponse update(@RequestBody PlanetSeedRequest planetSeedRequest, @PathVariable Integer id) {
-        if (id != planetSeedRequest.getId() || !this.planetSeedService.existsById(id)) {
+        if (!id.equals(planetSeedRequest.getId()) || !this.planetSeedService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

@@ -1,6 +1,5 @@
 package space.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOEspece;
 import space.model.Espece;
@@ -9,8 +8,11 @@ import java.util.List;
 
 @Service
 public class EspeceService implements IService<Espece, Integer> {
-    @Autowired
-    IDAOEspece daoEspece;
+    private final IDAOEspece daoEspece;
+
+    public EspeceService(IDAOEspece daoEspece) {
+        this.daoEspece = daoEspece;
+    }
 
     public Espece getById(Integer id) throws Exception {
         if (id == null) {

@@ -1,6 +1,5 @@
 package space.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,8 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/possession")
 public class PossessionRestController {
-    @Autowired
-    private PossessionService possessionService;
+    private final PossessionService possessionService;
+
+    public PossessionRestController(PossessionService possessionService) {
+        this.possessionService = possessionService;
+    }
 
     @GetMapping("")
     public List<PossessionResponse> getAll() {
@@ -42,7 +44,7 @@ public class PossessionRestController {
 
     @PutMapping("/{id}")
     public Possession update(@RequestBody PossessionRequest possessionRequest, @PathVariable Integer id) {
-        if (id != possessionRequest.getId() || !this.possessionService.existsById(id)) {
+        if (!id.equals(possessionRequest.getId()) || !this.possessionService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

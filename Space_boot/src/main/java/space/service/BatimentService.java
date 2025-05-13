@@ -1,6 +1,5 @@
 package space.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOBatiment;
 import space.model.Batiment;
@@ -9,8 +8,12 @@ import java.util.List;
 
 @Service
 public class BatimentService implements IService<Batiment, Integer> {
-    @Autowired
+
     IDAOBatiment daoBatiment;
+
+    public BatimentService(IDAOBatiment daoBatiment) {
+        this.daoBatiment = daoBatiment;
+    }
 
     public Batiment getById(Integer id) throws Exception {
         if (id == null) {

@@ -53,7 +53,6 @@ public class CompteRestController {
 
     @PostMapping("")
     public Compte create(@RequestBody CompteRequest compteRequest) {
-        System.out.println(compteRequest);
         Compte compte = CompteRequest.convert(compteRequest);
         compte.setPassword(this.passwordEncoder.encode(compte.getPassword()));
         
@@ -66,7 +65,7 @@ public class CompteRestController {
 
     @PutMapping("/{id}")
     public Compte update(@RequestBody CompteRequest compteRequest, @PathVariable Integer id) {
-        if (id != compteRequest.getId() || !this.compteService.existsById(id)) {
+        if (!id.equals(compteRequest.getId()) || !this.compteService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

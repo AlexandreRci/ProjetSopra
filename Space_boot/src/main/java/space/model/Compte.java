@@ -17,16 +17,16 @@ public abstract class Compte {
     protected String password;
 
 
-    public Compte() {
+    protected Compte() {
     }
 
-    public Compte(Integer id, String username, String password) {
+    protected Compte(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public Compte(String username, String password) {
+    protected Compte(String username, String password) {
         this.username = username;
         this.password = password;
     }

@@ -12,10 +12,13 @@ import java.util.List;
 @Service
 @Transactional
 public class PlanetSeedService implements IService<PlanetSeed, Integer> {
-    @Autowired
-    IDAOPlanetSeed daoPlanetSeed;
-    @Autowired
-    BatimentService batimentService;
+    private final IDAOPlanetSeed daoPlanetSeed;
+    private final BatimentService batimentService;
+
+    public PlanetSeedService(IDAOPlanetSeed daoPlanetSeed, BatimentService batimentService) {
+        this.daoPlanetSeed = daoPlanetSeed;
+        this.batimentService = batimentService;
+    }
 
     public PlanetSeed getById(Integer id) throws Exception {
         if (id == null) {

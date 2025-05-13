@@ -2,7 +2,7 @@ package space.model;
 
 import jakarta.persistence.*;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 @Entity
@@ -18,7 +18,7 @@ public class Espece {
     @MapKeyEnumerated(EnumType.STRING)
     @CollectionTable(name = "espece_biome", joinColumns = @JoinColumn(name = "espece_id"))
     @Column(name = "biome_value", nullable = false)
-    private Map<Biome, Double> biomes = new HashMap<>();
+    private Map<Biome, Double> biomes = new EnumMap<>(Biome.class);
 
 
     public Espece() {

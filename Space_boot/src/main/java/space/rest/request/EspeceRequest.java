@@ -4,14 +4,14 @@ import org.springframework.beans.BeanUtils;
 import space.model.Biome;
 import space.model.Espece;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class EspeceRequest {
 
     private Integer id;
     private String nom;
-    private Map<Biome, Double> biomes = new HashMap<>();
+    private Map<Biome, Double> biomes = new EnumMap<>(Biome.class);
 
     public EspeceRequest() {
         super();
