@@ -4,7 +4,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOCompte;
 import space.model.Admin;
@@ -17,11 +16,9 @@ import java.util.Optional;
 @Service
 public class CompteService implements IService<Compte, Integer>, UserDetailsService {
     private final IDAOCompte daoCompte;
-    private final PasswordEncoder passwordEncoder;
 
-    public CompteService(IDAOCompte daoCompte, PasswordEncoder passwordEncoder) {
+    public CompteService(IDAOCompte daoCompte) {
         this.daoCompte = daoCompte;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
