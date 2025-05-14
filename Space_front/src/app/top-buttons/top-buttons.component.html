@@ -12,7 +12,7 @@
   <div *ngIf="isOpen" class="side-menu" [ngClass]="{'open': isOpen}">
     <ul>
       <li><a href="#">Crédits</a></li>
-      <li><a [routerLink]="['/ecranAccueil']" onclick="removeToken()"><b>Se déconnecter</b></a></li>
+      <li><a [routerLink]="['/ecranAccueil']" (click)="removeToken()"><b>Se déconnecter</b></a></li>
     </ul>
   </div>
 </div>
