@@ -21,7 +21,11 @@ export class SeConnecterComponent implements OnInit {
   public passwordCtrl!: FormControl;
   public isError: boolean = false;
 
-  constructor(private service: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    private service: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.usernameCtrl = this.formBuilder.control('', Validators.required);
@@ -33,21 +37,32 @@ export class SeConnecterComponent implements OnInit {
     });
   }
 
-
   public authenticate(): void {
-    this.service.authenticate(new CompteRequest(this.authForm.value.username, this.authForm.value.password))
-      .subscribe({
-        next: (response: CompteResponse) => {
-          if (response.token) {
-            console.log('Connexion réussie');
+    const request = new CompteRequest(
+      this.authForm.value.username,
+      this.authForm.value.password
+    );
+
+    this.service.authenticate(request).subscribe({
+      next: (response: CompteResponse) => {
+        if (response.token) {
+          const role = this.service.getRole();
+
+          if (role === 'ROLE_ADMIN') {
+            this.router.navigate(['/menuAdmin']);
+          } else if (role === 'ROLE_UTILISATEUR') {
             this.router.navigate(['/menuPartie']);
           } else {
             this.isError = true;
+            console.error('Rôle non reconnu:', role);
           }
-        },
-        error: () => {
+        } else {
           this.isError = true;
         }
-      });
+      },
+      error: () => {
+        this.isError = true;
+      }
+    });
   }
 }

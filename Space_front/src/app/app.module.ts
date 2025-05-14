@@ -11,6 +11,7 @@ import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { TopButtonsComponent } from './top-buttons/top-buttons.component';
 import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     MenuPartieComponent,
     SeConnecterComponent,
     TopButtonsComponent,
-    EcranJeuComponent
+    EcranJeuComponent,
+    MenuAdminComponent
   ],
   imports: [
     BrowserModule,

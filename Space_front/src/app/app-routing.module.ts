@@ -5,6 +5,7 @@ import { CreationCompteComponent } from './creation-compte/creation-compte.compo
 import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 
 const routes: Routes = [
   { path: 'ecranAccueil', component: EcranAccueilComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'creationCompte', component: CreationCompteComponent },
   { path: 'menuPartie', component: MenuPartieComponent },
   { path: 'ecranJeu', component: EcranJeuComponent },
+  { path: 'menuAdmin', component: MenuAdminComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

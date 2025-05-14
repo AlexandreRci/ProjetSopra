@@ -5,6 +5,7 @@ import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -21,17 +22,22 @@ public class JwtUtil {
 
     // Génération du jeton pour un utilisateur
     public static String generate(Authentication authentication) {
-        SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
-        Date now = new Date();
+    SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
+    Date now = new Date();
 
-        log.debug("Generating token for user {} ...", authentication.getName());
+    String role = authentication.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .findFirst()
+            .orElse("ROLE_UTILISATEUR"); // Par défaut
 
-        return Jwts.builder().setSubject(authentication.getName()) // On donne dans le sujet du JWT le nom d'utilisateur
-                .setIssuedAt(now) // On précise la date du jeton
-                .setExpiration(new Date(now.getTime() + JWT_EXPIRATION)) // On donne la date d'expiration
-                .signWith(key) // On signe le JWT
-                .compact(); // On retourne au format String
-    }
+    return Jwts.builder()
+            .setSubject(authentication.getName()) // username
+            .claim("role", role) // 👈 On ajoute le rôle ici
+            .setIssuedAt(now)
+            .setExpiration(new Date(now.getTime() + JWT_EXPIRATION))
+            .signWith(key)
+            .compact();
+}
 
     public static Optional<String> getUsername(String token) {
         if (token == null || token.isBlank()) {
@@ -59,5 +65,19 @@ public class JwtUtil {
         }
 
         return Optional.empty();
+    }
+
+    public static Optional<String> getRole(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(JWT_KEY.getBytes(StandardCharsets.UTF_8))
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return Optional.ofNullable(claims.get("role", String.class));
+        } catch (JwtException e) {
+            log.error("JWT role extraction error: {}", e.getMessage());
+            return Optional.empty();
+        }
     }
 }
