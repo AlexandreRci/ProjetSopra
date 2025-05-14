@@ -13,8 +13,14 @@
     <div class="background">
       <app-top-buttons></app-top-buttons>
 
-      <div class="files">
+      <!-- <div class="files">
         <a href="ecran-jeu.component.html" [routerLink]="['/ecranJeu']" routerLinkActive="active"><button class="button"> Nouvelle partie</button></a>
+        <button class="button"> Nouvelle partie</button>
+        <button class="button"> Nouvelle partie</button>
+      </div> -->
+
+      <div class="files">
+        <button class="button" (click)="createNewPartie()">Nouvelle partie</button>
         <button class="button"> Nouvelle partie</button>
         <button class="button"> Nouvelle partie</button>
       </div>
