@@ -20,6 +20,7 @@ import { PlanetSeedComponent } from './menu-admin/planet-seed/planet-seed.compon
 import { EspeceComponent } from './menu-admin/espece/espece.component';
 import { PossessionComponent } from './menu-admin/possession/possession.component';
 import { BatimentComponent } from './menu-admin/batiment/batiment.component';
+import { jwtHeaderInterceptor } from './jwt-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { BatimentComponent } from './menu-admin/batiment/batiment.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [provideHttpClient(withFetch()) ],
+  providers: [
+    provideHttpClient(withFetch(), withInterceptors([ jwtHeaderInterceptor ]))
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
