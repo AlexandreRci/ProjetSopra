@@ -11,6 +11,7 @@ import { MenuPartieComponent } from './menu-partie/menu-partie.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { TopButtonsComponent } from './top-buttons/top-buttons.component';
 import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
+import { jwtHeaderInterceptor } from './jwt-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [provideHttpClient(withFetch()) ],
+  providers: [
+    provideHttpClient(withFetch(), withInterceptors([ jwtHeaderInterceptor ]))
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
