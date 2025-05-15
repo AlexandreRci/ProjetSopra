@@ -12,6 +12,14 @@ import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { TopButtonsComponent } from './top-buttons/top-buttons.component';
 import { EcranJeuComponent } from './ecran-jeu/ecran-jeu.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { PartieComponent } from './menu-admin/partie/partie.component';
+import { JoueurComponent } from './menu-admin/joueur/joueur.component';
+import { CompteComponent } from './menu-admin/compte/compte.component';
+import { PlaneteComponent } from './menu-admin/planete/planete.component';
+import { PlanetSeedComponent } from './menu-admin/planet-seed/planet-seed.component';
+import { EspeceComponent } from './menu-admin/espece/espece.component';
+import { PossessionComponent } from './menu-admin/possession/possession.component';
+import { BatimentComponent } from './menu-admin/batiment/batiment.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +30,15 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
     SeConnecterComponent,
     TopButtonsComponent,
     EcranJeuComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    PartieComponent,
+    JoueurComponent,
+    CompteComponent,
+    PlaneteComponent,
+    PlanetSeedComponent,
+    EspeceComponent,
+    PossessionComponent,
+    BatimentComponent
   ],
   imports: [
     BrowserModule,
