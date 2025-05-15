@@ -16,7 +16,7 @@ export class MenuPartieComponent {
   constructor(private partieService: PartieService, private router: Router){}
 
   createNewPartie(){
-    const partieData = {currentPosition: 1, nbTour:1, nbJoueur:1};
+    const partieData = {currentPosition: 1, nbTour:1, nbJoueur:1, joueurs: [], planetSeeds:[], statut:"Fini"};
 
     this.partieService.createPartie(partieData)
     .subscribe(
