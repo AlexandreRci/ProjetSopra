@@ -20,7 +20,6 @@ import space.service.EspeceService;
 import space.service.JoueurService;
 import space.service.PartieService;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -31,23 +30,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class JoueurRestControllerTest {
 
     @Autowired
+    JoueurService joueurService;
+    @Autowired
+    PartieService partieService;
+    @Autowired
+    EspeceService especeService;
+    @Autowired
     private WebApplicationContext applicationContext;
     private MockMvc mockMvc;
-
     private Map<Biome, Double> biomesMap;
     private Partie partie1;
     private Espece espece1;
     private Joueur joueur;
-
-    @Autowired
-    JoueurService joueurService;
-
-    @Autowired
-    PartieService partieService;
-
-    @Autowired
-    EspeceService especeService;
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -69,7 +63,7 @@ class JoueurRestControllerTest {
 
         espece1 = new Espece("Espece A", biomesMap);
         espece1 = especeService.create(espece1);
-        joueur = new Joueur(1, new ArrayList<>(), partie1, espece1);
+        joueur = new Joueur(1, null, partie1, espece1);
 
     }
 
@@ -113,7 +107,7 @@ class JoueurRestControllerTest {
         String jsonRequest = objectMapper.writeValueAsString(joueurRequest);
 
 
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/jpueur")
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/joueur")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -147,7 +141,7 @@ class JoueurRestControllerTest {
         String jsonRequest = objectMapper.writeValueAsString(joueurRequest);
 
 
-        this.mockMvc.perform(MockMvcRequestBuilders.put("/jpueur/" + id)
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/joueur/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())

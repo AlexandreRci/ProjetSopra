@@ -55,12 +55,16 @@ public class JoueurService implements IService<Joueur, Integer> {
      * @param joueur
      */
     public void delete(Joueur joueur) {
-        for (PlanetSeed planetSeed : joueur.getPlanetSeeds()) {
-            planetSeed.setJoueur(null);
-            planetSeedService.update(planetSeed);
+        if (joueur.getPlanetSeeds() != null) {
+            for (PlanetSeed planetSeed : joueur.getPlanetSeeds()) {
+                planetSeed.setJoueur(null);
+                planetSeedService.update(planetSeed);
+            }
         }
-        for (Possession possession : joueur.getPossessions()) {
-            possessionService.delete(possession);
+        if (joueur.getPossessions() != null) {
+            for (Possession possession : joueur.getPossessions()) {
+                possessionService.delete(possession);
+            }
         }
         daoJoueur.delete(joueur);
     }

@@ -31,7 +31,7 @@ public class JoueurRequest {
             joueur.setEspece(espece);
         }
 
-        if (!joueurRequest.getIdPossessions().isEmpty()) {
+        if (joueurRequest.getIdPossessions() != null && !joueurRequest.getIdPossessions().isEmpty()) {
             List<Possession> possessions = new ArrayList<>();
             for (Integer idPossession : joueurRequest.getIdPossessions()) {
                 Possession possession = new Possession();
@@ -40,7 +40,7 @@ public class JoueurRequest {
             }
             joueur.setPossessions(possessions);
         }
-        if (!joueurRequest.getIdPlanetSeeds().isEmpty()) {
+        if (joueurRequest.getIdPlanetSeeds() != null && !joueurRequest.getIdPlanetSeeds().isEmpty()) {
             List<PlanetSeed> planetSeeds = new ArrayList<>();
             for (Integer idPlanetSeed : joueurRequest.getIdPlanetSeeds()) {
                 PlanetSeed planetSeed = new PlanetSeed();
@@ -95,12 +95,6 @@ public class JoueurRequest {
     public List<Integer> getIdPlanetSeeds() {
         return idPlanetSeeds;
     }
-
-//	public static Joueur convert(JoueurRequest joueurRequest) {
-//		Joueur joueur = new Joueur();
-//		BeanUtils.copyProperties(joueurRequest, joueur);
-//			
-//		return joueur;
 
     public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
         this.idPlanetSeeds = idPlanetSeeds;
