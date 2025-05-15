@@ -1,6 +1,6 @@
 .parametres-button {
   /*  grid-column-gap: 0px;
-    grid-row-gap: 0px;*/
+  grid-row-gap: 0px;*/
   grid-auto-flow: column;
   grid-column: 12 /13;
   grid-row: 1 /2;
@@ -67,7 +67,7 @@
   position: fixed;
   /* Fixed position to stay in view */
   margin-top: 2%;
-  margin-right: 10%;
+  right: 4%;
   width: 200px;
   /* Adjust width as needed */
   transform: translateX(100%);
