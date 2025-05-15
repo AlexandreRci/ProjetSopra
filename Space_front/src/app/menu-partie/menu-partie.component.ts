@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PartieService } from '../partie.service';
-
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-menu-partie',
   standalone: false,
@@ -12,27 +12,23 @@ import { PartieService } from '../partie.service';
 
 export class MenuPartieComponent {
 
+  constructor(private partieService: PartieService, private router: Router) {}
 
-  constructor(private partieService: PartieService, private router: Router){}
+  createNewPartie() {
+    const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, joueurs: [], planetSeeds: [], statut: "Fini" };
 
-  createNewPartie(){
-    const partieData = {currentPosition: 1, nbTour:1, nbJoueur:1, joueurs: [], planetSeeds:[], statut:"Fini"};
-
-    this.partieService.createPartie(partieData)
-    .subscribe(
+    this.partieService.createPartie(partieData).subscribe(
       response => {
-        console.log('Partie créée',response)
+        console.log('Partie créée', response);
         this.router.navigate(['/ecranJeu']);
       },
       error => {
         console.error('Erreur création partie', error);
-
       }
-    )
-
-
-
+    );
   }
 
-
+  navigateToGame(id: number) {
+    this.router.navigate([`/ecranJeu/${id}`]);
+  }
 }

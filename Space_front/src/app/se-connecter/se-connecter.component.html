@@ -17,7 +17,7 @@
             <h2 id="FormName">Se connecter</h2>
             <form (ngSubmit)="authenticate()" [formGroup]="authForm" id="inscription">
                 <div class="content">
-                    <input type="text" class="input-field" placeholder="Pseudo" formControlName="username">
+                    <input type="text" class="input-field" placeholder="Identifiant" formControlName="username">
                     <div *ngIf="authForm.get('username')?.hasError('required')" class="error">
                         L'identifiant est obligatoire
                     </div>
