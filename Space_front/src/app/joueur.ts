@@ -19,5 +19,4 @@ export class Joueur {
     set position(value: number) {
         this._position = value;
     }    
-
 }
