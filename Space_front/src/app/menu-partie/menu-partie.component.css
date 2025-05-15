@@ -101,7 +101,7 @@ align-items: center;
 justify-items: center;
 }
 
-app-top-buttons {
+app-top-buttons-connected {
     display: grid;
     grid-auto-flow: column;
     grid-column: 12 /13;

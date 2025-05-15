@@ -10,6 +10,8 @@
   </div>
   <div *ngIf="isOpen" class="side-menu" [ngClass]="{'open': isOpen}">
     <ul>
+      <li>Compte</li>
+      <li><a  (click)="removeToken()" [routerLink]="['/ecranAccueil']"><b>Se déconnecter</b></a></li>
       <li><a href="#">Crédits</a></li>
       <li>  <button class="volume-button" (click)="toggleVolume()">
     <img [src]="isMuted ? '../assets/images/volume-mute.png' : '../assets/images/volume.png'" alt="volume">

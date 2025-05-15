@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-top-buttons',
+  selector: 'app-top-buttons-connected',
   standalone: false,
-  templateUrl: './top-buttons.component.html',
-  styleUrl: './top-buttons.component.css'
+  templateUrl: './top-buttons-connected.component.html',
+  styleUrl: './top-buttons-connected.component.css'
 })
-export class TopButtonsComponent {
+export class TopButtonsConnectedComponent {
   isOpen: boolean = false;
   isMuted: boolean = false; // ← nouvelle variable
 
