@@ -47,8 +47,10 @@ public class PlanetSeedService implements IService<PlanetSeed, Integer> {
     }
 
     public void delete(PlanetSeed planeteSeed) {
-        for (Batiment batiment : planeteSeed.getBatiments()) {
-            batimentService.delete(batiment);
+        if (planeteSeed.getBatiments() != null) {
+            for (Batiment batiment : planeteSeed.getBatiments()) {
+                batimentService.delete(batiment);
+            }
         }
         daoPlanetSeed.delete(planeteSeed);
     }

@@ -39,7 +39,7 @@ public class PlanetSeedRequest {
             planetSeed.setPlanete(planete);
         }
 
-        if (!planetSeedRequest.getIdBatiments().isEmpty()) {
+        if (planetSeedRequest.getIdBatiments() != null && !planetSeedRequest.getIdBatiments().isEmpty()) {
             List<Batiment> batiments = new ArrayList<>();
             for (Integer idBatiment : planetSeedRequest.getIdBatiments()) {
                 Batiment batiment = new Batiment();
