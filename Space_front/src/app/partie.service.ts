@@ -18,9 +18,9 @@ export class PartieService {
     return this.http.post<Partie>(this.API_URL, partie)
   }
 
-  public getExistingPartie(): Observable<Partie> {
-    return this.http.get<Partie>(`${this.API_URL}/existing`);
-  }
+  // public getExistingPartie(): Observable<Partie> {
+  //   return this.http.get<Partie>(`${this.API_URL}/existing`);
+  // }
 
 
 }
