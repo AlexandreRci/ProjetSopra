@@ -21,7 +21,7 @@
                Temps restant:
             </div>
             <div class="timer">
-              01:12 
+              {{ formatTime(timeLeft) }}
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="pseudo">
           <div class="box">
             <div class="pseudo-text">
-               pseudo 
+              {{username}}
             </div>
           </div>
 
@@ -115,7 +115,7 @@
           </div>
         </div> -->
 
-        <div class="planet-info">
+        <!-- <div class="planet-info">
           <div class="box">
             <div class="planet-info-text">
               Info planetes
@@ -142,8 +142,36 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
+      <div class="planet-info">
+        <div class="box">
+          <div class="planet-info-text">
+            Info planètes
+          </div>
+          <div class="planet-info-list-planets">
+            <div *ngFor="let planetSeed of planetSeeds; let i = index"
+                 [ngClass]="{'expanded': expandedPlanetIndex === i}"
+                 class="planet-info-list-planet"
+                 (click)="togglePlanetInfo(i)">
+              <div class="planet-info-list-planet-img">
+                <img src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+              </div>
+              <div class="planet-info-list-planet-name">
+                {{ planetSeed.planete.nom }}
+              </div>
+              <div class="planet-info-details">
+                <p>Minerai disponible : {{ planetSeed.mineraiRestant }}</p>
+                <p>Population: {{ planetSeed.population }}</p>
+                <p>Milice: {{ planetSeed.arme }}</p>
+                <p>Espèce: Espèce A</p>
+                <p>Biomes: {{ planetSeed.planete.biomes.join(', ') }}</p>
+                <button>[ATTAQUER]</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
         <div class="planet-display">
            <div class="box">
