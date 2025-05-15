@@ -30,12 +30,12 @@ public class JoueurResponse {
             joueurResponse.setIdEspece(idEspece);
         }
 
-        if (!joueur.getPossessions().isEmpty()) {
+        if (joueur.getPossessions() != null && !joueur.getPossessions().isEmpty()) {
             joueurResponse.setIdPossessions(joueur.getPossessions().stream().map(Possession::getId).toList());
 
         }
 
-        if (!joueur.getPlanetSeeds().isEmpty()) {
+        if (joueur.getPlanetSeeds() != null && !joueur.getPlanetSeeds().isEmpty()) {
             joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
 
         }

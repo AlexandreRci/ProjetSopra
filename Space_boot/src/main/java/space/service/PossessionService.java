@@ -1,6 +1,5 @@
 package space.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOPossession;
 import space.model.Possession;
@@ -9,8 +8,11 @@ import java.util.List;
 
 @Service
 public class PossessionService implements IService<Possession, Integer> {
-    @Autowired
-    IDAOPossession daoPossession;
+    private final IDAOPossession daoPossession;
+
+    public PossessionService(IDAOPossession daoPossession) {
+        this.daoPossession = daoPossession;
+    }
 
     public Possession getById(Integer id) throws Exception {
         if (id == null) {

@@ -49,7 +49,7 @@ public class JoueurRestController {
 
     @PutMapping("/{id}")
     public JoueurResponse update(@RequestBody JoueurRequest joueurRequest, @PathVariable Integer id) {
-        if (id != joueurRequest.getId() || !this.joueurService.existsById(id)) {
+        if (!id.equals(joueurRequest.getId()) || !this.joueurService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

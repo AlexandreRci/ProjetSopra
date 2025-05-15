@@ -1,6 +1,5 @@
 package space.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,10 +12,10 @@ import space.rest.response.ConnexionResponse;
 
 @RestController
 public class CommonRestController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    public CommonRestController() {
+    public CommonRestController(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/connexion")
@@ -35,5 +34,4 @@ public class CommonRestController {
         connexionResponse.setToken(token);
         return connexionResponse;
     }
-
 }

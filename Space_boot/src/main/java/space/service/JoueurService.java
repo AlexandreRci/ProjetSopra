@@ -1,7 +1,6 @@
 package space.service;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOJoueur;
 import space.model.Joueur;
@@ -13,12 +12,15 @@ import java.util.List;
 @Service
 @Transactional
 public class JoueurService implements IService<Joueur, Integer> {
-    @Autowired
-    IDAOJoueur daoJoueur;
-    @Autowired
-    PlanetSeedService planetSeedService;
-    @Autowired
-    PossessionService possessionService;
+    private final IDAOJoueur daoJoueur;
+    private final PlanetSeedService planetSeedService;
+    private final PossessionService possessionService;
+
+    public JoueurService(IDAOJoueur daoJoueur, PlanetSeedService planetSeedService, PossessionService possessionService) {
+        this.daoJoueur = daoJoueur;
+        this.planetSeedService = planetSeedService;
+        this.possessionService = possessionService;
+    }
 
     public Joueur getById(Integer id) throws Exception {
         if (id == null) {
@@ -53,12 +55,16 @@ public class JoueurService implements IService<Joueur, Integer> {
      * @param joueur
      */
     public void delete(Joueur joueur) {
-        for (PlanetSeed planetSeed : joueur.getPlanetSeeds()) {
-            planetSeed.setJoueur(null);
-            planetSeedService.update(planetSeed);
+        if (joueur.getPlanetSeeds() != null) {
+            for (PlanetSeed planetSeed : joueur.getPlanetSeeds()) {
+                planetSeed.setJoueur(null);
+                planetSeedService.update(planetSeed);
+            }
         }
-        for (Possession possession : joueur.getPossessions()) {
-            possessionService.delete(possession);
+        if (joueur.getPossessions() != null) {
+            for (Possession possession : joueur.getPossessions()) {
+                possessionService.delete(possession);
+            }
         }
         daoJoueur.delete(joueur);
     }

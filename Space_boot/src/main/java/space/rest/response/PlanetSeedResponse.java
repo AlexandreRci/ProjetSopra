@@ -34,7 +34,7 @@ public class PlanetSeedResponse {
             planetSeedResponse.setIdPlanete(idPlanete);
         }
 
-        if (!planetSeed.getBatiments().isEmpty()) {
+        if (planetSeed.getBatiments() != null && !planetSeed.getBatiments().isEmpty()) {
             planetSeedResponse.setIdBatiments(planetSeed.getBatiments().stream().map(Batiment::getId).toList());
 
         }

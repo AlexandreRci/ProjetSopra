@@ -1,6 +1,5 @@
 package space.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOPlanete;
 import space.model.Planete;
@@ -9,8 +8,11 @@ import java.util.List;
 
 @Service
 public class PlaneteService implements IService<Planete, Integer> {
-    @Autowired
-    IDAOPlanete daoPlanete;
+    private final IDAOPlanete daoPlanete;
+
+    public PlaneteService(IDAOPlanete daoPlanete) {
+        this.daoPlanete = daoPlanete;
+    }
 
     public Planete getById(Integer id) throws Exception {
         if (id == null) {

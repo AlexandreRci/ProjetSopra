@@ -1,7 +1,6 @@
 package space.service;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOPlanetSeed;
 import space.model.Batiment;
@@ -12,10 +11,13 @@ import java.util.List;
 @Service
 @Transactional
 public class PlanetSeedService implements IService<PlanetSeed, Integer> {
-    @Autowired
-    IDAOPlanetSeed daoPlanetSeed;
-    @Autowired
-    BatimentService batimentService;
+    private final IDAOPlanetSeed daoPlanetSeed;
+    private final BatimentService batimentService;
+
+    public PlanetSeedService(IDAOPlanetSeed daoPlanetSeed, BatimentService batimentService) {
+        this.daoPlanetSeed = daoPlanetSeed;
+        this.batimentService = batimentService;
+    }
 
     public PlanetSeed getById(Integer id) throws Exception {
         if (id == null) {
@@ -45,8 +47,10 @@ public class PlanetSeedService implements IService<PlanetSeed, Integer> {
     }
 
     public void delete(PlanetSeed planeteSeed) {
-        for (Batiment batiment : planeteSeed.getBatiments()) {
-            batimentService.delete(batiment);
+        if (planeteSeed.getBatiments() != null) {
+            for (Batiment batiment : planeteSeed.getBatiments()) {
+                batimentService.delete(batiment);
+            }
         }
         daoPlanetSeed.delete(planeteSeed);
     }

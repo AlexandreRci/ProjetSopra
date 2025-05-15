@@ -19,7 +19,7 @@ import space.model.Espece;
 import space.rest.request.EspeceRequest;
 import space.service.EspeceService;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,16 +38,15 @@ class EspeceRestControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(applicationContext)
                 .build();
-        Map<Biome, Double> biomesMap = new HashMap<>();
+        biomesMap = new EnumMap<>(Biome.class);
         biomesMap.put(Biome.Plaine, 1.0);
         biomesMap.put(Biome.Foret, 0.75);
         biomesMap.put(Biome.Desertique, 0.5);
         biomesMap.put(Biome.Ocean, 0.25);
-        this.biomesMap = biomesMap;
     }
 
 
@@ -116,7 +115,7 @@ class EspeceRestControllerTest {
     void update() throws Exception {
         Espece espece1 = new Espece("Espece A", biomesMap);
         int id = especeService.create(espece1).getId();
-        Map<Biome, Double> biomesMap2 = new HashMap<>();
+        Map<Biome, Double> biomesMap2 = new EnumMap<>(Biome.class);
         biomesMap2.put(Biome.Plaine, 0.5);
         biomesMap2.put(Biome.Foret, 0.75);
         biomesMap2.put(Biome.Desertique, 0.5);

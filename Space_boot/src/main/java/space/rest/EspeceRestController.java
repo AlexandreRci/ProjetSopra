@@ -46,7 +46,7 @@ public class EspeceRestController {
 
     @PutMapping("/{id}")
     public Espece update(@RequestBody EspeceRequest especeRequest, @PathVariable Integer id) {
-        if (id != especeRequest.getId() || !this.especeService.existsById(id)) {
+        if (!id.equals(especeRequest.getId()) || !this.especeService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

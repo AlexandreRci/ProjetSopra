@@ -68,10 +68,6 @@ public class CompteRequest {
         this.name = name;
     }
 
-    public enum CompteType {
-        ADMIN, UTILISATEUR
-    }
-
     @Override
     public String toString() {
         return "CompteRequest{" +
@@ -81,5 +77,9 @@ public class CompteRequest {
                 ", compteType=" + compteType +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public enum CompteType {
+        ADMIN, UTILISATEUR
     }
 }

@@ -35,7 +35,7 @@ class BatimentRestControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(applicationContext)
                 .build();
@@ -119,6 +119,9 @@ class BatimentRestControllerTest {
 
         // Convert the BatimentRequest object to a JSON string
         String jsonRequest = objectMapper.writeValueAsString(batimentRequest);
+
+        System.out.println(jsonRequest);
+        System.out.println(id);
 
 
         this.mockMvc.perform(MockMvcRequestBuilders.put("/batiment/" + id)

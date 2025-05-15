@@ -1,6 +1,5 @@
 package space.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,10 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/partie")
 public class PartieRestController {
-    @Autowired
-    private PartieService partieService;
-    @Autowired
-    private JoueurService joueurService;
+    private final PartieService partieService;
+    private final JoueurService joueurService;
+
+    public PartieRestController(PartieService partieService, JoueurService joueurService) {
+        this.partieService = partieService;
+        this.joueurService = joueurService;
+    }
 
     @GetMapping("")
     public List<PartieResponse> getAll() {
@@ -56,7 +58,7 @@ public class PartieRestController {
 
     @PutMapping("/{id}")
     public PartieResponse update(@RequestBody PartieRequest partieRequest, @PathVariable Integer id) {
-        if (id != partieRequest.getId() || !this.partieService.existsById(id)) {
+        if (!id.equals(partieRequest.getId()) || !this.partieService.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
         }
 

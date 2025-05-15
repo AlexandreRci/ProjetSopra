@@ -1,7 +1,6 @@
 package space.service;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.dao.IDAOPartie;
 import space.model.Joueur;
@@ -13,12 +12,15 @@ import java.util.List;
 @Service
 @Transactional
 public class PartieService implements IService<Partie, Integer> {
-    @Autowired
-    IDAOPartie daoPartie;
-    @Autowired
-    JoueurService joueurService;
-    @Autowired
-    PlanetSeedService planetSeedService;
+    private final IDAOPartie daoPartie;
+    private final JoueurService joueurService;
+    private final PlanetSeedService planetSeedService;
+
+    public PartieService(IDAOPartie daoPartie, JoueurService joueurService, PlanetSeedService planetSeedService) {
+        this.daoPartie = daoPartie;
+        this.joueurService = joueurService;
+        this.planetSeedService = planetSeedService;
+    }
 
     public Partie getById(Integer id) throws Exception {
         if (id == null) {
