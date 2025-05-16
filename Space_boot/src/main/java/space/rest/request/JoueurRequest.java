@@ -14,6 +14,7 @@ public class JoueurRequest {
     private Integer idPartie;
     private Integer idEspece;
     private List<Integer> idPlanetSeeds;
+    private List<Integer> idUtilisateurs;
 
     public static Joueur convert(JoueurRequest joueurRequest) {
         Joueur joueur = new Joueur();
@@ -48,6 +49,15 @@ public class JoueurRequest {
                 planetSeeds.add(planetSeed);
             }
             joueur.setPlanetSeeds(planetSeeds);
+        }
+        if (joueurRequest.getIdUtilisateurs() != null && !joueurRequest.getIdUtilisateurs().isEmpty()) {
+            List<Utilisateur> utilisateurs = new ArrayList<>();
+            for (Integer idUtilisateur : joueurRequest.getIdUtilisateurs()) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setId(idUtilisateur);
+                utilisateurs.add(utilisateur);
+            }
+            joueur.setUtilisateurs(utilisateurs);
         }
         return joueur;
     }
@@ -98,6 +108,14 @@ public class JoueurRequest {
 
     public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
         this.idPlanetSeeds = idPlanetSeeds;
+    }
+
+    public List<Integer> getIdUtilisateurs() {
+        return idUtilisateurs;
+    }
+
+    public void setIdUtilisateurs(List<Integer> idUtilisateurs) {
+        this.idUtilisateurs = idUtilisateurs;
     }
 
 }

@@ -50,17 +50,19 @@ export class SeConnecterComponent implements OnInit {
           const userId = response.getId;
           const userUsername = request.username;
 
-          // console.log(request);
-          // console.log(response);
-          // console.log(role);
-          // console.log(userId);
-          // console.log(response.token);
+          // console.log('[menu-partie.component]',request);
+          // console.log('[menu-partie.component]',response);
+          // console.log('[menu-partie.component]',role);
+          // console.log('[menu-partie.component]',userId);
+          // console.log('[menu-partie.component]',response.token);
+          // console.log('[menu-partie.component]',userUsername);
 
           if (role === 'ROLE_ADMIN') {
             this.router.navigate(['/menuAdmin']);
           } else if (role === 'ROLE_UTILISATEUR') {
             //this.router.navigate(['/menuPartie']);
             // this.router.navigate(['/menuPartie',userId]);
+            
             this.router.navigate(['/menuPartie',userUsername]);
           } else {
             this.isError = true;

@@ -5,6 +5,9 @@ import { JoueurService } from '../joueur.service';
 import { CompteService } from '../compte.service';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Joueur } from '../joueur';
+import { PlanetSeed } from '../planet-seed';
+import { Partie } from '../partie';
 
 @Component({
   selector: 'app-menu-partie',
@@ -13,7 +16,8 @@ import { of } from 'rxjs';
   styleUrls: ['./menu-partie.component.css']
 })
 export class MenuPartieComponent {
-  currentPartieId: number | null = null;
+  partieData = new Partie  (0 , 1, 1, 1,  [],  "Debut");
+  joueurData = new Joueur (1,1);
 
   constructor(
     private partieService: PartieService,
@@ -22,30 +26,44 @@ export class MenuPartieComponent {
     private router: Router
   ) {}
 
-  createNewPartie() {
-    // Supposons que vous avez un moyen de récupérer l'ID de l'utilisateur connecté
-    const userId = 1052; // Remplacez par l'ID de l'utilisateur connecté
+  //Met le code pour créer le joueur ici
 
-    this.partieService.checkExistingPartie(userId).pipe(
+  
+
+
+  createNewPartie() {
+    // const userId = 1052; //l'ID de l'utilisateur connecté INUTILE c'est les joueurs qui sont liée aux partie par l'utilisateur/
+    // Donc avant de créer une partie, je dois d'abord créer un joueur
+
+  // const joueurBDD = this.joueurService.createJoueur(this.joueurData);
+  // console.log('[menu-partie.component] vérification création joueur', joueurBDD);
+  this.joueurService.createJoueur(this.joueurData).pipe(
+    switchMap(createdJoueur => {
+      console.log('[menu-partie.component] Joueur créé avec succès', createdJoueur);
+
+      // Optionnel : ajouter le joueur à la partie si nécessaire
+      // this.partieData.joueurs = [createdJoueur]; ← à activer si ton backend gère ça
+
+      return this.partieService.getById(createdJoueur.id);
+    }),  
+    // this.partieService.getById(this.joueurData.id).pipe(
       switchMap(existingPartie => {
-        if (existingPartie) {
-          // Si une partie existe déjà, redirigez l'utilisateur vers cette partie
-          console.log('Partie existante trouvée', existingPartie);
-          this.currentPartieId = existingPartie.id; // Stockez l'ID de la partie actuelle
-          this.router.navigate(['/ecranJeu'], { state: { partie: existingPartie } });
-          return of(null); // Retourne un observable vide pour compléter la chaîne
+        if (existingPartie != null) {
+          // Si une partie existe déjà, redirection de l'utilisateur vers cette partie
+          console.log('[menu-partie.component] Partie existante trouvée on update', existingPartie);
+          return this.partieService.updatePartie(existingPartie.id, this.partieData);
         } else {
-          // Si aucune partie n'existe, créez une nouvelle partie
-          const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, joueurs: [], planetSeeds: [], statut: "Debut" };
-          return this.partieService.createPartie(partieData);
+          // Si aucune partie n'existe, création d'une nouvelle partie
+          console.log('[menu-partie.component] Partie existante non trouvée on create', existingPartie);
+          return this.partieService.createPartie(this.partieData);
         }
       })
     ).subscribe(
       response => {
+        console.log('Partie créée', response);
         if (response) {
-          console.log('Partie créée', response);
-          this.currentPartieId = response.id; // Stockez l'ID de la partie actuelle
-          this.router.navigate(['/ecranJeu'], { state: { partie: response } });
+          // On balance la partie dans ecranJeu avec l'id de la partie en question
+          this.router.navigate(['/ecranJeu', response.id], { state: { partie: response } });
         }
       },
       error => {

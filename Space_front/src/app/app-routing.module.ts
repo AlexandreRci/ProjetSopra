@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'creationCompte', component: CreationCompteComponent },
   { path: 'menuPartie/:username', component: MenuPartieComponent },
   // { path: 'ecranJeu', component: EcranJeuComponent },
-  { path: 'ecranJeu', component: EcranJeuComponent },
+  { path: 'ecranJeu/:id', component: EcranJeuComponent },
   { path: 'menuAdmin', component: MenuAdminComponent },
 
   { path: 'menuAdmin/parties', component: PartieComponent },

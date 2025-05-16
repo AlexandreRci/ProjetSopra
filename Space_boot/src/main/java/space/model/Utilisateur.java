@@ -10,6 +10,7 @@ public class Utilisateur extends Compte {
 
     @Column(nullable = false)
     protected String name;
+    
 
 
     public Utilisateur() {

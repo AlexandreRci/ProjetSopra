@@ -26,6 +26,8 @@ public class Joueur {
     private Espece espece;
     @OneToMany(mappedBy = "joueur")
     private List<PlanetSeed> planetSeeds;
+    @ManyToOne
+    private List<Utilisateur> utilisateurs;
 
 
     public Joueur() {
@@ -104,6 +106,15 @@ public class Joueur {
 
     public void setPlanetSeeds(List<PlanetSeed> planetSeeds) {
         this.planetSeeds = planetSeeds;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
     }
 
     @Override
