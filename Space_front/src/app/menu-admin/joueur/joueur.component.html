@@ -1,1 +1,62 @@
-<p>joueur works!</p>
+<div class="joueur-container">
+  <h2 class="section-title">Gestion des joueurs</h2>
+
+  <form [formGroup]="joueurForm" (ngSubmit)="addOrEditJoueur()" class="form-grid">
+    <!-- Position -->
+    <div class="form-group">
+      <label>Position</label>
+      <input type="number" formControlName="position" min="0" class="form-input" />
+      <div class="error-message" *ngIf="joueurForm.get('position')?.hasError('min') && joueurForm.get('position')?.touched">
+        La position doit être un nombre positif
+      </div>
+    </div>
+
+    <!-- Partie -->
+    <div class="form-group">
+      <label>Partie</label>
+      <select formControlName="idPartie" class="form-input">
+        <option *ngFor="let partie of parties$ | async" [value]="partie.id">Partie {{ partie.id }}</option>
+      </select>
+    </div>
+
+    <!-- Espèce -->
+    <div class="form-group">
+      <label>Espèce</label>
+      <select formControlName="idEspece" class="form-input">
+        <option *ngFor="let espece of especes$ | async" [value]="espece.id">{{ espece.nom }}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="joueurForm.invalid" class="btn-save">
+      {{ editingJoueur ? 'Modifier' : 'Créer' }} le Joueur
+    </button>
+  </form>
+
+  <table class="joueur-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Position</th>
+        <th>ID Partie</th>
+        <th>ID Espèce</th>
+        <th>Possessions</th>
+        <th>PlanetSeeds</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let joueur of joueurs$ | async">
+        <td>{{ joueur.id }}</td>
+        <td>{{ joueur.position }}</td>
+        <td>{{ joueur.idPartie }}</td>
+        <td>{{ joueur.idEspece }}</td>
+        <td>{{ joueur.idPossessions.join(', ') }}</td>
+        <td>{{ joueur.idPlanetSeeds.join(', ') }}</td>
+        <td>
+          <button (click)="editJoueur(joueur)" class="btn-action edit">Modifier</button>
+          <button (click)="deleteJoueur(joueur)" class="btn-action delete">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -4,6 +4,7 @@ export class Partie {
         private _currentPosition: number,
         private _nbTour: number,
         private _nbJoueur: number,
+        public _joueurs: number[],
         private _planetSeeds: number[],
         private _statut: string
     ) {}
@@ -46,6 +47,14 @@ export class Partie {
 
     set planetSeeds(value: number[]) {
         this._planetSeeds = value;
+    }
+
+    get joueurs(): number[] {
+        return this._joueurs;
+    }
+
+    set joueurs(value: number[]) {
+        this.joueurs = value;
     }
 
     get statut(): string {

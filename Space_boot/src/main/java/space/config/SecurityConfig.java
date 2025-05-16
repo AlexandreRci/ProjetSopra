@@ -29,8 +29,10 @@ public class SecurityConfig {
 
         // Autorisations sur URLs
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/**").permitAll();
-            auth.requestMatchers("/connexion").permitAll();
+            auth
+                    .requestMatchers("/connexion", "/compte", "/compte/**").permitAll() // Autorisé sans token
+                    .requestMatchers("/api/admin/**").hasRole("ADMIN") // 👈 REST API des admins
+                    .anyRequest().authenticated(); // Tout le reste nécessite un token JWT valide
         });
 
         http.csrf(c -> c.ignoringRequestMatchers("/**"));
