@@ -27,7 +27,8 @@ public class Joueur {
     @OneToMany(mappedBy = "joueur")
     private List<PlanetSeed> planetSeeds;
     @ManyToOne
-    private List<Utilisateur> utilisateurs;
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    private Utilisateur utilisateur;
 
 
     public Joueur() {
@@ -108,13 +109,13 @@ public class Joueur {
         this.planetSeeds = planetSeeds;
     }
 
-    public List<Utilisateur> getUtilisateurs() {
-        return utilisateurs;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
 
-    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
-        this.utilisateurs = utilisateurs;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     @Override
