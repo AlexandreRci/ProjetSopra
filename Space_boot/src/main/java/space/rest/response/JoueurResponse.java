@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import space.model.Joueur;
 import space.model.PlanetSeed;
 import space.model.Possession;
+import space.model.Utilisateur;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class JoueurResponse {
     private Integer idPartie;
     private Integer idEspece;
     private List<Integer> idPlanetSeeds;
+    private List<Integer> idUtilisateurs;
 
     public static JoueurResponse convert(Joueur joueur) {
         JoueurResponse joueurResponse = new JoueurResponse();
@@ -39,6 +41,12 @@ public class JoueurResponse {
             joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
 
         }
+
+        if (joueur.getUtilisateurs() != null && !joueur.getUtilisateurs().isEmpty()) {
+            joueurResponse.setIdUtilisateurs(joueur.getUtilisateurs().stream().map(Utilisateur::getId).toList());
+
+        }
+        
 
         return joueurResponse;
     }
@@ -91,5 +99,12 @@ public class JoueurResponse {
         this.idPlanetSeeds = idPlanetSeeds;
     }
 
+    public List<Integer> getIdUtilisateurs() {
+        return idUtilisateurs;
+    }
+
+    public void setIdUtilisateurs(List<Integer> idUtilisateurs) {
+        this.idUtilisateurs = idUtilisateurs;
+    }
 
 }

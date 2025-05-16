@@ -12,6 +12,28 @@ export class JoueurService {
   constructor(private http: HttpClient) { }
 
   public createJoueur(joueur: Joueur): Observable<Joueur> {
+    console.log('[joueur.service] le joueur a bien été crée', joueur);
     return this.http.post<Joueur>(this.API_URL, joueur);
   }
+
+
+  public getAll(): Observable<Joueur[]> {
+    return this.http.get<Joueur[]>(this.API_URL);
+  }
+
+  public getById(id: number): Observable<Joueur> {
+    return this.http.get<Joueur>(`${this.API_URL}/${id}`);
+  }  
+
+  public updateJoueur(joueur: Joueur): Observable<Joueur> {
+    if (!joueur.id) {
+      throw new Error('L\'ID du joueur est requis pour la mise à jour');
+    }
+    return this.http.put<Joueur>(`${this.API_URL}/${joueur.id}`, joueur);
+  }
+
+  public deleteJoueur(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
+  }  
+
 }

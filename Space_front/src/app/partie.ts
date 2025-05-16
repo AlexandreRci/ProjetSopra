@@ -8,7 +8,7 @@ export class Partie {
         private _statut: string
     ) {}
 
-    get id(): number {
+    get id(): number{
         return this._id;
     }
 
