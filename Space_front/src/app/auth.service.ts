@@ -43,4 +43,5 @@ export class AuthService {
   public getRole(): string | null {
     return localStorage.getItem('role');
   }
+
 }

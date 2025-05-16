@@ -47,11 +47,21 @@ export class SeConnecterComponent implements OnInit {
       next: (response: CompteResponse) => {
         if (response.token) {
           const role = this.service.getRole();
+          const userId = response.getId;
+          const userUsername = request.username;
+
+          // console.log(request);
+          // console.log(response);
+          // console.log(role);
+          // console.log(userId);
+          // console.log(response.token);
 
           if (role === 'ROLE_ADMIN') {
             this.router.navigate(['/menuAdmin']);
           } else if (role === 'ROLE_UTILISATEUR') {
-            this.router.navigate(['/menuPartie']);
+            //this.router.navigate(['/menuPartie']);
+            // this.router.navigate(['/menuPartie',userId]);
+            this.router.navigate(['/menuPartie',userUsername]);
           } else {
             this.isError = true;
             console.error('Rôle non reconnu:', role);

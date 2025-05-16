@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'ecranAccueil', component: EcranAccueilComponent },
   { path: 'seConnecter', component: SeConnecterComponent },
   { path: 'creationCompte', component: CreationCompteComponent },
-  { path: 'menuPartie', component: MenuPartieComponent },
+  { path: 'menuPartie/:username', component: MenuPartieComponent },
+  // { path: 'ecranJeu', component: EcranJeuComponent },
   { path: 'ecranJeu', component: EcranJeuComponent },
   { path: 'menuAdmin', component: MenuAdminComponent },
 

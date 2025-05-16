@@ -8,5 +8,10 @@ export class CompteResponse {
     public getToken(): string {
       return this.token;
     }
+
+    public getId(): number {
+      return this.id;
+    }
+
   }
   

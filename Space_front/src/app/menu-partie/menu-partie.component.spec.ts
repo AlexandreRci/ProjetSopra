@@ -1,23 +1,42 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnDestroy  } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PartieService } from '../partie.service';
+import { tap } from 'rxjs/operators';
+import { JoueurService } from '../joueur.service';
+import { CompteService } from '../compte.service';
+import { Joueur } from '../joueur';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs'; 
 
-import { MenuPartieComponent } from './menu-partie.component';
+@Component({
+  selector: 'app-menu-partie',
+  standalone: false,
+  templateUrl: './menu-partie.component.html',
+  styleUrl: './menu-partie.component.css'
+})
 
-describe('MenuPartieComponent', () => {
-  let component: MenuPartieComponent;
-  let fixture: ComponentFixture<MenuPartieComponent>;
+export class MenuPartieComponent  {
+  currentPartieId: number | null = null;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MenuPartieComponent]
-    })
-    .compileComponents();
+  constructor(private partieService: PartieService,private joueurService: JoueurService,private compteService: CompteService, private router: Router) {}
 
-    fixture = TestBed.createComponent(MenuPartieComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    createNewPartie() {
+    const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, joueurs: [], planetSeeds: [], statut: "Debut" };
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    this.partieService.createPartie(partieData).pipe(
+      tap(response => {
+        console.log('Partie créée', response);
+        this.router.navigate(['/ecranJeu']);
+      })
+    ).subscribe(
+      () => {},
+      error => {
+        console.error('Erreur création partie', error);
+      }
+    );
+  }
+
+}
+
+

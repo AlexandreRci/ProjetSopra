@@ -4,6 +4,8 @@ import { Compte } from '../compte';
 import { tap } from 'rxjs/operators';
 import { Planete } from '../planete';
 import { PlanetSeed } from '../planet-seed';
+import { PartieService } from '../partie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecran-jeu',
@@ -11,16 +13,17 @@ import { PlanetSeed } from '../planet-seed';
   templateUrl: './ecran-jeu.component.html',
   styleUrl: './ecran-jeu.component.css'
 })
-export class EcranJeuComponent {
+export class EcranJeuComponent  implements OnInit, OnDestroy  {
   isAnimated = true; // Contrôle l'état de l'animation planet-display
   expandedPlanetIndex: number | null = null; // Variable permettant de selectionner quel planete est "déplié"
   timeLeft: number = 90; // Temps restant en secondes
   timer: any;
   username: string = '';
   planetSeeds: PlanetSeed[] = [];
+  currentPartieId: number | null = null; // Stockez l'ID de la partie actuelle
 
 
-  constructor(private compteService: CompteService) {}
+  constructor(private compteService: CompteService, private partieService: PartieService,private router: Router) {}
 
 
   ngOnInit() {
@@ -28,11 +31,32 @@ export class EcranJeuComponent {
     // this.getUsername();
     // console.log('Username:', this.username);
     this.generateRandomPlanetSeeds();
+
+    const navigationState = this.router.getCurrentNavigation()?.extras.state;
+    if (navigationState && navigationState['partie']) {
+      this.currentPartieId = navigationState['partie'].id;
+    }
   }
+
+  // ngOnDestroy() {
+  //   this.clearTimer();
+  // }
 
   ngOnDestroy() {
     this.clearTimer();
+    if (this.currentPartieId) {
+      this.partieService.deletePartie(this.currentPartieId).subscribe(
+        () => {
+          console.log('Partie supprimée', this.currentPartieId);
+        },
+        (        error: any) => {
+          console.error('Erreur suppression partie', error);
+        }
+      );
+    }
   }
+
+
 
   startTimer() {
     this.timer = setInterval(() => {
