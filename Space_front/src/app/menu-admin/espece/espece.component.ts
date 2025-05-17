@@ -39,26 +39,28 @@ export class EspeceComponent implements OnInit, OnDestroy {
   }
 
   public addOrEditEspece(): void {
-    this.unsub('save');
+  this.unsub('save');
 
-    const biomes: { [key: string]: number } = {};
-    this.biomes.forEach(b => {
-      biomes[b] = this.especeForm.value[b];
+  const biomes: { [key: string]: number } = {};
+  this.biomes.forEach(b => {
+    biomes[b] = this.especeForm.value[b];
+  });
+
+  const especePayload = {
+    id: this.editingEspece?.id,
+    nom: this.especeForm.value.nom,
+    biomes
+  };
+
+  this.subscriptions['save'] = this.service.save(especePayload)
+    .subscribe(() => {
+      this.service.refresh();
+      this.especeForm.reset();
+      this.editingEspece = null;
     });
+}
 
-    const especePayload = {
-      id: this.editingEspece?.id,
-      nom: this.especeForm.value.nom,
-      biomes
-    };
 
-    this.subscriptions['save'] = this.service.save(especePayload)
-      .subscribe(() => {
-        this.service.refresh();
-        this.especeForm.reset();
-        this.editingEspece = null;
-      });
-  }
 
   public editEspece(espece: Espece): void {
     this.editingEspece = espece;

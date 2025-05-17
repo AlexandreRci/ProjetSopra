@@ -1,1 +1,82 @@
-<p>planet-seed works!</p>
+<div class="planet-seed-container">
+  <h2 class="section-title">Gestion des PlanetSeed</h2>
+
+  <form [formGroup]="planetSeedForm" (ngSubmit)="addOrEditPlanetSeed()" class="form-grid">
+    <div class="form-group">
+      <label>Population</label>
+      <input type="number" formControlName="population" class="form-input" min="0" />
+    </div>
+
+    <div class="form-group">
+      <label>Armes</label>
+      <input type="number" formControlName="arme" class="form-input" min="0" />
+    </div>
+
+    <div class="form-group">
+      <label>Minerai restant</label>
+      <input type="number" formControlName="mineraiRestant" class="form-input" min="0" />
+    </div>
+
+    <div class="form-group">
+      <label>Planète</label>
+      <select formControlName="idPlanete" class="form-input">
+        <option *ngFor="let planete of planeteList$ | async" [value]="planete.id">
+          {{ planete.nom }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Joueur</label>
+      <select formControlName="idJoueur" class="form-input">
+        <option [value]="null">Aucun</option>
+        <option *ngFor="let joueur of joueurList$ | async" [value]="joueur.id">
+          Joueur #{{ joueur.id }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Batiments (0 à 4)</label>
+      <select formControlName="idBatiments" class="form-input" multiple>
+        <option *ngFor="let batiment of batimentList$ | async" [value]="batiment.id">
+          {{ batiment.nom }} ({{ batiment.taille }})
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="planetSeedForm.invalid" class="btn-save">
+      {{ editingPlanetSeed ? 'Modifier' : 'Créer' }} PlanetSeed
+    </button>
+  </form>
+
+  <table class="planet-seed-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Population</th>
+        <th>Arme</th>
+        <th>Minerai</th>
+        <th>Planète</th>
+        <th>Joueur</th>
+        <th>Batiments</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ps of planetSeeds$ | async">
+        <td>{{ ps.id }}</td>
+        <td>{{ ps.population }}</td>
+        <td>{{ ps.arme }}</td>
+        <td>{{ ps.mineraiRestant }}</td>
+        <td>{{ ps.idPlanete }}</td>
+        <td>{{ ps.idJoueur ?? '—' }}</td>
+        <td>{{ ps.idBatiments.join(', ') || '—' }}</td>
+        <td>
+          <button (click)="editPlanetSeed(ps)" class="btn-action edit">Modifier</button>
+          <button (click)="deletePlanetSeed(ps)" class="btn-action delete">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

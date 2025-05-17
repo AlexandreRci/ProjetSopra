@@ -1,1 +1,49 @@
-<p>possession works!</p>
+<div class="possession-container">
+  <h2 class="section-title">Gestion des possessions</h2>
+
+  <form [formGroup]="possessionForm" (ngSubmit)="addOrEditPossession()" class="form-grid">
+    <div class="form-group">
+      <label>Quantité</label>
+      <input type="number" formControlName="quantite" class="form-input" min="0" />
+      <div class="error-message" *ngIf="possessionForm.get('quantite')?.hasError('min') && possessionForm.get('quantite')?.touched">
+        La quantité doit être positive
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Ressource</label>
+      <select formControlName="ressource" class="form-input">
+        <option value="Arme">Arme</option>
+        <option value="Nourriture">Nourriture</option>
+        <option value="Energie">Énergie</option>
+        <option value="Argent">Argent</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="possessionForm.invalid" class="btn-save">
+      {{ editingPossession ? 'Modifier' : 'Créer' }} la possession
+    </button>
+  </form>
+
+  <table class="possession-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Quantité</th>
+        <th>Ressource</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let possession of possessions$ | async">
+        <td>{{ possession.id }}</td>
+        <td>{{ possession.quantite }}</td>
+        <td>{{ possession.ressource }}</td>
+        <td>
+          <button (click)="editPossession(possession)" class="btn-action edit">Modifier</button>
+          <button (click)="deletePossession(possession)" class="btn-action delete">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
