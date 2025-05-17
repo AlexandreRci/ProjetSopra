@@ -2,15 +2,15 @@ package space.rest.request;
 
 public class StartRequest {
 
-    private Integer UserId;
+    private Integer userId;
     private Integer idEspece;
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public Integer getIdEspece() {

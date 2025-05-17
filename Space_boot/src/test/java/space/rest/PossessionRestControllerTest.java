@@ -34,7 +34,7 @@ class PossessionRestControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(applicationContext)
                 .build();
