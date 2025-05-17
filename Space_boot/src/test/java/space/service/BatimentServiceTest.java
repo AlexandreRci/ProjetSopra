@@ -26,7 +26,7 @@ class BatimentServiceTest {
 
     @Test
     void getById() throws Exception {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         Integer id = idaoBatiment.save(batiment1).getId();
 
         Batiment batimentDB = batimentService.getById(id);
@@ -35,14 +35,14 @@ class BatimentServiceTest {
         assertNull(batimentService.getById(9999));
         assertThrows(Exception.class, () -> batimentService.getById(null));
         assertEquals("Caserne", batimentDB.getNom());
-        assertEquals(Taille.Petit, batimentDB.getTaille());
-        assertEquals(Ressource.Arme, batimentDB.getRessource());
+        assertEquals(Taille.PETIT, batimentDB.getTaille());
+        assertEquals(Ressource.ARME, batimentDB.getRessource());
     }
 
     @Test
     void getAll() {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
-        Batiment batiment2 = new Batiment("Ferme", Taille.Moyen, Ressource.Nourriture);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
+        Batiment batiment2 = new Batiment("Ferme", Taille.MOYEN, Ressource.NOURRITURE);
         idaoBatiment.save(batiment1);
         idaoBatiment.save(batiment2);
 
@@ -53,7 +53,7 @@ class BatimentServiceTest {
 
     @Test
     void create() {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
 
         Integer id = batimentService.create(batiment1).getId();
         Batiment batimentDB = idaoBatiment.findById(id).orElse(null);
@@ -64,11 +64,11 @@ class BatimentServiceTest {
 
     @Test
     void update() {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         batiment1 = idaoBatiment.save(batiment1);
         batiment1.setNom("Ferme");
-        batiment1.setTaille(Taille.Moyen);
-        batiment1.setRessource(Ressource.Nourriture);
+        batiment1.setTaille(Taille.MOYEN);
+        batiment1.setRessource(Ressource.NOURRITURE);
 
         Batiment batimentDB = batimentService.update(batiment1);
 
@@ -77,7 +77,7 @@ class BatimentServiceTest {
 
     @Test
     void deleteById() {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         Integer id = batimentService.create(batiment1).getId();
 
         batimentService.deleteById(id);
@@ -87,7 +87,7 @@ class BatimentServiceTest {
 
     @Test
     void delete() {
-        Batiment batiment = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         batiment = batimentService.create(batiment);
 
         batimentService.delete(batiment);
@@ -97,7 +97,7 @@ class BatimentServiceTest {
 
     @Test
     void existsById() {
-        Batiment batiment = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         int id = idaoBatiment.save(batiment).getId();
 
         boolean exist = batimentService.existsById(id);

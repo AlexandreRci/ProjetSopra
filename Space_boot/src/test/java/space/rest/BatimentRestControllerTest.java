@@ -43,8 +43,8 @@ class BatimentRestControllerTest {
 
     @Test
     void getAll() throws Exception {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
-        Batiment batiment2 = new Batiment("Ferme", Taille.Moyen, Ressource.Nourriture);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
+        Batiment batiment2 = new Batiment("Ferme", Taille.MOYEN, Ressource.NOURRITURE);
         batimentService.create(batiment1);
         batimentService.create(batiment2);
 
@@ -61,7 +61,7 @@ class BatimentRestControllerTest {
 
     @Test
     void getById() throws Exception {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         int id = batimentService.create(batiment1).getId();
 
         // ACT et ASSERT
@@ -70,16 +70,16 @@ class BatimentRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Caserne"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Petit.toString()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.PETIT.toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.ARME.toString()));
     }
 
     @Test
     void create() throws Exception {
         BatimentRequest batimentRequest = new BatimentRequest();
         batimentRequest.setNom("Caserne");
-        batimentRequest.setTaille(Taille.Moyen);
-        batimentRequest.setRessource(Ressource.Arme);
+        batimentRequest.setTaille(Taille.MOYEN);
+        batimentRequest.setRessource(Ressource.ARME);
 
         // Convert the BatimentRequest object to a JSON string
         String jsonRequest = objectMapper.writeValueAsString(batimentRequest);
@@ -92,8 +92,8 @@ class BatimentRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Caserne"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Moyen.toString()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.MOYEN.toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.ARME.toString()))
                 .andReturn();
 
         JsonNode jsonNode = objectMapper.readTree(result.getResponse().getContentAsString());
@@ -101,21 +101,21 @@ class BatimentRestControllerTest {
         assertTrue(batimentService.existsById(id));
         Batiment batiment = batimentService.getById(id);
         assertEquals("Caserne", batiment.getNom());
-        assertEquals(Taille.Moyen, batiment.getTaille());
-        assertEquals(Ressource.Arme, batiment.getRessource());
+        assertEquals(Taille.MOYEN, batiment.getTaille());
+        assertEquals(Ressource.ARME, batiment.getRessource());
 
     }
 
     @Test
     void update() throws Exception {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         int id = batimentService.create(batiment1).getId();
 
         BatimentRequest batimentRequest = new BatimentRequest();
         batimentRequest.setId(id);
         batimentRequest.setNom("Ferme");
-        batimentRequest.setTaille(Taille.Moyen);
-        batimentRequest.setRessource(Ressource.Nourriture);
+        batimentRequest.setTaille(Taille.MOYEN);
+        batimentRequest.setRessource(Ressource.NOURRITURE);
 
         // Convert the BatimentRequest object to a JSON string
         String jsonRequest = objectMapper.writeValueAsString(batimentRequest);
@@ -131,18 +131,18 @@ class BatimentRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(id))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Ferme"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.Moyen.toString()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Nourriture.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.taille").value(Taille.MOYEN.toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.NOURRITURE.toString()));
 
         Batiment batiment = batimentService.getById(id);
         assertEquals("Ferme", batiment.getNom());
-        assertEquals(Taille.Moyen, batiment.getTaille());
-        assertEquals(Ressource.Nourriture, batiment.getRessource());
+        assertEquals(Taille.MOYEN, batiment.getTaille());
+        assertEquals(Ressource.NOURRITURE, batiment.getRessource());
     }
 
     @Test
     void delete() throws Exception {
-        Batiment batiment1 = new Batiment("Caserne", Taille.Petit, Ressource.Arme);
+        Batiment batiment1 = new Batiment("Caserne", Taille.PETIT, Ressource.ARME);
         int id = batimentService.create(batiment1).getId();
 
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/batiment/" + id)

@@ -45,9 +45,9 @@ class PlaneteRestControllerTest {
                 .webAppContextSetup(applicationContext)
                 .build();
         listeBiome1 = new ArrayList<>();
-        listeBiome1.add(Biome.Desertique);
-        listeBiome1.add(Biome.Plaine);
-        listeBiome1.add(Biome.Ocean);
+        listeBiome1.add(Biome.DESERTIQUE);
+        listeBiome1.add(Biome.PLAINE);
+        listeBiome1.add(Biome.OCEAN);
         planete1 = new Planete("Planete A", 125, listeBiome1);
 
 
@@ -56,9 +56,9 @@ class PlaneteRestControllerTest {
     @Test
     void getAll() throws Exception {
         List<Biome> listeBiome2 = new ArrayList<>();
-        listeBiome2.add(Biome.Foret);
-        listeBiome2.add(Biome.Plaine);
-        listeBiome2.add(Biome.Desertique);
+        listeBiome2.add(Biome.FORET);
+        listeBiome2.add(Biome.PLAINE);
+        listeBiome2.add(Biome.DESERTIQUE);
         Planete planete2 = new Planete("Planete B", 247, listeBiome2);
 
         planeteService.create(planete1);
@@ -82,7 +82,7 @@ class PlaneteRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Planete A"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes[0]").value("Desertique"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes[0]").value("DESERTIQUE"));
     }
 
     @Test
@@ -120,9 +120,9 @@ class PlaneteRestControllerTest {
         int id = planeteService.create(planete1).getId();
 
         List<Biome> listeBiome2 = new ArrayList<>();
-        listeBiome2.add(Biome.Foret);
-        listeBiome2.add(Biome.Plaine);
-        listeBiome2.add(Biome.Desertique);
+        listeBiome2.add(Biome.FORET);
+        listeBiome2.add(Biome.PLAINE);
+        listeBiome2.add(Biome.DESERTIQUE);
 
         PlaneteRequest planeteRequest = new PlaneteRequest();
         planeteRequest.setId(id);
