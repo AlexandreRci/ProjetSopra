@@ -22,22 +22,22 @@ public class JwtUtil {
 
     // Génération du jeton pour un utilisateur
     public static String generate(Authentication authentication) {
-    SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
-    Date now = new Date();
+        SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
+        Date now = new Date();
 
-    String role = authentication.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .findFirst()
-            .orElse("ROLE_UTILISATEUR"); // Par défaut
+        String role = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("ROLE_UTILISATEUR"); // Par défaut
 
-    return Jwts.builder()
-            .setSubject(authentication.getName()) // username
-            .claim("role", role) // 👈 On ajoute le rôle ici
-            .setIssuedAt(now)
-            .setExpiration(new Date(now.getTime() + JWT_EXPIRATION))
-            .signWith(key)
-            .compact();
-}
+        return Jwts.builder()
+                .setSubject(authentication.getName()) // username
+                .claim("role", role) // 👈 On ajoute le rôle ici
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + JWT_EXPIRATION))
+                .signWith(key)
+                .compact();
+    }
 
     public static Optional<String> getUsername(String token) {
         if (token == null || token.isBlank()) {
