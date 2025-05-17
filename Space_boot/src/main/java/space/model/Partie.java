@@ -48,6 +48,14 @@ public class Partie {
         this.statut = statut;
     }
 
+    public void addJoueur(Joueur joueur) {
+        if (this.joueurs == null) {
+            this.joueurs = new java.util.ArrayList<>();
+        }
+        this.joueurs.add(joueur);
+        joueur.setPartie(this);
+    }
+
 
     public Integer getId() {
         return id;
