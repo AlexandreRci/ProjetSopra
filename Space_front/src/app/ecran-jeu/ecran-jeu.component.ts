@@ -6,6 +6,7 @@ import { Planete } from '../planete';
 import { PlanetSeed } from '../planet-seed';
 import { PartieService } from '../partie.service';
 import { Router } from '@angular/router';
+import { PossessionService } from '../possession.service';
 
 @Component({
   selector: 'app-ecran-jeu',
@@ -23,7 +24,7 @@ export class EcranJeuComponent  implements OnInit, OnDestroy  {
   currentPartieId: number | null = null; // Stockez l'ID de la partie actuelle
 
 
-  constructor(private compteService: CompteService, private partieService: PartieService,private router: Router) {}
+  constructor(private compteService: CompteService, private partieService: PartieService, private possessionService: PossessionService,private router: Router) {}
 
 
   ngOnInit() {
@@ -38,9 +39,7 @@ export class EcranJeuComponent  implements OnInit, OnDestroy  {
     }
   }
 
-  // ngOnDestroy() {
-  //   this.clearTimer();
-  // }
+  
 
   ngOnDestroy() {
     this.clearTimer();
@@ -56,7 +55,13 @@ export class EcranJeuComponent  implements OnInit, OnDestroy  {
     }
   }
 
+  createPossession(){
+    const possessionJoueur = {
+      quantite = 800,
+      ressource = Arme
+    }
 
+  }
 
   startTimer() {
     this.timer = setInterval(() => {
@@ -79,20 +84,6 @@ export class EcranJeuComponent  implements OnInit, OnDestroy  {
     const remainingSeconds: number = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
-
-// getUsername() {
-//   this.compteService.getCompte(1052).pipe(
-//     tap((compte: Compte) => {
-//       this.username = compte.getUsername();
-//       console.log('Username:', this.username);
-//     })
-//   ).subscribe(
-//     () => {},
-//     error => {
-//       console.error('Erreur lors de la récupération du compte', error);
-//     }
-//   );
-// }
 
     generateRandomPlanetSeeds() {
     // Liste de planètes codées en dur

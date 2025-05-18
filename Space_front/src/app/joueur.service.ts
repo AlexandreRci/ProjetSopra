@@ -11,11 +11,10 @@ export class JoueurService {
 
   constructor(private http: HttpClient) { }
 
-  public createJoueur(joueur: Joueur): Observable<Joueur> {
+  public save(joueur: any): Observable<any> {
     console.log('[joueur.service] le joueur a bien été crée', joueur);
-    return this.http.post<Joueur>(this.API_URL, joueur);
+    return this.http.post(this.API_URL, joueur);
   }
-
 
   public getAll(): Observable<Joueur[]> {
     return this.http.get<Joueur[]>(this.API_URL);

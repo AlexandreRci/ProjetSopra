@@ -23,13 +23,13 @@ export class PartieService {
     switchMap(() => this.http.get<Partie[]>(this.API_URL))
   );
 }
-  public createPartie(partie: Partie) {
-    console.log('[partie.service.ts] Info sur partie depuis createPartie()',partie);
+  public save(partie: any):Observable<Partie> {
+    console.log('[partie.service.ts] Info sur partie depuis save()',partie);
     if (partie.id) {
       console.log('[partie.service.ts] Info sur partie depuis createPartie() passage dans le if AVEC id',partie);
       return this.http.put<Partie>(`${this.API_URL}/${partie.id}`, partie);
     }
-    console.log('[partie.service.ts] Info sur partie depuis createPartie() passage dans le if SANS id',partie);
+    console.log('[partie.service.ts] Info sur partie depuis save() passage dans le if SANS id',partie);
     return this.http.post<Partie>(this.API_URL, partie);
   }
 
@@ -54,7 +54,6 @@ public updatePartie(id: number, newData: Partial<Partie>) {
         newData.currentPosition ?? existingPartie.currentPosition,
         newData.nbTour ?? existingPartie.nbTour,
         newData.nbJoueur ?? existingPartie.nbJoueur,
-        newData.planetSeeds ?? existingPartie.planetSeeds,
         newData.statut ?? existingPartie.statut
       );
 

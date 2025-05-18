@@ -2,9 +2,8 @@ export class Partie {
     constructor(
         private _id: number,
         private _currentPosition: number,
-        private _nbTour: number,
         private _nbJoueur: number,
-        private _planetSeeds: number[],
+        private _nbTour: number,
         private _statut: string
     ) {}
 
@@ -24,28 +23,20 @@ export class Partie {
         this._currentPosition = value;
     }
 
-    get nbTour(): number {
-        return this._nbTour;
-    }
-
-    set nbTour(value: number) {
-        this._nbTour = value;
-    }
-
     get nbJoueur(): number {
         return this._nbJoueur;
     }
 
     set nbJoueur(value: number) {
         this._nbJoueur = value;
+    }    
+
+    get nbTour(): number {
+        return this._nbTour;
     }
 
-    get planetSeeds(): number[] {
-        return this._planetSeeds;
-    }
-
-    set planetSeeds(value: number[]) {
-        this._planetSeeds = value;
+    set nbTour(value: number) {
+        this._nbTour = value;
     }
 
     get statut(): string {
