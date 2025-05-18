@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CompteService } from '../compte.service';
+import { CompteService } from '../../service/compte.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Compte } from '../compte';
+import { Compte } from '../../class/compte';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 

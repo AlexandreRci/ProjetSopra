@@ -6,7 +6,7 @@ html {
   width: 100%;
   height: 100%;
 
-  background-image: url('../../assets/images/planets-solar-system.jpg');
+  background-image: url('../../../assets/images/planets-solar-system.jpg');
   background-size: cover;
   /* Ajuste la taille de l'image pour couvrir tout l'élément */
   background-repeat: no-repeat;

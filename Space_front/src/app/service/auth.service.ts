@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { CompteRequest } from './compte-request';
-import { CompteResponse } from './compte-response';
+import { CompteRequest } from '../class/request/compte-request';
+import { CompteResponse } from '../class/response/compte-response';
 import { jwtDecode } from 'jwt-decode';
 
 export interface JwtPayload {

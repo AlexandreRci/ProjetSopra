@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PartieService } from '../partie.service';
+import { PartieService } from '../../service/partie.service';
 import { tap } from 'rxjs/operators';
-import { JoueurService } from '../joueur.service';
-import { CompteService } from '../compte.service';
-import { Joueur } from '../joueur';
+import { JoueurService } from '../../service/joueur.service';
+import { CompteService } from '../../service/compte.service';
+import { Joueur } from '../../class/joueur';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,7 @@ export class MenuPartieComponent {
   constructor(private partieService: PartieService,private joueurService: JoueurService,private compteService: CompteService, private router: Router) {}
 
     createNewPartie() {
-    const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, joueurs: [], planetSeeds: [], statut: "Debut" };
+    const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, statut: "DEBUT" };
 
     this.partieService.save(partieData).pipe(
       tap(response => {

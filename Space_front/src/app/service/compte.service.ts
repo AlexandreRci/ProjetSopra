@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, startWith, switchMap } from 'rxjs';
-import { Compte } from './compte';
+import { Subject, Observable  } from 'rxjs';
+import { Compte } from '../class/compte';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CompteService {
   private refresh$: Subject<void> = new Subject<void>();
   private API_URL: string = `http://localhost:8080/compte`;

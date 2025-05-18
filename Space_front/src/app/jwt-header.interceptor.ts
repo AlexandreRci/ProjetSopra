@@ -1,12 +1,12 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 import { inject } from '@angular/core';
 
 export const jwtHeaderInterceptor: HttpInterceptorFn = (req, next) => {
   const authService: AuthService = inject(AuthService);
 
   console.log('URL appelée par interceptor:',req.url);
-  
+
   // Exclus certaines requêtes de l'ajout de l'en-tête d'autorisation
   // On fait return dès maintenant car pas intéressant de récupérer le token
   if (req.url.endsWith("/connexion")){

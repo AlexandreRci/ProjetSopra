@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { CompteRequest } from '../compte-request';
-import { CompteResponse } from '../compte-response';
+import { AuthService } from '../../service/auth.service';
+import { CompteRequest } from '../../class/request/compte-request';
+import { CompteResponse } from '../../class/response/compte-response';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

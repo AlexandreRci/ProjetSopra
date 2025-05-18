@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Partie } from '../class/partie'
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { Partie } from './partie';
 
 @Injectable({
   providedIn: 'root'
