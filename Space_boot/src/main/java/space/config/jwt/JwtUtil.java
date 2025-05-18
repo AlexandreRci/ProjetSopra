@@ -21,7 +21,7 @@ public class JwtUtil {
     }
 
     // Génération du jeton pour un utilisateur
-    public static String generate(Authentication authentication) {
+    public static String generate(Authentication authentication, int id) {
     SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
     Date now = new Date();
 
@@ -33,6 +33,7 @@ public class JwtUtil {
     return Jwts.builder()
             .setSubject(authentication.getName()) // username
             .claim("role", role) // 👈 On ajoute le rôle ici
+            .claim("id", id)
             .setIssuedAt(now)
             .setExpiration(new Date(now.getTime() + JWT_EXPIRATION))
             .signWith(key)

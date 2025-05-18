@@ -92,7 +92,8 @@ export class MenuPartieComponent {
         const token = this.authService.token;
         const payload = jwtDecode<JwtPayload>(token);
         console.log('Payload JWT:', payload);
-        const idUtilisateur = parseInt(payload.sub); 
+        // const idUtilisateur = parseInt(payload.sub); 
+        const idUtilisateur = payload.id;
 
         const nouveauJoueur = {
           position: 1,
@@ -100,8 +101,8 @@ export class MenuPartieComponent {
           // idPartie: 3,
           idPartie: partie.id, 
           // idPartie: (partie as any).id, // Solution roue de secours à éviter normalement
-          idUtilisateur: 52
-          // idUtilisateur: idUtilisateur
+          // idUtilisateur: 52
+          idUtilisateur: idUtilisateur
           
         };
       this.joueurService.save(nouveauJoueur).subscribe({

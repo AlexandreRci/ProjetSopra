@@ -10,6 +10,7 @@ export interface JwtPayload {
   role: string;
   exp: number;
   iat: number;
+  id: number;
 }
 
 @Injectable({
