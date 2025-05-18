@@ -2,6 +2,7 @@ package space.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,6 +31,8 @@ public class Partie {
 
 
     public Partie() {
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
     }
 
     public Partie(Integer id, int currentPosition, int nbTour, int nbJoueur,
@@ -39,6 +42,8 @@ public class Partie {
         this.nbTour = nbTour;
         this.nbJoueur = nbJoueur;
         this.statut = statut;
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
     }
 
     public Partie(int currentPosition, int nbTour, int nbJoueur, Statut statut) {
@@ -46,6 +51,8 @@ public class Partie {
         this.nbTour = nbTour;
         this.nbJoueur = nbJoueur;
         this.statut = statut;
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
     }
 
     public void addJoueur(Joueur joueur) {
