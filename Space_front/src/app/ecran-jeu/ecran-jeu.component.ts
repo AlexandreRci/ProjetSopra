@@ -55,13 +55,13 @@ export class EcranJeuComponent  implements OnInit, OnDestroy  {
     }
   }
 
-  createPossession(){
-    const possessionJoueur = {
-      quantite = 800,
-      ressource = Arme
-    }
+  // createPossession(){
+  //   const possessionJoueur = {
+  //     quantite = 800,
+  //     ressource = Arme
+  //   }
 
-  }
+  // }
 
   startTimer() {
     this.timer = setInterval(() => {
