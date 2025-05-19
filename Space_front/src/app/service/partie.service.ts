@@ -24,6 +24,7 @@ export class PartieService {
   }
 
   public save(partie: any): Observable<Partie> {
+    console.log('partie', partie);
     if (partie.id) {
       return this.http.put<Partie>(`${this.API_URL}/${partie.id}`, partie);
     }

@@ -26,7 +26,7 @@ public class Partie {
             inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
     private List<PlanetSeed> planetSeeds;
     @Enumerated(EnumType.STRING)
-    @Column(name = "statut", columnDefinition = "ENUM('Debut','EnCours','Fini')", nullable = false)
+    @Column(name = "statut", columnDefinition = "ENUM('DEBUT','EN_COURS','FINI')", nullable = false)
     private Statut statut;
 
 
