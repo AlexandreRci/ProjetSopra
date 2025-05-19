@@ -25,6 +25,13 @@ export class PartieService {
     );
   }
 
+  public findAllByIdUser(idUser: number): Observable<Partie[]> {
+    return this.refresh$.pipe(
+      startWith(null),
+      switchMap(() => this.http.get<Partie[]>(`${this.API_URL}/user/${idUser}`))
+    );
+  }
+
   public save(partie: any): Observable<Partie> {
     console.log('partie', partie);
     if (partie.id) {
@@ -39,5 +46,9 @@ export class PartieService {
 
   public start(startRequest: StartRequest): Observable<StartResponse> {
     return this.http.post<StartResponse>(`${this.API_URL}/start`, startRequest);
+  }
+
+  public findById(id: number): Observable<Partie> {
+    return this.http.get<Partie>(`${this.API_URL}/${id}`);
   }
 }

@@ -1,9 +1,17 @@
-import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompteService } from '../../service/compte.service';
-import { Compte } from '../../class/compte';
-import { tap } from 'rxjs/operators';
 import { Planete } from '../../class/planete';
 import { PlanetSeed } from '../../class/planet-seed';
+import { ActivatedRoute } from '@angular/router';
+import { PartieService } from '../../service/partie.service';
+import { PlanetSeedService } from '../../service/planet-seed.service';
+import { Partie } from '../../class/partie';
+import { PlaneteService } from '../../service/planete.service';
+import { JoueurService } from '../../service/joueur.service';
+import { first, forkJoin, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { PossessionService } from '../../service/possession.service';
+import { Joueur } from '../../class/joueur';
+import { Possession } from '../../class/possession';
 
 @Component({
   selector: 'app-ecran-jeu',
@@ -17,21 +25,98 @@ export class EcranJeuComponent {
   timeLeft: number = 90; // Temps restant en secondes
   timer: any;
   username: string = '';
-  planetSeeds: PlanetSeed[] = [];
+  partieId: number = 0;
+  playerId: number = 0;
+  energie: number = 0;
+  arme: number = 0;
+  nourriture: number = 0;
+  argent: number = 0;
+  partie!: Partie;
+  joueur!: Joueur;
+  posessions: Possession[] = [];
+  public planetSeeds: any[] = [];
+  public planets: any[] = [];
+  private destroy$ = new Subject<void>();
+  
 
 
-  constructor(private compteService: CompteService) {}
+  constructor(
+    private partieService: PartieService,
+    private route: ActivatedRoute,
+    private planetSeedService: PlanetSeedService,
+    private planeteService: PlaneteService,
+    private joueurService: JoueurService,
+    private compteService: CompteService,
+    private possessionService: PossessionService
+  ) { }
 
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.startTimer();
-    // this.getUsername();
-    // console.log('Username:', this.username);
-    this.generateRandomPlanetSeeds();
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      this.partieId = +params['idPartie'];
+      this.playerId = +params['idPlayer']; // Convert to number
+
+      this.joueurService.findById(this.playerId).pipe(
+        first(),
+        takeUntil(this.destroy$),
+        switchMap(joueur => {
+          this.joueur = joueur;
+          console.log(joueur);
+          const possessionRequests = joueur.idPossessions.map(idpossession =>
+            this.possessionService.findById(idpossession).pipe(first())
+          );
+          return forkJoin(possessionRequests);
+        }
+        )).subscribe(possessions => {this.posessions = possessions;
+          console.log(possessions);
+        });
+        console.log(this.posessions);
+        for (const possession of this.posessions) {
+          if (possession.ressource === 'ENERGIE') {
+            this.energie = possession.quantite;
+          } else if (possession.ressource === 'ARME') {
+            this.arme = possession.quantite;
+          } else if (possession.ressource === 'NOURRITURE') {
+            this.nourriture = possession.quantite;
+          } else if (possession.ressource === 'ARGENT') {
+            this.argent = possession.quantite;
+          }
+        }
+
+      this.partieService.findById(this.partieId).pipe(
+        first(),
+        takeUntil(this.destroy$),
+        switchMap(partie => {
+          this.partie = partie;
+          console.log(partie);
+
+          const planetSeedRequests = partie.planetSeeds.map(idplanetSeed =>
+            this.planetSeedService.getById(idplanetSeed).pipe(first())
+          );
+
+          return forkJoin(planetSeedRequests);
+        })
+      ).subscribe(planetSeeds => {
+        this.planetSeeds = planetSeeds;
+
+        const planetRequests = planetSeeds.map(planetSeed =>
+          this.planeteService.findById(planetSeed.idPlanete).pipe(first())
+        );
+
+        forkJoin(planetRequests).subscribe(planets => {
+          this.planets = planets;
+        });
+      });
+    });
   }
+
+
 
   ngOnDestroy() {
     this.clearTimer();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   startTimer() {
@@ -56,65 +141,6 @@ export class EcranJeuComponent {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
 
-// getUsername() {
-//   this.compteService.getCompte(1052).pipe(
-//     tap((compte: Compte) => {
-//       this.username = compte.getUsername();
-//       console.log('Username:', this.username);
-//     })
-//   ).subscribe(
-//     () => {},
-//     error => {
-//       console.error('Erreur lors de la récupération du compte', error);
-//     }
-//   );
-// }
-
-    generateRandomPlanetSeeds() {
-    // Liste de planètes codées en dur
-    const hardcodedPlanetes: Planete[] = [
-      new Planete(1, 'Planète 1', 100, ['Desertique', 'Plaine', 'Ocean']),
-      new Planete(2, 'Planète 2', 150, ['Foret', 'Desertique', 'Ocean']),
-      new Planete(3, 'Planète 3', 200, ['Ocean', 'Desertique','Plaine']),
-      new Planete(4, 'Planète 4', 250, ['Plaine', 'Foret', 'Foret']),
-      new Planete(5, 'Planète 5', 300, ['Desertique', 'Ocean', 'Foret']),
-      new Planete(6, 'Planète 6', 350, ['Desertique', 'Plaine', 'Plaine']),
-      new Planete(7, 'Planète 7', 400, ['Foret', 'Desertique', 'Foret']),
-      new Planete(8, 'Planète 8', 450, ['Ocean', 'Desertique', 'Ocean']),
-      new Planete(9, 'Planète 9', 500, ['Plaine', 'Foret', 'Plaine']),
-      new Planete(10, 'Planète 10', 550, ['Desertique', 'Ocean', 'Desertique']),
-      new Planete(11, 'Planète 11', 600, ['Desertique', 'Plaine', 'Foret']),
-      new Planete(12, 'Planète 12', 650, ['Foret', 'Desertique', 'Desertique'])
-    ];
-
-    // Mélanger la liste de planètes
-    const shuffledPlanetes = this.shuffleArray(hardcodedPlanetes);
-
-    // Sélectionner 8 planètes aléatoires
-    this.planetSeeds = shuffledPlanetes.slice(0, 8).map(planete => {
-      return new PlanetSeed(
-        planete.id,
-        Math.floor(Math.random() * 500) + 1,
-        Math.floor(Math.random() * 100) + 1,
-        Math.floor(Math.random() * 100) + 1,
-        null, // Ici c'est Joueur
-        planete,
-        [], // Ici c'est une liste de Batiment
-        null
-      );
-    });
-  }
-
-  shuffleArray(array: any[]): any[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-
-
   togglePlanetInfo(index: number) {
     // Fonction permettant de déplier les informations d'une planete
     // En vrai, on peut le réduire à un ternaire mais c'est plus lisible pour moi
@@ -124,7 +150,5 @@ export class EcranJeuComponent {
       this.expandedPlanetIndex = index;
     }
   }
-
-
-
+  
 }

@@ -33,4 +33,8 @@ export class PossessionService {
   public delete(possession: Possession): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${possession.id}`);
   }
+
+  public findById(id: number): Observable<Possession> {
+    return this.http.get<Possession>(`${this.API_URL}/${id}`);
+  }
 }

@@ -25,9 +25,12 @@
     </div>
 
     <div class="files" *ngIf="!startChoiceEspece">
-      <button class="button" (click)="createNewPartie()">Nouvelle partie</button>
-      <button class="button"> Nouvelle partie</button>
-      <button class="button"> Nouvelle partie</button>
+      <button class="button" (click)="createNewPartie()" *ngIf="partieList.length===0">Nouvelle partie</button>
+      <button class="button" (click)="joinPartie(0)" *ngIf="partieList.length>0">Join partie</button>
+      <button class="button" (click)="createNewPartie()" *ngIf="partieList.length<2"> Nouvelle partie</button>
+      <button class="button" (click)="joinPartie(1)" *ngIf="partieList.length>1">Join partie</button>
+      <button class="button" (click)="createNewPartie()" *ngIf="partieList.length<3"> Nouvelle partie</button>
+      <button class="button" (click)="joinPartie(2)" *ngIf="partieList.length===3">Join partie</button>
     </div>
 
     <div class="online-files" *ngIf="!startChoiceEspece">

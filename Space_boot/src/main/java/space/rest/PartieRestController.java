@@ -46,6 +46,12 @@ public class PartieRestController {
 
         return parties.stream().map(PartieResponse::convert).toList();
     }
+    @GetMapping("/user/{id}")
+    public List<PartieResponse> getByUser(@PathVariable Integer id) {
+        List<Partie> parties = this.partieService.getByUser(id);
+
+        return parties.stream().map(PartieResponse::convert).toList();
+    }
 
     @GetMapping("/{id}")
     public PartieResponse getById(@PathVariable Integer id) {
@@ -84,10 +90,10 @@ public class PartieRestController {
      * @return HttpStatus
      */
     @PostMapping("/start")
-    public StartResponse start(@RequestBody StartRequest startRequest) {
+    public StartResponse start(@RequestBody StartRequest startRequest) throws Exception {
         Random random = new Random();
 
-        Partie partie = new Partie(0, 1, 4, Statut.DEBUT);
+        Partie partie = new Partie(1, 1, 1, Statut.DEBUT);
         //To be modified as maybe unnecessary (check if adding a joueur to a partie also adds it into the partie list
         // of player
         Utilisateur utilisateur = null;
@@ -136,15 +142,18 @@ public class PartieRestController {
                     0,
                     random.nextInt(20, 50),
                     null,
-                    planete
+                    planete,
+                    partie
             );
             planetSeedService.create(planetSeed);
+            partie.getPlanetSeeds().add(planetSeed);
         }
-        // Attribute a randow planet to the player
-        List<PlanetSeed> planetSeeds = planetSeedService.getAll();
-        PlanetSeed planetSeed = planetSeeds.get(random.nextInt(planetSeeds.size()));
+
+        // Attribute a random planet to the player
+        PlanetSeed planetSeed = partie.getPlanetSeeds().get(random.nextInt(partie.getPlanetSeeds().size()));
         planetSeed.setJoueur(joueur);
         planetSeedService.update(planetSeed);
+        partieService.update(partie);
 
         StartResponse startResponse = new StartResponse();
         startResponse.setIdGame(partie.getId());

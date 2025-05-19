@@ -32,21 +32,31 @@ public class PlanetSeed {
     public PlanetSeed() {
     }
 
-    public PlanetSeed(Integer id, int population, int arme, int mineraiRestant, Joueur joueur, Planete planete) {
+    public PlanetSeed(
+            Integer id,
+            int population,
+            int arme,
+            int mineraiRestant,
+            Joueur joueur,
+            Planete planete,
+            Partie partie
+    ) {
         this.id = id;
         this.population = population;
         this.arme = arme;
         this.mineraiRestant = mineraiRestant;
         this.joueur = joueur;
         this.planete = planete;
+        this.partie = partie;
     }
 
-    public PlanetSeed(int population, int arme, int mineraiRestant, Joueur joueur, Planete planete) {
+    public PlanetSeed(int population, int arme, int mineraiRestant, Joueur joueur, Planete planete, Partie partie) {
         this.population = population;
         this.arme = arme;
         this.mineraiRestant = mineraiRestant;
         this.joueur = joueur;
         this.planete = planete;
+        this.partie = partie;
     }
 
     public Integer getId() {

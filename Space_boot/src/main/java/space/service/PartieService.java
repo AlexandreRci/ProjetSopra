@@ -33,6 +33,10 @@ public class PartieService implements IService<Partie, Integer> {
         return daoPartie.findAll();
     }
 
+    public List<Partie> getByUser(Integer id) {
+        return daoPartie.findByUtilisateur(id);
+    }
+
     public Partie create(Partie partie) {
         return daoPartie.save(partie);
     }
@@ -62,4 +66,6 @@ public class PartieService implements IService<Partie, Integer> {
     public boolean existsById(Integer id) {
         return daoPartie.existsById(id);
     }
+
+
 }
