@@ -78,3 +78,33 @@
   color: white;
   cursor: pointer;
 }
+
+.btn-action.edit {
+  background-color: #ffc107;
+}
+
+.btn-action.delete {
+  background-color: #dc3545;
+}
+
+.btn-action:hover {
+  opacity: 0.85;
+}
+
+select,
+option {
+  background-color: rgba(0, 0, 0, 0.7); /* fond sombre pour la liste */
+  color: white;                         /* texte en blanc */
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 16px;
+  font-family: 'Orbitron';
+  appearance: none; /* enlève le style natif du navigateur */
+}
+
+select:focus {
+  outline: none;
+  border-color: orange;
+  background-color: rgba(0, 0, 0, 0.9);
+}
