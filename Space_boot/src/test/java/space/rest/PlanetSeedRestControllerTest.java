@@ -56,19 +56,19 @@ class PlanetSeedRestControllerTest {
                 .webAppContextSetup(applicationContext)
                 .build();
 
-        partie1 = new Partie(1, 5, 2, Statut.Debut);
+        partie1 = new Partie(1, 5, 2, Statut.DEBUT);
 
         partie1 = partieService.create(partie1);
 
         Map<Biome, Double> biomesMap = new EnumMap<>(Biome.class);
-        biomesMap.put(Biome.Plaine, 1.0);
-        biomesMap.put(Biome.Foret, 0.75);
-        biomesMap.put(Biome.Desertique, 0.5);
-        biomesMap.put(Biome.Ocean, 0.25);
+        biomesMap.put(Biome.PLAINE, 1.0);
+        biomesMap.put(Biome.FORET, 0.75);
+        biomesMap.put(Biome.DESERTIQUE, 0.5);
+        biomesMap.put(Biome.OCEAN, 0.25);
 
         Espece espece1 = new Espece("Espece A", biomesMap);
         espece1 = especeService.create(espece1);
-        joueur1 = new Joueur(1, new ArrayList<>(), partie1, espece1);
+        joueur1 = new Joueur(1, partie1, espece1);
         joueur1 = joueurService.create(joueur1);
         planete1 = new Planete("Planete A", 125, new ArrayList<>());
         planete1 = planeteService.create(planete1);
@@ -78,14 +78,14 @@ class PlanetSeedRestControllerTest {
     @Test
     void getAll() throws Exception {
         Map<Biome, Double> biomesMap = new EnumMap<>(Biome.class);
-        biomesMap.put(Biome.Plaine, 1.0);
-        biomesMap.put(Biome.Foret, 0.75);
-        biomesMap.put(Biome.Desertique, 0.5);
-        biomesMap.put(Biome.Ocean, 0.25);
+        biomesMap.put(Biome.PLAINE, 1.0);
+        biomesMap.put(Biome.FORET, 0.75);
+        biomesMap.put(Biome.DESERTIQUE, 0.5);
+        biomesMap.put(Biome.OCEAN, 0.25);
 
         Espece espece2 = new Espece("Espece N", biomesMap);
         espece2 = especeService.create(espece2);
-        Joueur joueur2 = new Joueur(2, new ArrayList<>(), partie1, espece2);
+        Joueur joueur2 = new Joueur(2, partie1, espece2);
         joueur2 = joueurService.create(joueur2);
         Planete planete2 = new Planete("Planete B", 125, new ArrayList<>());
         planete2 = planeteService.create(planete2);
@@ -161,7 +161,7 @@ class PlanetSeedRestControllerTest {
         Map<Biome, Double> biomesMap = new EnumMap<>(Biome.class);
         Espece espece2 = new Espece("Espece N", biomesMap);
         espece2 = especeService.create(espece2);
-        Joueur joueur2 = new Joueur(2, new ArrayList<>(), partie1, espece2);
+        Joueur joueur2 = new Joueur(2, partie1, espece2);
         int idJoueur = joueurService.create(joueur2).getId();
         Planete planete2 = new Planete("Planete B", 125, new ArrayList<>());
         int idPlanete = planeteService.create(planete2).getId();

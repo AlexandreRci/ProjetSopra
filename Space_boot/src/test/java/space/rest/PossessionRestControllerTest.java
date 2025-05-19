@@ -34,7 +34,7 @@ class PossessionRestControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(applicationContext)
                 .build();
@@ -42,8 +42,8 @@ class PossessionRestControllerTest {
 
     @Test
     void getAll() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
-        Possession possession2 = new Possession(404, Ressource.Nourriture);
+        Possession possession1 = new Possession(202, Ressource.ARME);
+        Possession possession2 = new Possession(404, Ressource.NOURRITURE);
         possessionService.create(possession1);
         possessionService.create(possession2);
 
@@ -60,7 +60,7 @@ class PossessionRestControllerTest {
 
     @Test
     void getById() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
+        Possession possession1 = new Possession(202, Ressource.ARME);
         int id = possessionService.create(possession1).getId();
 
         // ACT et ASSERT
@@ -69,14 +69,14 @@ class PossessionRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(202))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.ARME.toString()));
     }
 
     @Test
     void create() throws Exception {
         PossessionRequest possessionRequest = new PossessionRequest();
         possessionRequest.setQuantite(202);
-        possessionRequest.setRessource(Ressource.Arme);
+        possessionRequest.setRessource(Ressource.ARME);
 
         // Convert the PossessionRequest object to a JSON string
         String jsonRequest = objectMapper.writeValueAsString(possessionRequest);
@@ -89,7 +89,7 @@ class PossessionRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(202))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Arme.toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.ARME.toString()))
                 .andReturn();
 
         JsonNode jsonNode = objectMapper.readTree(result.getResponse().getContentAsString());
@@ -97,19 +97,19 @@ class PossessionRestControllerTest {
         assertTrue(possessionService.existsById(id));
         Possession possession = possessionService.getById(id);
         assertEquals(202, possession.getQuantite());
-        assertEquals(Ressource.Arme, possession.getRessource());
+        assertEquals(Ressource.ARME, possession.getRessource());
 
     }
 
     @Test
     void update() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
+        Possession possession1 = new Possession(202, Ressource.ARME);
         int id = possessionService.create(possession1).getId();
 
         PossessionRequest possessionRequest = new PossessionRequest();
         possessionRequest.setId(id);
         possessionRequest.setQuantite(404);
-        possessionRequest.setRessource(Ressource.Nourriture);
+        possessionRequest.setRessource(Ressource.NOURRITURE);
 
         // Convert the PossessionRequest object to a JSON string
         String jsonRequest = objectMapper.writeValueAsString(possessionRequest);
@@ -122,16 +122,16 @@ class PossessionRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(id))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.quantite").value(404))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.Nourriture.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.ressource").value(Ressource.NOURRITURE.toString()));
 
         Possession possession = possessionService.getById(id);
         assertEquals(404, possession.getQuantite());
-        assertEquals(Ressource.Nourriture, possession.getRessource());
+        assertEquals(Ressource.NOURRITURE, possession.getRessource());
     }
 
     @Test
     void delete() throws Exception {
-        Possession possession1 = new Possession(202, Ressource.Arme);
+        Possession possession1 = new Possession(202, Ressource.ARME);
         int id = possessionService.create(possession1).getId();
 
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/possession/" + id)

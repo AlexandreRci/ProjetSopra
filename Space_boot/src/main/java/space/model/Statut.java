@@ -1,6 +1,5 @@
 package space.model;
 
 public enum Statut {
-
-    Debut, EnCours, Fini
+    DEBUT, EN_COURS, FINI
 }

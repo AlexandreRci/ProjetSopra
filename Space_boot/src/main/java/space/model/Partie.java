@@ -2,6 +2,7 @@ package space.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,11 +26,13 @@ public class Partie {
             inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
     private List<PlanetSeed> planetSeeds;
     @Enumerated(EnumType.STRING)
-    @Column(name = "statut", columnDefinition = "ENUM('Debut','EnCours','Fini')", nullable = false)
+    @Column(name = "statut", columnDefinition = "ENUM('DEBUT','EN_COURS','FINI')", nullable = false)
     private Statut statut;
 
 
     public Partie() {
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
     }
 
     public Partie(Integer id, int currentPosition, int nbTour, int nbJoueur,
@@ -39,6 +42,8 @@ public class Partie {
         this.nbTour = nbTour;
         this.nbJoueur = nbJoueur;
         this.statut = statut;
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
     }
 
     public Partie(int currentPosition, int nbTour, int nbJoueur, Statut statut) {
@@ -46,6 +51,16 @@ public class Partie {
         this.nbTour = nbTour;
         this.nbJoueur = nbJoueur;
         this.statut = statut;
+        this.planetSeeds = new ArrayList<>();
+        this.joueurs = new ArrayList<>();
+    }
+
+    public void addJoueur(Joueur joueur) {
+        if (this.joueurs == null) {
+            this.joueurs = new java.util.ArrayList<>();
+        }
+        this.joueurs.add(joueur);
+        joueur.setPartie(this);
     }
 
 

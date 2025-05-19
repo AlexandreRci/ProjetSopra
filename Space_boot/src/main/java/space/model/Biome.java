@@ -1,5 +1,5 @@
 package space.model;
 
 public enum Biome {
-    Plaine, Foret, Ocean, Desertique
+    PLAINE, FORET, OCEAN, DESERTIQUE
 }

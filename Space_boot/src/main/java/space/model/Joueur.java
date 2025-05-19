@@ -39,9 +39,8 @@ public class Joueur {
         this.espece = espece;
     }
 
-    public Joueur(int position, List<Possession> possessions, Partie partie, Espece espece) {
+    public Joueur(int position, Partie partie, Espece espece) {
         this.position = position;
-        this.possessions = possessions;
         this.partie = partie;
         this.espece = espece;
     }
@@ -114,5 +113,14 @@ public class Joueur {
                 ", partie=" + partie.getId() +
                 ", espece=" + espece.getNom() +
                 '}';
+    }
+
+    public Possession searchByRessource(Ressource ressource) {
+        for (Possession possession : possessions) {
+            if (possession.getRessource().equals(ressource)) {
+                return possession;
+            }
+        }
+        return null;
     }
 }

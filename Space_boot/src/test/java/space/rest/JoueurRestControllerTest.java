@@ -51,26 +51,26 @@ class JoueurRestControllerTest {
                 .webAppContextSetup(applicationContext)
                 .build();
 
-        partie1 = new Partie(1, 5, 2, Statut.Debut);
+        partie1 = new Partie(1, 5, 2, Statut.DEBUT);
 
         partie1 = partieService.create(partie1);
 
         biomesMap = new EnumMap<>(Biome.class);
-        biomesMap.put(Biome.Plaine, 1.0);
-        biomesMap.put(Biome.Foret, 0.75);
-        biomesMap.put(Biome.Desertique, 0.5);
-        biomesMap.put(Biome.Ocean, 0.25);
+        biomesMap.put(Biome.PLAINE, 1.0);
+        biomesMap.put(Biome.FORET, 0.75);
+        biomesMap.put(Biome.DESERTIQUE, 0.5);
+        biomesMap.put(Biome.OCEAN, 0.25);
 
         espece1 = new Espece("Espece A", biomesMap);
         espece1 = especeService.create(espece1);
-        joueur = new Joueur(1, null, partie1, espece1);
+        joueur = new Joueur(1, partie1, espece1);
 
     }
 
     @Test
     void getAll() throws Exception {
 
-        Joueur joueur2 = new Joueur(2, null, partie1, espece1);
+        Joueur joueur2 = new Joueur(2, partie1, espece1);
 
         joueurService.create(joueur);
         joueurService.create(joueur2);

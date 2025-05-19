@@ -23,16 +23,20 @@ public class PartieRequest {
 
     public static Partie convert(PartieRequest partieRequest) {
         Partie partie = new Partie();
-        partie.setJoueurs(partieRequest.getJoueurs().stream().map(id -> {
-            Joueur joueur = new Joueur();
-            joueur.setId(id);
-            return joueur;
-        }).toList());
-        partie.setPlanetSeeds(partieRequest.getPlanetSeeds().stream().map(id -> {
-            PlanetSeed planetSeed = new PlanetSeed();
-            planetSeed.setId(id);
-            return planetSeed;
-        }).toList());
+        if (partieRequest.getJoueurs()!= null){
+            partie.setJoueurs(partieRequest.getJoueurs().stream().map(id -> {
+                Joueur joueur = new Joueur();
+                joueur.setId(id);
+                return joueur;
+            }).toList());
+        }
+        if (partieRequest.getPlanetSeeds() != null){
+            partie.setPlanetSeeds(partieRequest.getPlanetSeeds().stream().map(id -> {
+                PlanetSeed planetSeed = new PlanetSeed();
+                planetSeed.setId(id);
+                return planetSeed;
+            }).toList());
+        }
         BeanUtils.copyProperties(partieRequest, partie);
         return partie;
     }

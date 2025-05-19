@@ -35,6 +35,15 @@ public class Espece {
         this.biomes = biomes;
     }
 
+    public Espece(String nom, double ratePlain, double rateForest, double rateOcean, double rateDesert) {
+        this.nom = nom;
+        this.biomes = new EnumMap<>(Biome.class);
+        this.biomes.put(Biome.PLAINE, ratePlain);
+        this.biomes.put(Biome.FORET, rateForest);
+        this.biomes.put(Biome.OCEAN, rateOcean);
+        this.biomes.put(Biome.DESERTIQUE, rateDesert);
+    }
+
 
     public Integer getId() {
         return id;
@@ -69,5 +78,6 @@ public class Espece {
     public String toString() {
         return "Espece [id=" + id + ", nom=" + nom + ", biomes=" + biomes + "]";
     }
+
 
 }

@@ -33,9 +33,9 @@ public class JwtHeaderAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;
-
-        if (authHeader != null) {
-            token = authHeader.substring(7); // On retire "Bearer " qui fait 7 caractères
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            // On retire "Bearer " qui fait 7 caractères
+            token = authHeader.substring(7);
         }
 
         Optional<String> optUsername = JwtUtil.getUsername(token);

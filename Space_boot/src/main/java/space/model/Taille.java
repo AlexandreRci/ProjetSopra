@@ -2,7 +2,7 @@ package space.model;
 
 public enum Taille {
 
-    Petit(5, 10), Moyen(10, 30), Grand(20, 50);
+    PETIT(5, 10), MOYEN(10, 30), GRAND(20, 50);
 
     private final int prix;
     private final int gain;

@@ -43,10 +43,10 @@ class EspeceRestControllerTest {
                 .webAppContextSetup(applicationContext)
                 .build();
         biomesMap = new EnumMap<>(Biome.class);
-        biomesMap.put(Biome.Plaine, 1.0);
-        biomesMap.put(Biome.Foret, 0.75);
-        biomesMap.put(Biome.Desertique, 0.5);
-        biomesMap.put(Biome.Ocean, 0.25);
+        biomesMap.put(Biome.PLAINE, 1.0);
+        biomesMap.put(Biome.FORET, 0.75);
+        biomesMap.put(Biome.DESERTIQUE, 0.5);
+        biomesMap.put(Biome.OCEAN, 0.25);
     }
 
 
@@ -79,7 +79,7 @@ class EspeceRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Espece A"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.Plaine").value(1.0));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.PLAINE").value(1.0));
     }
 
     @Test
@@ -99,7 +99,7 @@ class EspeceRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Espece A"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.Plaine").value(1.0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.PLAINE").value(1.0))
                 .andReturn();
 
         JsonNode jsonNode = objectMapper.readTree(result.getResponse().getContentAsString());
@@ -116,10 +116,10 @@ class EspeceRestControllerTest {
         Espece espece1 = new Espece("Espece A", biomesMap);
         int id = especeService.create(espece1).getId();
         Map<Biome, Double> biomesMap2 = new EnumMap<>(Biome.class);
-        biomesMap2.put(Biome.Plaine, 0.5);
-        biomesMap2.put(Biome.Foret, 0.75);
-        biomesMap2.put(Biome.Desertique, 0.5);
-        biomesMap2.put(Biome.Ocean, 0.25);
+        biomesMap2.put(Biome.PLAINE, 0.5);
+        biomesMap2.put(Biome.FORET, 0.75);
+        biomesMap2.put(Biome.DESERTIQUE, 0.5);
+        biomesMap2.put(Biome.OCEAN, 0.25);
 
         EspeceRequest especeRequest = new EspeceRequest();
         especeRequest.setId(id);
@@ -137,7 +137,7 @@ class EspeceRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(id))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Espece B"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.Plaine").value(0.5));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.biomes.PLAINE").value(0.5));
 
 
         Espece espece = especeService.getById(id);

@@ -12,7 +12,7 @@ public class Possession {
     private Integer id;
     private int quantite;
     @Enumerated(EnumType.STRING)
-    @Column(name = "ressource", columnDefinition = "ENUM('Arme','Nourriture','Energie','Argent')", nullable = false)
+    @Column(name = "ressource", columnDefinition = "ENUM('ARME','NOURRITURE','ENERGIE','ARGENT')", nullable = false)
     private Ressource ressource;
 
 

@@ -12,10 +12,10 @@ public class Batiment {
     private String nom;
     //à coder , pas sûr de moi!!!!!
     @Enumerated(EnumType.STRING)
-    @Column(name = "taille", columnDefinition = "ENUM('Petit','Moyen','Grand')", nullable = false)
+    @Column(name = "taille", columnDefinition = "ENUM('PETIT','MOYEN','GRAND')", nullable = false)
     private Taille taille;
     @Enumerated(EnumType.STRING)
-    @Column(name = "ressource", columnDefinition = "ENUM('Arme','Nourriture','Energie','Argent')", nullable = false)
+    @Column(name = "ressource", columnDefinition = "ENUM('ARME','NOURRITURE','ENERGIE','ARGENT')", nullable = false)
     private Ressource ressource;
 
 

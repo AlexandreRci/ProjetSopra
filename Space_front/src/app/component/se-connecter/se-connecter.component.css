@@ -1,0 +1,145 @@
+body,
+html {
+  /*Applique toutes ces modifications entre les balises body et html*/
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  background-image: url('../../../assets/images/planets-solar-system.jpg');
+  background-size: cover;
+  /* Ajuste la taille de l'image pour couvrir tout l'élément */
+  background-repeat: no-repeat;
+  /* Empêche la répétition de l'image */
+  background-position: center;
+  /* Centre l'image dans l'élément */
+}
+
+.background {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  /*  grid-column-gap: 0px;
+grid-row-gap: 0px;*/
+  height: 100vh;
+}
+
+.content {
+  display: grid;
+  grid-column: 2 / 11;
+  /* Colonne de début et de fin */
+  grid-row: 2 /12;
+  justify-items: center;
+  /* C'est lui le plus important*/
+}
+
+app-top-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column: 12 /13;
+  grid-row: 1 /2;
+  align-items: center;
+}
+
+.button {
+  border: 2px solid white;
+  /*Modification du bord des boutons*/
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /*Ajoute des effets de transparence trop cool*/
+  transition: background-color 0.3s;
+
+  color: white;
+  font-size: 18px;
+  font-family: 'Orbitron';
+  cursor: pointer;
+
+  width: 400px;
+  height: 50px;
+  /*Change ke curseur en "index qui montre que c'est clicable"*/
+}
+
+.button:disabled {
+  background-color: #CCCCCC;
+  /* Change background color */
+  opacity: 0.6;
+  /* Make it slightly transparent */
+  cursor: not-allowed;
+  /* Change cursor to indicate it's not clickable */
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: orange;
+}
+
+.input-field {
+  border: 2px solid white;
+  /*Modification du bord des boutons*/
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /*Ajoute des effets de transparence trop cool*/
+  transition: background-color 0.3s;
+
+  color: white;
+  font-size: 18px;
+  font-family: 'Orbitron';
+  cursor: pointer;
+  /*Change ke curseur en "index qui montre que c'est clicable"*/
+
+  text-align: center;
+
+  width: 400px;
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.input-field:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: orange;
+}
+
+.error {
+  color: white;
+}
+
+#FormName {
+  grid-column: 3/10;
+  grid-row: 2;
+  display: flex;
+  /* Use Flexbox to center content inside the button */
+  align-items: center;
+  /* Vertically center content */
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+  font-family: 'Orbitron';
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#inscription {
+  grid-column: 3/10;
+  grid-row: 3/7;
+  justify-items: center;
+  /* C'est lui le plus important*/
+  display: flex;
+  /* Use Flexbox to center content inside the button */
+  flex-direction: column;
+  /* Align items in a column */
+  align-items: center;
+  /* Vertically center content */
+  justify-content: center;
+}
+
+#retour {
+  margin-top: 60px;
+  grid-column: 2/11;
+  grid-row: 10/10;
+}
+
+#submit_button {
+  margin-top: 20px;
+}
