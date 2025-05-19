@@ -15,7 +15,6 @@ public class PlanetSeedResponse {
     private Integer idPlanete;
     private List<Integer> idBatiments;
 
-
     public PlanetSeedResponse() {
         super();
     }
@@ -34,9 +33,14 @@ public class PlanetSeedResponse {
             planetSeedResponse.setIdPlanete(idPlanete);
         }
 
-        if (planetSeed.getBatiments() != null && !planetSeed.getBatiments().isEmpty()) {
-            planetSeedResponse.setIdBatiments(planetSeed.getBatiments().stream().map(Batiment::getId).toList());
-
+        if (planetSeed.getBatiments() != null) {
+            planetSeedResponse.setIdBatiments(
+                    planetSeed.getBatiments().stream()
+                            .filter(b -> b != null && b.getId() != null)
+                            .map(Batiment::getId)
+                            .toList());
+        } else {
+            planetSeedResponse.setIdBatiments(List.of());
         }
 
         return planetSeedResponse;

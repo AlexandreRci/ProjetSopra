@@ -6,9 +6,11 @@ import { PlanetSeed } from '../../../class/planet-seed';
 import { PlaneteService } from '../../../service/planete.service';
 import { JoueurService } from '../../../service/joueur.service';
 import { BatimentService } from '../../../service/batiment.service';
+import { PartieService } from '../../../service/partie.service';
 import { Planete } from '../../../class/planete';
 import { Joueur } from '../../../class/joueur';
 import { Batiment } from '../../../class/batiment';
+import { Partie } from '../../../class/partie';
 
 @Component({
   selector: 'app-planet-seed',
@@ -24,6 +26,7 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
 
   planeteList$!: Observable<Planete[]>;
   joueurList$!: Observable<Joueur[]>;
+  partieList$!: Observable<Partie[]>;
   batimentList$!: Observable<Batiment[]>;
 
   constructor(
@@ -31,8 +34,9 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
     private planetSeedService: PlanetSeedService,
     private planeteService: PlaneteService,
     private joueurService: JoueurService,
+    private partieService: PartieService,
     private batimentService: BatimentService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.planetSeedForm = this.fb.group({
@@ -40,13 +44,19 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
       arme: [0, [Validators.required, Validators.min(0)]],
       mineraiRestant: [0, [Validators.required, Validators.min(0)]],
       idPlanete: [null, Validators.required],
+      idPartie: [null, Validators.required],
       idJoueur: [null],
-      idBatiments: [[]]
+      batiment1: [null],
+      batiment2: [null],
+      batiment3: [null],
+      batiment4: [null]
     });
+
 
     this.planetSeeds$ = this.planetSeedService.findAll();
     this.planeteList$ = this.planeteService.findAll();
     this.joueurList$ = this.joueurService.findAll();
+    this.partieList$ = this.partieService.findAll();
     this.batimentList$ = this.batimentService.findAll();
   }
 
@@ -58,9 +68,24 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
   addOrEditPlanetSeed(): void {
     this.unsub('save');
 
+    const raw = this.planetSeedForm.value;
+
+    const idBatiments: number[] = [
+      raw.batiment1,
+      raw.batiment2,
+      raw.batiment3,
+      raw.batiment4
+    ].filter((id: number | null) => id != null); // Exclut les sélections vides
+
     const payload = {
       id: this.editingPlanetSeed?.id,
-      ...this.planetSeedForm.value
+      population: raw.population,
+      arme: raw.arme,
+      mineraiRestant: raw.mineraiRestant,
+      idPlanete: raw.idPlanete,
+      idJoueur: raw.idJoueur,
+      idPartie: raw.idPartie,
+      idBatiments: idBatiments
     };
 
     this.subscriptions['save'] = this.planetSeedService.save(payload).subscribe(() => {
@@ -70,8 +95,10 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
     });
   }
 
+
   editPlanetSeed(planetSeed: PlanetSeed): void {
     this.editingPlanetSeed = planetSeed;
+    const ids = planetSeed.idBatiments;
 
     this.planetSeedForm.patchValue({
       population: planetSeed.population,
@@ -79,9 +106,14 @@ export class PlanetSeedComponent implements OnInit, OnDestroy {
       mineraiRestant: planetSeed.mineraiRestant,
       idPlanete: planetSeed.idPlanete,
       idJoueur: planetSeed.idJoueur,
-      idBatiments: planetSeed.idBatiments
+      idPartie: planetSeed.idPartie,
+      batiment1: ids[0] ?? null,
+      batiment2: ids[1] ?? null,
+      batiment3: ids[2] ?? null,
+      batiment4: ids[3] ?? null
     });
   }
+
 
   deletePlanetSeed(planetSeed: PlanetSeed): void {
     this.unsub('delete');

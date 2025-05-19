@@ -37,13 +37,55 @@
     </div>
 
     <div class="form-group">
-      <label>Batiments (0 à 4)</label>
-      <select formControlName="idBatiments" class="form-input" multiple>
-        <option *ngFor="let batiment of batimentList$ | async" [value]="batiment.id">
-          {{ batiment.nom }} ({{ batiment.taille }})
+      <label>Partie</label>
+      <select formControlName="idPartie" class="form-input">
+        <option *ngFor="let partie of partieList$ | async" [value]="partie.id">
+          Partie #{{ partie.id }}
         </option>
       </select>
     </div>
+
+
+    <div class="form-group">
+      <label>Batiment 1</label>
+      <select formControlName="batiment1" class="form-input">
+        <option [value]="null">Aucun</option>
+        <option *ngFor="let bat of batimentList$ | async" [value]="bat.id">
+          {{ bat.nom }} ({{ bat.taille }})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Batiment 2</label>
+      <select formControlName="batiment2" class="form-input">
+        <option [value]="null">Aucun</option>
+        <option *ngFor="let bat of batimentList$ | async" [value]="bat.id">
+          {{ bat.nom }} ({{ bat.taille }})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Batiment 3</label>
+      <select formControlName="batiment3" class="form-input">
+        <option [value]="null">Aucun</option>
+        <option *ngFor="let bat of batimentList$ | async" [value]="bat.id">
+          {{ bat.nom }} ({{ bat.taille }})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Batiment 4</label>
+      <select formControlName="batiment4" class="form-input">
+        <option [value]="null">Aucun</option>
+        <option *ngFor="let bat of batimentList$ | async" [value]="bat.id">
+          {{ bat.nom }} ({{ bat.taille }})
+        </option>
+      </select>
+    </div>
+
 
     <button type="submit" [disabled]="planetSeedForm.invalid" class="btn-save">
       {{ editingPlanetSeed ? 'Modifier' : 'Créer' }} PlanetSeed

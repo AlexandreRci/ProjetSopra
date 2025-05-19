@@ -3,6 +3,7 @@ package space.rest.request;
 import org.springframework.beans.BeanUtils;
 import space.model.Batiment;
 import space.model.Joueur;
+import space.model.Partie;
 import space.model.PlanetSeed;
 import space.model.Planete;
 
@@ -17,7 +18,7 @@ public class PlanetSeedRequest {
     private Integer idJoueur;
     private Integer idPlanete;
     private List<Integer> idBatiments;
-
+    private Integer idPartie;
 
     public PlanetSeedRequest() {
         super();
@@ -37,6 +38,12 @@ public class PlanetSeedRequest {
             Planete planete = new Planete();
             planete.setId(planetSeedRequest.getIdPlanete());
             planetSeed.setPlanete(planete);
+        }
+
+        if (planetSeedRequest.getIdPartie() != null) {
+            Partie partie = new Partie();
+            partie.setId(planetSeedRequest.getIdPartie());
+            planetSeed.setPartie(partie); // à condition que PlanetSeed ait un attribut `partie`
         }
 
         if (planetSeedRequest.getIdBatiments() != null && !planetSeedRequest.getIdBatiments().isEmpty()) {
@@ -90,6 +97,14 @@ public class PlanetSeedRequest {
 
     public void setIdJoueur(Integer idJoueur) {
         this.idJoueur = idJoueur;
+    }
+
+    public Integer getIdPartie() {
+        return idPartie;
+    }
+
+    public void setIdPartie(Integer idPartie) {
+        this.idPartie = idPartie;
     }
 
     public Integer getIdPlanete() {
