@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Partie } from '../../partie';
-import { PartieService } from '../../partie.service';
+import { Partie } from '../../../class/partie';
+import { PartieService } from '../../../service/partie.service';
 
 @Component({
   selector: 'app-partie',

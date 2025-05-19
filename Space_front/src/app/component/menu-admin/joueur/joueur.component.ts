@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { Joueur } from '../../joueur';
-import { JoueurService } from '../../joueur.service';
-import { PartieService } from '../../partie.service';
-import { EspeceService } from '../../espece.service';
-import { Partie } from '../../partie';
-import { Espece } from '../../espece';
+import { Joueur } from '../../../class/joueur';
+import { JoueurService } from '../../../service/joueur.service';
+import { PartieService } from '../../../service/partie.service';
+import { EspeceService } from '../../../service/espece.service';
+import { Partie } from '../../../class/partie';
+import { Espece } from '../../../class/espece';
 
 @Component({
   selector: 'app-joueur',

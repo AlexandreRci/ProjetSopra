@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { Possession } from './possession';
+import { Possession } from '../class/possession';
 
 @Injectable({
   providedIn: 'root'

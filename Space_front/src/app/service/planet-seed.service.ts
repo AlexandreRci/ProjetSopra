@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
-import { PlanetSeed } from './planet-seed';
+import { PlanetSeed } from '../class/planet-seed';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Batiment } from './batiment';
+import { Batiment } from '../class/batiment';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 
 @Injectable({

@@ -1,0 +1,101 @@
+.batiment-container {
+  padding: 40px;
+  background: url('../../../../assets/images/space-background2.webp') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  min-height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.section-title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px black;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input,
+select,
+option {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+}
+
+select:focus {
+  outline: none;
+  border-color: orange;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.btn-save {
+  padding: 10px;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background-color: #0b5ed7;
+}
+
+.batiment-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.batiment-table th,
+.batiment-table td {
+  border: 1px solid white;
+  padding: 10px;
+  text-align: center;
+}
+
+.batiment-table th {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-action {
+  margin: 0 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-action.edit {
+  background-color: #ffc107;
+}
+
+.btn-action.delete {
+  background-color: #dc3545;
+}
+
+.btn-action:hover {
+  opacity: 0.85;
+}

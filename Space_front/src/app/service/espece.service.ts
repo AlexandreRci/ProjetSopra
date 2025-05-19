@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Espece } from './espece';
+import { Espece } from '../class/espece';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 
 @Injectable({

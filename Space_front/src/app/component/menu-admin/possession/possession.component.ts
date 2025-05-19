@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Possession } from '../../possession';
-import { PossessionService } from '../../possession.service';
+import { Possession } from '../../../class/possession';
+import { PossessionService } from '../../../service/possession.service';
 
 @Component({
   selector: 'app-possession',

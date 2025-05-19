@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CompteService } from '../../compte.service';
-import { Compte } from '../../compte';
+import { CompteService } from '../../../service/compte.service';
+import { Compte } from '../../../class/compte';
 import { Observable } from 'rxjs';
 
 @Component({

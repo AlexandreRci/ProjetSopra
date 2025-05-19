@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Batiment } from '../../batiment';
-import { BatimentService } from '../../batiment.service';
+import { Batiment } from '../../../class/batiment';
+import { BatimentService } from '../../../service/batiment.service';
 
 @Component({
   selector: 'app-batiment',

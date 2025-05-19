@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Planete } from '../../class/planete';
+import { Planete } from '../class/planete';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 
 @Injectable({

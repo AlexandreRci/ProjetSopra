@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Planete } from '../../planete';
-import { PlaneteService } from '../../planete.service';
+import { Planete } from '../../../class/planete';
+import { PlaneteService } from '../../../service/planete.service';
 
 @Component({
   selector: 'app-planete',
