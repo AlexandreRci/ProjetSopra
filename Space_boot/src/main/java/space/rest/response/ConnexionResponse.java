@@ -3,6 +3,7 @@ package space.rest.response;
 public class ConnexionResponse {
     private boolean success;
     private String token;
+    private int id;
 
     public ConnexionResponse() {
         super();
@@ -24,4 +25,11 @@ public class ConnexionResponse {
         this.token = token;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
