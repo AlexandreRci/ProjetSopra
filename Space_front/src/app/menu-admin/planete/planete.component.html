@@ -1,1 +1,64 @@
-<p>planete works!</p>
+<div class="planete-container">
+    <h2 class="section-title">Gestion des planètes</h2>
+
+    <form [formGroup]="planeteForm" (ngSubmit)="addOrEditPlanete()" class="form-grid">
+        <div class="form-group">
+            <label>Nom</label>
+            <input type="text" formControlName="nom" class="form-input" />
+        </div>
+
+        <div class="form-group">
+            <label>Quantité de minerai</label>
+            <input type="number" min="0" formControlName="minerai" class="form-input" />
+        </div>
+
+        <div class="form-group">
+            <label>Biome 1</label>
+            <select formControlName="biome1" class="form-input">
+                <option *ngFor="let biome of biomeOptions" [value]="biome">{{ biome }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Biome 2</label>
+            <select formControlName="biome2" class="form-input">
+                <option *ngFor="let biome of biomeOptions" [value]="biome">{{ biome }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Biome 3</label>
+            <select formControlName="biome3" class="form-input">
+                <option *ngFor="let biome of biomeOptions" [value]="biome">{{ biome }}</option>
+            </select>
+        </div>
+
+        <button type="submit" [disabled]="planeteForm.invalid" class="btn-save">
+            {{ editingPlanete ? 'Modifier' : 'Créer' }} la planète
+        </button>
+    </form>
+
+    <table class="planete-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Minerai</th>
+                <th>Biomes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let planete of planetes$ | async">
+                <td>{{ planete.id }}</td>
+                <td>{{ planete.nom }}</td>
+                <td>{{ planete.minerai }}</td>
+                <td>{{ planete.biomes.join(', ') }}</td>
+                <td>
+                    <button (click)="editPlanete(planete)" class="btn-action edit">Modifier</button>
+                    <button (click)="deletePlanete(planete)" class="btn-action delete">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EcranJeuComponent } from './ecran-jeu.component';
 
 describe('EcranJeuComponent', () => {
@@ -9,8 +8,7 @@ describe('EcranJeuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EcranJeuComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EcranJeuComponent);
     component = fixture.componentInstance;
@@ -19,5 +17,9 @@ describe('EcranJeuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have default message', () => {
+    expect(component.message).toBe('Écran de jeu temporairement désactivé. En cours de maintenance.');
   });
 });

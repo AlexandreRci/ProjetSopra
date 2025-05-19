@@ -22,7 +22,7 @@ export class MenuPartieComponent {
     createNewPartie() {
     const partieData = { currentPosition: 1, nbTour: 1, nbJoueur: 1, joueurs: [], planetSeeds: [], statut: "Debut" };
 
-    this.partieService.createPartie(partieData).pipe(
+    this.partieService.save(partieData).pipe(
       tap(response => {
         console.log('Partie créée', response);
         this.router.navigate(['/ecranJeu']);

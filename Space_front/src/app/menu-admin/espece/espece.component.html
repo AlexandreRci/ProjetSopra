@@ -1,1 +1,47 @@
-<p>espece works!</p>
+<div class="espece-container">
+  <h2 class="section-title">Gestion des espèces</h2>
+
+  <form [formGroup]="especeForm" (ngSubmit)="addOrEditEspece()" class="form-grid">
+    <div class="form-group">
+      <label>Nom</label>
+      <input type="text" formControlName="nom" class="form-input" />
+    </div>
+
+    <div class="form-group" *ngFor="let biome of biomes">
+      <label>Ratio pour {{ biome }}</label>
+      <input type="number" min="0" [formControlName]="biome" class="form-input" />
+    </div>
+
+    <button type="submit" [disabled]="especeForm.invalid" class="btn-save">
+      {{ editingEspece ? 'Modifier' : 'Créer' }} l'espèce
+    </button>
+  </form>
+
+  <table class="espece-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Plaine</th>
+        <th>Forêt</th>
+        <th>Océan</th>
+        <th>Désertique</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let espece of especes$ | async">
+        <td>{{ espece.id }}</td>
+        <td>{{ espece.nom }}</td>
+        <td>{{ espece.biomes['Plaine'] }}</td>
+        <td>{{ espece.biomes['Foret'] }}</td>
+        <td>{{ espece.biomes['Ocean'] }}</td>
+        <td>{{ espece.biomes['Desertique'] }}</td>
+        <td>
+          <button (click)="editEspece(espece)" class="btn-action edit">Modifier</button>
+          <button (click)="deleteEspece(espece)" class="btn-action delete">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
