@@ -23,18 +23,21 @@ public class PartieRestController {
     private final PlanetSeedService planetSeedService;
     private final EspeceService especeService;
     private final PlaneteService planeteService;
+    private  final CompteService compteService;
 
     public PartieRestController(
             PartieService partieService,
             JoueurService joueurService,
             PlanetSeedService planetSeedService,
             EspeceService especeService,
-            PlaneteService planeteService) {
+            PlaneteService planeteService,
+            CompteService compteService) {
         this.partieService = partieService;
         this.joueurService = joueurService;
         this.planetSeedService = planetSeedService;
         this.especeService = especeService;
         this.planeteService = planeteService;
+        this.compteService = compteService;
     }
 
     @GetMapping("")
@@ -87,7 +90,13 @@ public class PartieRestController {
         Partie partie = new Partie(0, 1, 4, Statut.DEBUT);
         //To be modified as maybe unnecessary (check if adding a joueur to a partie also adds it into the partie list
         // of player
-        partie.addJoueur(new Joueur(0, partie, null));
+        Utilisateur utilisateur = null;
+        try {
+            utilisateur = (Utilisateur) compteService.getById(startRequest.getUserId());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utilisateur inconnu");
+        }
+        partie.addJoueur(new Joueur(0, partie, null, utilisateur));
         partie = partieService.create(partie);
         //Create base species
         if (especeService.getAll().isEmpty()) {
@@ -99,7 +108,7 @@ public class PartieRestController {
         //Attribute a species to the player
         Joueur joueur;
         try {
-            joueur = new Joueur(0, partie, especeService.getById(startRequest.getIdEspece()));
+            joueur = new Joueur(0, partie, especeService.getById(startRequest.getIdEspece()), utilisateur);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Espece inconnue");
         }

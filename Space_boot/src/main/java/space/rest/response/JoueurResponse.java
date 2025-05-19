@@ -15,35 +15,48 @@ public class JoueurResponse {
     private Integer idPartie;
     private Integer idEspece;
     private List<Integer> idPlanetSeeds;
+    private Integer idUtilisateur;
 
     public static JoueurResponse convert(Joueur joueur) {
-        JoueurResponse res = new JoueurResponse();
-        res.setId(joueur.getId());
-        res.setPosition(joueur.getPosition());
-        res.setIdPartie(joueur.getPartie() != null ? joueur.getPartie().getId() : null);
-        res.setIdEspece(joueur.getEspece() != null ? joueur.getEspece().getId() : null);
+        JoueurResponse joueurResponse = new JoueurResponse();
+        BeanUtils.copyProperties(joueur, joueurResponse);
+
+        if (joueur.getPartie() != null) {
+            Integer idPartie = joueur.getPartie().getId();
+            joueurResponse.setIdPartie(idPartie);
+        }
+
+        if (joueur.getEspece() != null) {
+            Integer idEspece = joueur.getEspece().getId();
+            joueurResponse.setIdEspece(idEspece);
+        }
 
         // map possessions
         if (joueur.getPossessions() != null) {
-            res.setIdPossessions(joueur.getPossessions().stream()
+            joueurResponse.setIdPossessions(joueur.getPossessions().stream()
                     .filter(p -> p != null && p.getId() != null)
                     .map(Possession::getId)
                     .toList());
         } else {
-            res.setIdPossessions(List.of());
+            joueurResponse.setIdPossessions(List.of());
         }
 
         // map planetSeeds
         if (joueur.getPlanetSeeds() != null) {
-            res.setIdPlanetSeeds(joueur.getPlanetSeeds().stream()
+            joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream()
                     .filter(p -> p != null && p.getId() != null)
                     .map(PlanetSeed::getId)
                     .toList());
         } else {
-            res.setIdPlanetSeeds(List.of());
+            joueurResponse.setIdPlanetSeeds(List.of());
         }
 
-        return res;
+        if (joueur.getUtilisateur() != null) {
+            Integer idUtilisateur = joueur.getUtilisateur().getId();
+            joueurResponse.setIdUtilisateur(idUtilisateur);
+        }
+
+        return joueurResponse;
     }
 
     public Integer getId() {
@@ -94,4 +107,11 @@ public class JoueurResponse {
         this.idPlanetSeeds = idPlanetSeeds;
     }
 
+    public Integer getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(Integer idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
 }

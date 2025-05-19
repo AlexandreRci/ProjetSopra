@@ -26,23 +26,27 @@ public class Joueur {
     private Espece espece;
     @OneToMany(mappedBy = "joueur")
     private List<PlanetSeed> planetSeeds;
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    private Utilisateur utilisateur;
 
 
     public Joueur() {
     }
 
-    public Joueur(Integer id, int position, List<Possession> possessions, Partie partie, Espece espece) {
+    public Joueur(Integer id, int position, Partie partie, Espece espece, Utilisateur utilisateur) {
         this.id = id;
         this.position = position;
-        this.possessions = possessions;
         this.partie = partie;
         this.espece = espece;
+        this.utilisateur = utilisateur;
     }
 
-    public Joueur(int position, Partie partie, Espece espece) {
+    public Joueur(int position, Partie partie, Espece espece, Utilisateur utilisateur) {
         this.position = position;
         this.partie = partie;
         this.espece = espece;
+        this.utilisateur = utilisateur;
     }
 
 
@@ -105,6 +109,15 @@ public class Joueur {
         this.planetSeeds = planetSeeds;
     }
 
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
     @Override
     public String toString() {
         return "Joueur{" +
@@ -112,6 +125,7 @@ public class Joueur {
                 ", position=" + position +
                 ", partie=" + partie.getId() +
                 ", espece=" + espece.getNom() +
+                ", utilisateur=" + utilisateur.getUsername() +
                 '}';
     }
 
