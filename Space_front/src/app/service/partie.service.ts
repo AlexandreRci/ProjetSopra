@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Partie } from '../class/partie'
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
+import { StartRequest } from '../class/request/start-request';
+import { StartResponse } from '../class/response/start-response';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +35,9 @@ export class PartieService {
 
   public delete(partie: Partie): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${partie.id}`);
+  }
+
+  public start(startRequest: StartRequest): Observable<StartResponse> {
+    return this.http.post<StartResponse>(`${this.API_URL}/start`, startRequest);
   }
 }

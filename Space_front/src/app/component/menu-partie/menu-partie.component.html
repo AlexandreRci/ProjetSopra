@@ -1,42 +1,48 @@
 <html lang="fr">
+
 <head>
-    <!-- <link rel="stylesheet" href="../CSS/menuPartie.css"> -->
+  <!-- <link rel="stylesheet" href="../CSS/menuPartie.css"> -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu des parties</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu des parties</title>
 
-<!-- Dans cette version je fais plein de div pour utiliser grid-->
+  <!-- Dans cette version je fais plein de div pour utiliser grid-->
 
 </head>
-<body>
-    <div class="background">
-      <app-top-buttons></app-top-buttons>
 
-      <!-- <div class="files">
+<body>
+  <div class="background">
+    <app-top-buttons></app-top-buttons>
+
+    <!-- <div class="files">
         <a href="ecran-jeu.component.html" [routerLink]="['/ecranJeu']" routerLinkActive="active"><button class="button"> Nouvelle partie</button></a>
         <button class="button"> Nouvelle partie</button>
         <button class="button"> Nouvelle partie</button>
       </div> -->
-
-      <div class="files">
-        <button class="button" (click)="createNewPartie()">Nouvelle partie</button>
-        <button class="button"> Nouvelle partie</button>
-        <button class="button"> Nouvelle partie</button>
-      </div>
-
-      <div class="online-files">
-        <button class="button">Créer une partie en ligne</button>
-        <button class="button">Rejoindre une partie en ligne</button>
-      </div>
-
-      <div class="bottom-center-buttons">
-        <button class="button">Effacer</button>
-      </div>
-
-
+    <div *ngIf="startChoiceEspece" class="choice">
+      <app-choice-espece ></app-choice-espece>
     </div>
 
-</body>
-</html>
+    <div class="files" *ngIf="!startChoiceEspece">
+      <button class="button" (click)="createNewPartie()">Nouvelle partie</button>
+      <button class="button"> Nouvelle partie</button>
+      <button class="button"> Nouvelle partie</button>
+    </div>
 
+    <div class="online-files" *ngIf="!startChoiceEspece">
+      <button class="button">Créer une partie en ligne</button>
+      <button class="button">Rejoindre une partie en ligne</button>
+    </div>
+
+    <div class="bottom-center-buttons" *ngIf="!startChoiceEspece">
+      <button class="button">Effacer</button>
+    </div>
+
+
+
+  </div>
+
+</body>
+
+</html>
