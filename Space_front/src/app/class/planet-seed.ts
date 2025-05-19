@@ -6,8 +6,18 @@ export class PlanetSeed {
     private _mineraiRestant: number,
     private _idJoueur: number | null,
     private _idPlanete: number,
-    private _idBatiments: number[]
-  ) {}
+    private _idBatiments: number[],
+    private _idPartie: number | null // nouveau champ
+  ) { }
+
+  get idPartie(): number | null {
+    return this._idPartie;
+  }
+
+  set idPartie(value: number | null) {
+    this._idPartie = value;
+  }
+
 
   get id(): number | null {
     return this._id;

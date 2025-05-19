@@ -99,7 +99,8 @@ export class EcranJeuComponent {
         Math.floor(Math.random() * 100) + 1,
         null, // Ici c'est Joueur
         planete,
-        [] // Ici c'est une liste de Batiment
+        [], // Ici c'est une liste de Batiment
+        null
       );
     });
   }

@@ -22,11 +22,12 @@ public class PlanetSeed {
     @JoinColumn(name = "planete_id", nullable = false)
     private Planete planete;
     @OneToMany
-    @JoinTable(name = "batiment_sur_planete",
-            joinColumns = @JoinColumn(name = "planet_seed_id"),
-            inverseJoinColumns = @JoinColumn(name = "batiment_id"))
+    @JoinTable(name = "batiment_sur_planete", joinColumns = @JoinColumn(name = "planet_seed_id"), inverseJoinColumns = @JoinColumn(name = "batiment_id"))
     private List<Batiment> batiments;
 
+    @ManyToOne
+    @JoinColumn(name = "partie_id")
+    private Partie partie;
 
     public PlanetSeed() {
     }
@@ -52,69 +53,64 @@ public class PlanetSeed {
         return id;
     }
 
-
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public int getPopulation() {
         return population;
     }
 
-
     public void setPopulation(int population) {
         this.population = population;
     }
-
 
     public int getArme() {
         return arme;
     }
 
-
     public void setArme(int arme) {
         this.arme = arme;
     }
-
 
     public int getMineraiRestant() {
         return mineraiRestant;
     }
 
-
     public void setMineraiRestant(int mineraiRestant) {
         this.mineraiRestant = mineraiRestant;
     }
-
 
     public Joueur getJoueur() {
         return joueur;
     }
 
-
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
-
 
     public Planete getPlanete() {
         return planete;
     }
 
-
     public void setPlanete(Planete planete) {
         this.planete = planete;
     }
-
 
     public List<Batiment> getBatiments() {
         return batiments;
     }
 
-
     public void setBatiments(List<Batiment> batiments) {
         this.batiments = batiments;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
     }
 
     @Override
