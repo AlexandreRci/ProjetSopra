@@ -1,3 +1,4 @@
+<app-navbar-admin></app-navbar-admin>
 <div class="joueur-container">
   <h2 class="section-title">Gestion des joueurs</h2>
 
@@ -6,7 +7,8 @@
     <div class="form-group">
       <label>Position</label>
       <input type="number" formControlName="position" min="0" class="form-input" />
-      <div class="error-message" *ngIf="joueurForm.get('position')?.hasError('min') && joueurForm.get('position')?.touched">
+      <div class="error-message"
+        *ngIf="joueurForm.get('position')?.hasError('min') && joueurForm.get('position')?.touched">
         La position doit être un nombre positif
       </div>
     </div>
@@ -26,6 +28,17 @@
         <option *ngFor="let espece of especes$ | async" [value]="espece.id">{{ espece.nom }}</option>
       </select>
     </div>
+
+    <div class="form-group" *ngFor="let i of [1, 2, 3, 4]">
+      <label>Possession {{ i }}</label>
+      <select [formControlName]="'possession' + i" class="form-input">
+        <option [value]="null">Aucune</option>
+        <option *ngFor="let p of possessions$ | async" [value]="p.id">
+          {{ p.ressource }} x{{ p.quantite }}
+        </option>
+      </select>
+    </div>
+
 
     <button type="submit" [disabled]="joueurForm.invalid" class="btn-save">
       {{ editingJoueur ? 'Modifier' : 'Créer' }} le Joueur

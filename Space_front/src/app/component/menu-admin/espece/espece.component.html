@@ -1,3 +1,4 @@
+<app-navbar-admin></app-navbar-admin>
 <div class="espece-container">
   <h2 class="section-title">Gestion des espèces</h2>
 
@@ -33,10 +34,10 @@
       <tr *ngFor="let espece of especes$ | async">
         <td>{{ espece.id }}</td>
         <td>{{ espece.nom }}</td>
-        <td>{{ espece.biomes['Plaine'] }}</td>
-        <td>{{ espece.biomes['Foret'] }}</td>
-        <td>{{ espece.biomes['Ocean'] }}</td>
-        <td>{{ espece.biomes['Desertique'] }}</td>
+        <td>{{ espece.biomes['PLAINE'] }}</td>
+        <td>{{ espece.biomes['FORET'] }}</td>
+        <td>{{ espece.biomes['OCEAN'] }}</td>
+        <td>{{ espece.biomes['DESERTIQUE'] }}</td>
         <td>
           <button (click)="editEspece(espece)" class="btn-action edit">Modifier</button>
           <button (click)="deleteEspece(espece)" class="btn-action delete">Supprimer</button>
