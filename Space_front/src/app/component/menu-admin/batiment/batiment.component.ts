@@ -15,8 +15,8 @@ export class BatimentComponent implements OnInit, OnDestroy {
   batiments$!: Observable<Batiment[]>;
   editingBatiment: Batiment | null = null;
   subscriptions: any = {};
-  tailles = ['Petit', 'Moyen', 'Grand'];
-  ressources = ['Arme', 'Nourriture', 'Energie', 'Argent'];
+  tailles = ['PETIT', 'MOYEN', 'GRAND'];
+  ressources = ['ARME', 'NOURRITURE', 'ENERGIE', 'ARGENT'];
 
   constructor(private service: BatimentService, private formBuilder: FormBuilder) {}
 

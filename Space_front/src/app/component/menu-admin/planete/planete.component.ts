@@ -15,7 +15,7 @@ export class PlaneteComponent implements OnInit, OnDestroy {
   planetes$!: Observable<Planete[]>;
   editingPlanete: Planete | null = null;
   subscriptions: any = {};
-  biomeOptions: string[] = ['Plaine', 'Foret', 'Ocean', 'Desertique'];
+  biomeOptions: string[] = ['PLAINE', 'FORET', 'OCEAN', 'DESERTIQUE'];
 
   constructor(private service: PlaneteService, private formBuilder: FormBuilder) {}
 

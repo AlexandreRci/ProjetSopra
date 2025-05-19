@@ -15,7 +15,7 @@ export class EspeceComponent implements OnInit, OnDestroy {
   especes$!: Observable<Espece[]>;
   editingEspece: Espece | null = null;
   subscriptions: any = {};
-  biomes: string[] = ['Plaine', 'Foret', 'Ocean', 'Desertique'];
+  biomes: string[] = ['PLAINE', 'FORET', 'OCEAN', 'DESERTIQUE'];
 
   constructor(private service: EspeceService, private formBuilder: FormBuilder) {}
 
