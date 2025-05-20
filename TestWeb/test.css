@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000; /* Dark background */
+    overflow: hidden;
+}
+
+.sun-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.sun {
+    position: absolute;
+    bottom: 0; /* Start at the bottom of the container */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #FFD700, #FF4500); /* Gradient for the sun */
+    border-radius: 50%;
+    animation: rise 5s forwards;
+}
+
+.rays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(
+        transparent 25%,
+        rgba(255, 215, 0, 0.5) 25%,
+        rgba(255, 215, 0, 0.5) 50%,
+        transparent 50%
+    ); /* Rays effect */
+    border-radius: 50%;
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        bottom: 0; /* Sun starts at the bottom */
+    }
+    100% {
+        bottom: 100px; /* Sun rises and stays */
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

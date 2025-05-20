@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- <link rel="stylesheet" href="../CSS/seConnecter.css"> -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter</title>
+
+</head>
+
+<body>
+    <div class="content">
+        <h2 id="FormName">Espece</h2>
+        <form (ngSubmit)="startGame()" [formGroup]="selectForm" id="inscription">
+            <div class="content">
+                <select formControlName="especeId" class="input-field">
+                    <option *ngFor="let espece of especeList" [value]="espece.id">
+                        {{ espece.nom }}
+                    </option>
+                </select>
+
+                <div *ngIf="selectForm.get('espece')?.hasError('required')" class="error">
+                    L'espece est obligatoire
+                </div>
+                <input id="submit_button" class="button" type="submit" value="Valider"
+                    [disabled]="selectForm.invalid" />
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
