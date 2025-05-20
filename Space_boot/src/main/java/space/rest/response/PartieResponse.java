@@ -13,20 +13,46 @@ public class PartieResponse {
     private int currentPosition;
     private int nbTour;
     private int nbJoueur;
-    private List<Integer> joueurs;
-    private List<Integer> planetSeeds;
     private Statut statut;
-
-    public PartieResponse() {
-    }
+    private List<Integer> joueurs;
+    private List<Integer> planetSeeds; // ← AJOUT
 
     public static PartieResponse convert(Partie partie) {
         PartieResponse partieResponse = new PartieResponse();
-        partieResponse.setJoueurs(partie.getJoueurs().stream().map(Joueur::getId).toList());
-        partieResponse.setPlanetSeeds(partie.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
-        BeanUtils.copyProperties(partie, partieResponse);
+
+        // Copie des propriétés simples
+        partieResponse.setId(partie.getId());
+        partieResponse.setCurrentPosition(partie.getCurrentPosition());
+        partieResponse.setNbTour(partie.getNbTour());
+        partieResponse.setNbJoueur(partie.getNbJoueur());
+        partieResponse.setStatut(partie.getStatut());
+
+        // Conversion des IDs joueurs
+        if (partie.getJoueurs() != null) {
+            partieResponse.setJoueurs(
+                    partie.getJoueurs().stream()
+                            .filter(j -> j != null && j.getId() != null)
+                            .map(Joueur::getId)
+                            .toList());
+        } else {
+            partieResponse.setJoueurs(List.of());
+        }
+
+        // Conversion des IDs planetSeeds
+        if (partie.getPlanetSeeds() != null) {
+            partieResponse.setPlanetSeeds(
+                    partie.getPlanetSeeds().stream()
+                            .filter(p -> p != null && p.getId() != null)
+                            .map(PlanetSeed::getId)
+                            .toList());
+        } else {
+            partieResponse.setPlanetSeeds(List.of());
+        }
+
         return partieResponse;
     }
+
+    // Getters et setters...
 
     public Integer getId() {
         return id;
@@ -60,6 +86,14 @@ public class PartieResponse {
         this.nbJoueur = nbJoueur;
     }
 
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
+    }
+
     public List<Integer> getJoueurs() {
         return joueurs;
     }
@@ -74,13 +108,5 @@ public class PartieResponse {
 
     public void setPlanetSeeds(List<Integer> planetSeeds) {
         this.planetSeeds = planetSeeds;
-    }
-
-    public Statut getStatut() {
-        return statut;
-    }
-
-    public void setStatut(Statut statut) {
-        this.statut = statut;
     }
 }

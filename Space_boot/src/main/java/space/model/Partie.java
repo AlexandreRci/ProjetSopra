@@ -20,10 +20,7 @@ public class Partie {
     private int nbJoueur;
     @OneToMany(mappedBy = "partie")
     private List<Joueur> joueurs;
-    @OneToMany
-    @JoinTable(name = "planete_seed_par_partie",
-            joinColumns = @JoinColumn(name = "partie_id"),
-            inverseJoinColumns = @JoinColumn(name = "planete_seed_id"))
+    @OneToMany(mappedBy = "partie")
     private List<PlanetSeed> planetSeeds;
     @Enumerated(EnumType.STRING)
     @Column(name = "statut", columnDefinition = "ENUM('DEBUT','EN_COURS','FINI')", nullable = false)

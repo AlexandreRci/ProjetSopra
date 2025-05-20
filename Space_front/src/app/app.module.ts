@@ -21,6 +21,7 @@ import { EspeceComponent } from './component/menu-admin/espece/espece.component'
 import { PossessionComponent } from './component/menu-admin/possession/possession.component';
 import { BatimentComponent } from './component/menu-admin/batiment/batiment.component';
 import { jwtHeaderInterceptor } from './jwt-header.interceptor';
+import { NavbarAdminComponent } from './component/navbar-admin/navbar-admin.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { jwtHeaderInterceptor } from './jwt-header.interceptor';
     PlanetSeedComponent,
     EspeceComponent,
     PossessionComponent,
-    BatimentComponent
+    BatimentComponent,
+    NavbarAdminComponent
   ],
   imports: [
     BrowserModule,

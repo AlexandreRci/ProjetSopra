@@ -17,30 +17,33 @@ public class JoueurResponse {
     private List<Integer> idPlanetSeeds;
 
     public static JoueurResponse convert(Joueur joueur) {
-        JoueurResponse joueurResponse = new JoueurResponse();
-        BeanUtils.copyProperties(joueur, joueurResponse);
+        JoueurResponse res = new JoueurResponse();
+        res.setId(joueur.getId());
+        res.setPosition(joueur.getPosition());
+        res.setIdPartie(joueur.getPartie() != null ? joueur.getPartie().getId() : null);
+        res.setIdEspece(joueur.getEspece() != null ? joueur.getEspece().getId() : null);
 
-        if (joueur.getPartie() != null) {
-            Integer idPartie = joueur.getPartie().getId();
-            joueurResponse.setIdPartie(idPartie);
+        // map possessions
+        if (joueur.getPossessions() != null) {
+            res.setIdPossessions(joueur.getPossessions().stream()
+                    .filter(p -> p != null && p.getId() != null)
+                    .map(Possession::getId)
+                    .toList());
+        } else {
+            res.setIdPossessions(List.of());
         }
 
-        if (joueur.getEspece() != null) {
-            Integer idEspece = joueur.getEspece().getId();
-            joueurResponse.setIdEspece(idEspece);
+        // map planetSeeds
+        if (joueur.getPlanetSeeds() != null) {
+            res.setIdPlanetSeeds(joueur.getPlanetSeeds().stream()
+                    .filter(p -> p != null && p.getId() != null)
+                    .map(PlanetSeed::getId)
+                    .toList());
+        } else {
+            res.setIdPlanetSeeds(List.of());
         }
 
-        if (joueur.getPossessions() != null && !joueur.getPossessions().isEmpty()) {
-            joueurResponse.setIdPossessions(joueur.getPossessions().stream().map(Possession::getId).toList());
-
-        }
-
-        if (joueur.getPlanetSeeds() != null && !joueur.getPlanetSeeds().isEmpty()) {
-            joueurResponse.setIdPlanetSeeds(joueur.getPlanetSeeds().stream().map(PlanetSeed::getId).toList());
-
-        }
-
-        return joueurResponse;
+        return res;
     }
 
     public Integer getId() {
@@ -90,6 +93,5 @@ public class JoueurResponse {
     public void setIdPlanetSeeds(List<Integer> idPlanetSeeds) {
         this.idPlanetSeeds = idPlanetSeeds;
     }
-
 
 }
