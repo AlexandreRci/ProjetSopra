@@ -77,7 +77,7 @@ class PlanetSeedRestControllerTest {
         joueur1 = joueurService.create(joueur1);
         planete1 = new Planete("Planete A", 125, new ArrayList<>());
         planete1 = planeteService.create(planete1);
-        planeteSeed1 = new PlanetSeed(100, 12, 10, joueur1, planete1);
+        planeteSeed1 = new PlanetSeed(100, 12, 10, joueur1, planete1, partie1);
     }
 
     @Test
@@ -94,7 +94,7 @@ class PlanetSeedRestControllerTest {
         joueur2 = joueurService.create(joueur2);
         Planete planete2 = new Planete("Planete B", 125, new ArrayList<>());
         planete2 = planeteService.create(planete2);
-        PlanetSeed planeteSeed2 = new PlanetSeed(150, 10, 5, joueur2, planete2);
+        PlanetSeed planeteSeed2 = new PlanetSeed(150, 10, 5, joueur2, planete2, partie1);
 
         planetSeedService.create(planeteSeed1);
         planetSeedService.create(planeteSeed2);
