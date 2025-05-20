@@ -23,23 +23,32 @@ public class PartieRestController {
     private final PlanetSeedService planetSeedService;
     private final EspeceService especeService;
     private final PlaneteService planeteService;
+    private  final CompteService compteService;
 
     public PartieRestController(
             PartieService partieService,
             JoueurService joueurService,
             PlanetSeedService planetSeedService,
             EspeceService especeService,
-            PlaneteService planeteService) {
+            PlaneteService planeteService,
+            CompteService compteService) {
         this.partieService = partieService;
         this.joueurService = joueurService;
         this.planetSeedService = planetSeedService;
         this.especeService = especeService;
         this.planeteService = planeteService;
+        this.compteService = compteService;
     }
 
     @GetMapping("")
     public List<PartieResponse> getAll() {
         List<Partie> parties = this.partieService.getAll();
+
+        return parties.stream().map(PartieResponse::convert).toList();
+    }
+    @GetMapping("/user/{id}")
+    public List<PartieResponse> getByUser(@PathVariable Integer id) {
+        List<Partie> parties = this.partieService.getByUser(id);
 
         return parties.stream().map(PartieResponse::convert).toList();
     }
@@ -81,13 +90,19 @@ public class PartieRestController {
      * @return HttpStatus
      */
     @PostMapping("/start")
-    public StartResponse start(@RequestBody StartRequest startRequest) {
+    public StartResponse start(@RequestBody StartRequest startRequest) throws Exception {
         Random random = new Random();
 
-        Partie partie = new Partie(0, 1, 4, Statut.DEBUT);
+        Partie partie = new Partie(1, 1, 1, Statut.DEBUT);
         //To be modified as maybe unnecessary (check if adding a joueur to a partie also adds it into the partie list
         // of player
-        partie.addJoueur(new Joueur(0, partie, null));
+        Utilisateur utilisateur = null;
+        try {
+            utilisateur = (Utilisateur) compteService.getById(startRequest.getUserId());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Utilisateur inconnu");
+        }
+        partie.addJoueur(new Joueur(0, partie, null, utilisateur));
         partie = partieService.create(partie);
         //Create base species
         if (especeService.getAll().isEmpty()) {
@@ -99,7 +114,7 @@ public class PartieRestController {
         //Attribute a species to the player
         Joueur joueur;
         try {
-            joueur = new Joueur(0, partie, especeService.getById(startRequest.getIdEspece()));
+            joueur = new Joueur(0, partie, especeService.getById(startRequest.getIdEspece()), utilisateur);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Espece inconnue");
         }
@@ -127,15 +142,18 @@ public class PartieRestController {
                     0,
                     random.nextInt(20, 50),
                     null,
-                    planete
+                    planete,
+                    partie
             );
             planetSeedService.create(planetSeed);
+            partie.getPlanetSeeds().add(planetSeed);
         }
-        // Attribute a randow planet to the player
-        List<PlanetSeed> planetSeeds = planetSeedService.getAll();
-        PlanetSeed planetSeed = planetSeeds.get(random.nextInt(planetSeeds.size()));
+
+        // Attribute a random planet to the player
+        PlanetSeed planetSeed = partie.getPlanetSeeds().get(random.nextInt(partie.getPlanetSeeds().size()));
         planetSeed.setJoueur(joueur);
         planetSeedService.update(planetSeed);
+        partieService.update(partie);
 
         StartResponse startResponse = new StartResponse();
         startResponse.setIdGame(partie.getId());

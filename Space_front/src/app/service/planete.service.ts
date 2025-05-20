@@ -33,4 +33,8 @@ export class PlaneteService {
   public delete(planete: Planete): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${planete.id}`);
   }
+
+  public findById(id: number): Observable<Planete> {
+    return this.http.get<Planete>(`${this.API_URL}/${id}`);
+  }
 }

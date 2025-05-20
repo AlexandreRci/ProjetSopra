@@ -23,6 +23,13 @@ public class EspeceRestController {
     @GetMapping("")
     public List<EspeceResponse> getAll() {
         List<Espece> espece = this.especeService.getAll();
+        if (espece.isEmpty()) {
+            especeService.create(new Espece("humain", 1.0, 0.75, 0.25, 0.5));
+            especeService.create(new Espece("insecte", 0.25, 1.0, 0.5, 0.75));
+            especeService.create(new Espece("robot", 0.5, 0.25, 0.75, 1.0));
+            especeService.create(new Espece("triton", 0.75, 0.5, 1.0, 0.25));
+        }
+        espece = this.especeService.getAll();
         return espece.stream().map(EspeceResponse::convert).toList();
     }
 

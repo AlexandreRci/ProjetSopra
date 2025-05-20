@@ -2,7 +2,7 @@ package space.model;
 
 public enum Ressource {
 
-    ARME("usine"), NOURRITURE("ferme"), ENERGIE("Moulin"), ARGENT("marché");
+    ARME("Caserne"), NOURRITURE("Ferme"), ENERGIE("Centrale atomique"), ARGENT("Banque");
 
     private final String name;
 

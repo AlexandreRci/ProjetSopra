@@ -32,6 +32,7 @@ export class AuthService {
         if (resp.token) {
           this.token = resp.token;
           localStorage.setItem('token', this.token);
+          localStorage.setItem('userId', resp.id.toString());
 
           const payload: JwtPayload = jwtDecode(this.token);
           localStorage.setItem('role', payload.role); // 👈 Enregistre le rôle aussi

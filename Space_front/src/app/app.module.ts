@@ -21,6 +21,7 @@ import { EspeceComponent } from './component/menu-admin/espece/espece.component'
 import { PossessionComponent } from './component/menu-admin/possession/possession.component';
 import { BatimentComponent } from './component/menu-admin/batiment/batiment.component';
 import { jwtHeaderInterceptor } from './jwt-header.interceptor';
+import { ChoiceEspeceComponent } from './component/choice-espece/choice-espece.component';
 import { NavbarAdminComponent } from './component/navbar-admin/navbar-admin.component';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NavbarAdminComponent } from './component/navbar-admin/navbar-admin.comp
     EspeceComponent,
     PossessionComponent,
     BatimentComponent,
-    NavbarAdminComponent
+    NavbarAdminComponent,
+    ChoiceEspeceComponent
   ],
   imports: [
     BrowserModule,

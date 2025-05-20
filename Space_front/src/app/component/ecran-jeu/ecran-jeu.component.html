@@ -1,4 +1,173 @@
-<div class="ecran-jeu-placeholder">
-<!--  <h2>{{ message }}</h2>-->
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<!-- <link rel="stylesheet" href="../CSS/ecran-jeu.component.css"> -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecran de Jeu</title>
+
+</head>
+
+<body>
+  <div class="background">
+    <app-top-buttons></app-top-buttons>
+
+    <div class="time-turn">
+      <div class="time-left">
+        <div class="box">
+          <div class="timer-text">
+            Temps restant:
+          </div>
+          <div class="timer">
+            {{ formatTime(timeLeft) }}
+          </div>
+        </div>
+      </div>
+
+      <div class="turn-number">
+        <div class="box">
+          <div class="turn-text">
+            Tours n°
+          </div>
+          <div class="turn">
+            {{partie.nbTour}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pseudo">
+      <div class="box">
+        <div class="pseudo-text">
+          {{username}}
+        </div>
+      </div>
+
+      <div class="pseudo-fake-box">
+        <!-- Cette box est purement esthétique, elle a pour but d'aligner la box pseudo avec la box du temps restant -->
+      </div>
+    </div>
+
+
+
+    <div class="ressources">
+      <div class="box">
+        <div class="food-number">
+          {{nourriture}}
+        </div>
+        <div class="ressource-icon">
+          <img src="../../assets/images/food_icon_500px.png" alt="food-icon">
+        </div>
+        <div class="money-number">
+          {{argent}}
+        </div>
+        <div class="ressource-icon">
+          <img src="../../assets/images/money_icon_500px.png" alt="money-icon">
+        </div>
+        <div class="energy-number">
+          {{energie}}
+        </div>
+        <div class="ressource-icon">
+          <img src="../../assets/images/energy_icon_500px.png" alt="energy-icon">
+        </div>
+        <div class="mineral-number">
+          {{arme}}
+        </div>
+        <div class="ressource-icon">
+          <img src="../../assets/images/mineral_icon_500px.png" alt="mineral-icon">
+        </div>
+      </div>
+    </div>
+
+    <div class="planet-info">
+      <div class="box">
+        <div class="planet-info-text">Info Planètes </div>
+
+        <div class="planet-info-list-planets">
+          <div *ngFor="let planetSeed of planetSeeds; let i = index" [ngClass]="{'expanded': expandedPlanetIndex === i}"
+            class="planet-info-list-planet" (click)="togglePlanetInfo(i)">
+
+            <div class="planet-info-list-planet-img" *ngIf="expandedPlanetIndex !== i">
+              <img src="../../assets/images/orange_planet_1024px.png" alt="Planet Icon" class="planet-icon">
+            </div>
+
+            <div class="planet-info-name">
+              {{ planets[i]?.nom || 'Unknown Planet' }}
+            </div>
+
+            <div class="planet-info-name" >
+              {{ planetSeed.idJoueur ? "Possédé" : "" }}
+            </div>
+
+            <div class="planet-info-details" *ngIf="expandedPlanetIndex === i">
+              <p><strong>Minerai disponible:</strong> {{ planetSeed.mineraiRestant }}</p>
+              <p><strong>Population:</strong> {{ planetSeed.population }}</p>
+              <p><strong>Biomes:</strong> {{ planets[i]?.biomes?.join(", ") || 'No biomes' }}</p>
+              <button class="attack-button" aria-label="Attack Planet">[ATTAQUER]</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
+
+  <div class="planet-display">
+    <div class="box">
+      <!--La div "box" est utile pour aider à voir l'emplacement de la planete sur la grid -->
+      <img [ngClass]="{'animated': isAnimated}" src="../../assets/images/orange_planet_1024px.png" alt="planet-icon">
+    </div>
+  </div>
+
+  <div class="main-menu">
+    <div class="box">
+      <div class="main-menu-text">
+        Menu principal
+      </div>
+
+      <div class="main-menu-buttons">
+        <div class="main-menu-build-list">
+          <div class="main-menu-build-button"> Construire Bâtiment A </div>
+          <div class="main-menu-build-button"> Construire Bâtiment B </div>
+          <div class="main-menu-build-button"> Construire Bâtiment C </div>
+          <div class="main-menu-build-button"> Construire Bâtiment D </div>
+        </div>
+
+        <div class="main-menu-destroy-list">
+          <div class="main-menu-destroy-button"> Détruire Bâtiment A </div>
+          <div class="main-menu-destroy-button"> Détruire Bâtiment B </div>
+          <div class="main-menu-destroy-button"> Détruire Bâtiment C </div>
+          <div class="main-menu-destroy-button"> Détruire Bâtiment D </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="secondary-menu">
+    <div class="box">
+      <div class="secondary-menu-text">
+        Menu secondaire
+      </div>
+      <div class="secondary-menu-boutons">
+        <div class="secondary-menu-bouton">
+          Passer le tour
+        </div>
+        <div class="secondary-menu-bouton">
+          Abandonner
+        </div>
+        <div class="secondary-menu-bouton">
+          Quitter la partie
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+
+</body>
+
+</html>

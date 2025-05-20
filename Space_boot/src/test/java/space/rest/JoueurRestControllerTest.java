@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import space.model.*;
 import space.rest.request.JoueurRequest;
+import space.service.CompteService;
 import space.service.EspeceService;
 import space.service.JoueurService;
 import space.service.PartieService;
@@ -36,12 +37,15 @@ class JoueurRestControllerTest {
     @Autowired
     EspeceService especeService;
     @Autowired
+    CompteService compteService;
+    @Autowired
     private WebApplicationContext applicationContext;
     private MockMvc mockMvc;
     private Map<Biome, Double> biomesMap;
     private Partie partie1;
     private Espece espece1;
     private Joueur joueur;
+    private  Utilisateur utilisateur;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -63,14 +67,16 @@ class JoueurRestControllerTest {
 
         espece1 = new Espece("Espece A", biomesMap);
         espece1 = especeService.create(espece1);
-        joueur = new Joueur(1, partie1, espece1);
+        utilisateur = new Utilisateur("test","test", "test");
+        utilisateur = (Utilisateur) compteService.create(utilisateur);
+        joueur = new Joueur(1, partie1, espece1, utilisateur);
 
     }
 
     @Test
     void getAll() throws Exception {
 
-        Joueur joueur2 = new Joueur(2, partie1, espece1);
+        Joueur joueur2 = new Joueur(2, partie1, espece1, utilisateur);
 
         joueurService.create(joueur);
         joueurService.create(joueur2);
@@ -103,6 +109,7 @@ class JoueurRestControllerTest {
         joueurRequest.setPosition(1);
         joueurRequest.setIdEspece(espece1.getId());
         joueurRequest.setIdPartie(partie1.getId());
+        joueurRequest.setIdUtilisateur(utilisateur.getId());
 
         String jsonRequest = objectMapper.writeValueAsString(joueurRequest);
 
@@ -137,6 +144,7 @@ class JoueurRestControllerTest {
         joueurRequest.setPosition(1);
         joueurRequest.setIdEspece(espece1.getId());
         joueurRequest.setIdPartie(partie1.getId());
+        joueurRequest.setIdUtilisateur(utilisateur.getId());
 
         String jsonRequest = objectMapper.writeValueAsString(joueurRequest);
 

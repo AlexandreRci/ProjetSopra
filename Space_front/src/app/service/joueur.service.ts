@@ -33,4 +33,8 @@ export class JoueurService {
   public delete(joueur: Joueur): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${joueur.id}`);
   }
+
+  public findById(id: number): Observable<Joueur> {
+    return this.http.get<Joueur>(`${this.API_URL}/${id}`);
+  }
 }

@@ -60,6 +60,13 @@ body, html {    /*Applique toutes ces modifications entre les balises body et ht
   font-family:'Orbitron';
 }
 
+app-top-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column: 12 /13;
+  grid-row: 1 /2;
+  align-items: center;
+}
 
 
 /***************/
@@ -169,7 +176,7 @@ body, html {    /*Applique toutes ces modifications entre les balises body et ht
 /***************/
 .ressources{
     display: grid;
-    grid-column: 9 / 13;
+    grid-column: 7 / 11;
     grid-row: 1 / 2;
 
 }

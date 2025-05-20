@@ -16,7 +16,10 @@ public class JoueurService implements IService<Joueur, Integer> {
     private final PlanetSeedService planetSeedService;
     private final PossessionService possessionService;
 
-    public JoueurService(IDAOJoueur daoJoueur, PlanetSeedService planetSeedService, PossessionService possessionService) {
+    public JoueurService(IDAOJoueur daoJoueur,
+                         PlanetSeedService planetSeedService,
+                         PossessionService possessionService
+    ) {
         this.daoJoueur = daoJoueur;
         this.planetSeedService = planetSeedService;
         this.possessionService = possessionService;
